@@ -1,0 +1,26 @@
+---
+// Evidence and denominator (WordPress .pane-evidence), plus an optional qualification.
+interface Props { evidence: string; qualification?: string }
+const { evidence, qualification } = Astro.props;
+---
+<aside class="evidence-box" aria-label="Evidence">
+  <p class="pane-evidence">{evidence}</p>
+  {qualification && <p class="qualification">{qualification}</p>}
+</aside>
+
+<style>
+  .evidence-box {
+    margin-block: var(--space-40);
+    padding: 16px 20px;
+    background: var(--colour-cream);
+    border: 1px solid var(--colour-sand);
+    border-radius: 6px;
+  }
+  .pane-evidence {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--colour-terracotta);
+    font-style: italic;
+  }
+  .qualification { margin: 8px 0 0; font-size: var(--text-small); color: var(--colour-charcoal); }
+</style>

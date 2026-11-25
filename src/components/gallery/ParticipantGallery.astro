@@ -116,17 +116,6 @@ const lenses = Object.entries(TIER2.lenses) as [keyof typeof TIER2.lenses, (type
     root.querySelectorAll<HTMLButtonElement>('[data-tier2]').forEach((b) =>
       b.addEventListener('click', () => { state.tier2 = b.dataset.tier2!; render(); }));
 
-    // Flip cards: tap, click, Enter or Space. Filter state is untouched.
-    cards.forEach((card) => {
-      const btn = card.querySelector<HTMLButtonElement>('.card-inner');
-      const back = card.querySelector<HTMLElement>('.back');
-      btn?.addEventListener('click', () => {
-        const flipped = btn.getAttribute('aria-pressed') !== 'true';
-        btn.setAttribute('aria-pressed', String(flipped));
-        back?.setAttribute('aria-hidden', String(!flipped));
-      });
-    });
-
     render();
   });
 </script>

@@ -1,0 +1,43 @@
+---
+// Compact story preview in the WordPress findings style: label, quote-style
+// headline with terracotta rule, evidence line. The whole card is a link.
+import type { CollectionEntry } from 'astro:content';
+import { href } from '../../data/navigation';
+interface Props { story: CollectionEntry<'stories'>; showEvidence?: boolean }
+const { story, showEvidence = false } = Astro.props;
+---
+<li class="story-card">
+  <a href={href(`stories/${story.id}/`)}>
+    <span class="label">{story.data.label}</span>
+    <span class="quote">{story.data.headline}</span>
+    {showEvidence && <span class="evidence">{story.data.evidence}</span>}
+  </a>
+</li>
+
+<style>
+  .story-card { list-style: none; }
+  a {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    padding: 20px;
+    background: var(--colour-cream);
+    border: 1px solid var(--colour-sand);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color var(--duration-fast) var(--ease);
+  }
+  a:hover { border-color: var(--colour-terracotta); }
+  a:hover .quote { text-decoration: underline; text-decoration-thickness: 1px; }
+  .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; color: var(--colour-terracotta); }
+  .quote {
+    font-size: var(--text-large);
+    font-weight: 600;
+    color: var(--colour-terracotta);
+    line-height: 1.35;
+    border-left: 4px solid var(--colour-terracotta);
+    padding-left: 14px;
+  }
+  .evidence { font-size: 0.9rem; font-style: italic; color: var(--colour-terracotta); opacity: 0.9; }
+</style>

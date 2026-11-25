@@ -1,0 +1,23 @@
+---
+// A selection of the eight findings on the homepage (specification §4, component 4).
+// Change FEATURED to choose others.
+import { getCollection } from 'astro:content';
+import StoryCard from '../stories/StoryCard.astro';
+import { href } from '../../data/navigation';
+
+const FEATURED = ['home-isnt-a-place', 'its-never-the-room', 'no-single-answer'];
+const stories = (await getCollection('stories'))
+  .filter((s) => FEATURED.includes(s.id))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<section class="container section" aria-labelledby="featured-stories">
+  <h2 id="featured-stories" class="section-heading">Headline findings: <strong>Travellers</strong></h2>
+  <p>Eight traveller "stories" stand out. Each story is drawn from thematic analysis across every conversation to date.</p>
+  <ul class="list">{stories.map((s) => <StoryCard story={s} showEvidence />)}</ul>
+  <p class="more"><a class="arrow-link" href={href('stories/')}>The Stories →</a></p>
+</section>
+
+<style>
+  .list { list-style: none; margin: var(--space-30) 0 0; padding: 0; display: grid; gap: 12px; }
+  .more { margin-top: var(--space-30); }
+</style>

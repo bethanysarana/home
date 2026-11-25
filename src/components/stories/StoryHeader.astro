@@ -1,0 +1,35 @@
+---
+// Story header: WordPress tab label (eyebrow), headline and paragraph.
+import { href } from '../../data/navigation';
+interface Props { label: string; headline: string; summary: string }
+const { label, headline, summary } = Astro.props;
+---
+<header class="story-header">
+  <p class="eyebrow"><a href={href('stories/')}>The Stories</a> · {label}</p>
+  <h1 class="pane-quote headline">{headline}</h1>
+  <p class="pane-text intro">{summary}</p>
+</header>
+
+<style>
+  .eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    color: var(--colour-terracotta);
+    margin-bottom: var(--space-30);
+  }
+  .eyebrow a { text-decoration: none; }
+  .eyebrow a:hover { text-decoration: underline; }
+  /* WordPress .pane-quote, scaled up for a page headline */
+  .headline {
+    font-size: var(--text-xx-large);
+    font-weight: 600;
+    color: var(--colour-terracotta);
+    line-height: 1.15;
+    border-left: 4px solid var(--colour-terracotta);
+    padding-left: 18px;
+    margin-bottom: var(--space-40);
+  }
+  .intro { font-size: var(--text-large); }
+</style>

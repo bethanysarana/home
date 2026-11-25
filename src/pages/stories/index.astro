@@ -1,0 +1,53 @@
+---
+// The Stories overview (specification §6): the WordPress "Headline findings"
+// tabbed component, each panel linking to its full story page.
+import { getCollection } from 'astro:content';
+import ReadingLayout from '../../layouts/ReadingLayout.astro';
+import PillTabs from '../../components/interactions/PillTabs.astro';
+import { href } from '../../data/navigation';
+
+const stories = (await getCollection('stories')).sort((a, b) => a.data.order - b.data.order);
+---
+<ReadingLayout title="The Stories" description="Eight traveller stories drawn from thematic analysis of 26 conversations about home.">
+  <h1 class="section-heading">Headline findings: <strong>Travellers</strong></h1>
+  <p class="pad">Eight traveller "stories" stand out. Each story is drawn from thematic analysis across every conversation to date.</p>
+  <p class="pad">Click through to see what's actually behind each one.</p>
+
+  <PillTabs id="findings-tabs" labels={stories.map((s) => s.data.label)} variant="grid" panelClass="cream-box">
+    {stories.map((s) => (
+      <div data-panel>
+        <div class="pane-quote">{s.data.headline}</div>
+        <p class="pane-text">{s.data.summary}</p>
+        <span class="pane-evidence">{s.data.evidence}</span>
+        <p class="read-more"><a class="arrow-link" href={href(`stories/${s.id}/`)}>{s.data.label} →</a></p>
+      </div>
+    ))}
+  </PillTabs>
+
+  <p class="emerge-footer">This full analysis draws from every conversation collected with travellers across the project.</p>
+</ReadingLayout>
+
+<style>
+  .pad { padding-block: var(--space-20); }
+  .pane-quote {
+    font-size: var(--text-large);
+    font-weight: 600;
+    color: var(--colour-terracotta);
+    margin-bottom: 14px;
+    line-height: 1.35;
+    border-left: 4px solid var(--colour-terracotta);
+    padding-left: 14px;
+  }
+  .pane-text { margin: 0 0 14px; }
+  .pane-evidence { display: block; font-size: 0.95rem; color: var(--colour-terracotta); font-style: italic; opacity: 0.9; }
+  .read-more { margin: 16px 0 0; }
+  .emerge-footer {
+    margin-top: 24px;
+    font-size: var(--text-large);
+    line-height: 1.55;
+    color: #555;
+    font-style: italic;
+    border-top: 1px solid rgba(139, 64, 43, 0.15);
+    padding-top: 20px;
+  }
+</style>

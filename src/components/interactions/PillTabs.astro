@@ -2,11 +2,12 @@
 // Accessible tabs rebuilding the WordPress radio-button tab components.
 //   variant="pill"  → .focus-pills (Belonging / The Shift / Method)
 //   variant="block" → .emerge-tabs-2 (Gallery purpose / Interpretation guide)
+//   variant="grid"  → .emerge-tabs-2 with eight tabs, four per row (Headline findings)
 // Put one element with a `data-panel` attribute in the slot per tab, in order.
 interface Props {
   id: string;
   labels: string[];
-  variant?: 'pill' | 'block';
+  variant?: 'pill' | 'block' | 'grid';
   panelClass?: string;
 }
 const { id, labels, variant = 'pill', panelClass = 'cream-panel' } = Astro.props;
@@ -22,6 +23,7 @@ const { id, labels, variant = 'pill', panelClass = 'cream-panel' } = Astro.props
         aria-selected={i === 0 ? 'true' : 'false'}
         tabindex={i === 0 ? 0 : -1}
         class={variant === 'pill' ? 'pill' : 'block-tab'}
+        title={variant === 'grid' ? label : undefined}
       >{label}</button>
     ))}
   </div>
@@ -48,6 +50,19 @@ const { id, labels, variant = 'pill', panelClass = 'cream-panel' } = Astro.props
     transition: all 0.25s ease;
   }
   .block-tab[aria-selected='true'] { background: var(--colour-terracotta); color: var(--colour-white); }
+
+  .tabs--grid .block-tab {
+    flex: 1 1 calc(25% - 8px);
+    min-width: 0;
+    padding: 10px 6px;
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 600px) {
+    .tabs--grid .block-tab { flex: 1 1 calc(50% - 8px); white-space: normal; }
+  }
 
   .panels { min-height: 160px; }
   .panels :global([data-panel][hidden]) { display: none; }

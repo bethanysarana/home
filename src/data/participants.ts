@@ -33,7 +33,8 @@ export interface Participant {
   biography?: string;
   biographyApproved: boolean;
 
-  /** Findings this person supports or complicates (filled in Phase 4). */
+  /** Kept for the specification's model; story links are derived from
+   *  src/data/relationships.ts (storiesFor), which is the single source. */
   storySlugs: string[];
 
   publicationStatus: PublicationStatus;
