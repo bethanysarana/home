@@ -14,7 +14,7 @@ export const NAVIGATION: NavItem[] = [
   { label: 'What Emerges', path: 'what-emerges/', ready: true },
   { label: 'Visual Archive', path: 'visual-archive/', ready: true },
   { label: 'Fieldnotes', path: 'fieldnotes/', ready: false },
-  { label: 'The Research', path: 'research/', ready: false },
+  { label: 'The Research', path: 'research/', ready: true },
   { label: 'About', path: 'about/', ready: false },
 ];
 

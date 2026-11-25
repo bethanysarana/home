@@ -9,6 +9,7 @@ import { archiveParticipants } from '../../data/participants';
 import { STORY_PARTICIPANTS } from '../../data/relationships';
 import { toneFor } from '../../data/story-tones';
 import { href } from '../../data/navigation';
+import ResearchProcessLink from '../../components/stories/ResearchProcessLink.astro';
 import frame from '../../data/what-emerges-frame.json';
 
 const ideas = (await getCollection('ideas')).sort((a, b) => a.data.order - b.data.order);
@@ -74,6 +75,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
           ) : (
             <div class="prose">
               <Content />
+              {idea.id === 'movement-and-continuity' && (
+                <ResearchProcessLink anchor="limitations" title="What this can (and can't) tell you" more="Limitations of the research" />
+              )}
             </div>
           )}
 

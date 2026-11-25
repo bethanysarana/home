@@ -2,7 +2,7 @@
 // "What this project is" (design brief §6): Belonging, The Shift and Method,
 // set as an editorial sequence beside the Wonderland photograph. Text verbatim
 // from the WordPress tabs; all three are now visible at once.
-import { href } from '../../data/navigation';
+import { href, isReady } from '../../data/navigation';
 const parts = [
   { n: '01', title: 'Belonging', text: 'Ideas of home and belonging shape how people understand themselves and the places they inhabit. For travellers, the meaning of home can shift depending on movement, community, culture, and lived experience.' },
   { n: '02', title: 'The Shift', text: 'Bringing together data science and lived experience, I have developed a strong interest in how people narrate and make sense of their lives. This project is an experiment in extending that curiosity into everyday life and travel.' },
@@ -23,6 +23,9 @@ const parts = [
             <span class="n" aria-hidden="true">{p.n}</span>
             <h3>{p.title}</h3>
             <p>{p.text}</p>
+            {p.title === 'Method' && isReady('research/') && (
+              <a class="arrow-link" href={href('research/#conversations')}>How the research works <span aria-hidden="true">→</span></a>
+            )}
           </li>
         ))}
       </ol>

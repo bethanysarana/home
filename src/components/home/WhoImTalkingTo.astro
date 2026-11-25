@@ -3,6 +3,7 @@
 // that only the traveller conversations (26) have been collected.
 // Group words verbatim from WordPress; the four facts from the specification.
 import { TOTAL_PARTICIPANTS } from '../../data/participants';
+import { href, isReady } from '../../data/navigation';
 const facts = ['Mobile volunteer community', 'Qualitative autobiographical narrative approach', 'Independent research project'];
 ---
 <section class="who section surface-white" aria-labelledby="who-heading">
@@ -35,7 +36,7 @@ const facts = ['Mobile volunteer community', 'Qualitative autobiographical narra
       </div>
     </div>
 
-    <p class="note">Every conversation so far has been with a <strong>traveller</strong> (not yet a local or someone in between).</p>
+    <p class="note">Every conversation so far has been with a <strong>traveller</strong> (not yet a local or someone in between).{isReady('research/') && <> <a href={href('research/#limitations')}>More on what that means <span aria-hidden="true">→</span></a></>}</p>
   </div>
 </section>
 

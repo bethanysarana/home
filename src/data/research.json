@@ -1,0 +1,183 @@
+{
+ "background": [
+  "Ideas of home and belonging shape how people understand themselves and the places they inhabit. For travellers, the meaning of home can shift depending on movement, community, culture, and lived experience.",
+  "While volunteering at Wonderland, I wanted to explore the construct of home through informal conversations with volunteers. Wonderland provides a uniquely rich environment for this exploration, as it brings together people from diverse cultural and geographic backgrounds who are temporarily sharing space and experiences.",
+  "The project sits at the intersection of narrative inquiry, qualitative research, and creative storytelling."
+ ],
+ "objectives": [
+  "Explore how different people understand and describe the idea of home.",
+  "Examine how experiences of travel, migration, and place shape feelings of belonging.",
+  "Create space for reflective conversations between people who might not normally articulate these experiences.",
+  "Collect stories, perspectives, and reflections that contribute to a narrative exploration of how people create meaning around home and place."
+ ],
+ "groups": {
+  "phase1": "Phase 1: In progress",
+  "travellers": [
+   "Portable versions of home.",
+   "Temporary routines.",
+   "Familiarity built through movement."
+  ],
+  "phase2": "Phase 2: Upcoming comparative enquiry",
+  "locals": [
+   "Rootedness",
+   "Continuity",
+   "Memory",
+   "Community"
+  ],
+  "between": [
+   "Volunteers",
+   "Seasonal residents,",
+   "People negotiating multiple versions of belonging."
+  ],
+  "note": "Every conversation so far has been with a traveller (not yet a local or someone in between). More on what that means below ↓"
+ },
+ "demographicsHeading": "Demographics from all 25 travellers interviewed so far",
+ "conversation": {
+  "intro": [
+   "Conversations happen casually over coffee or in shared spaces.",
+   "They move through memories, places, routines, and the different ways people experience home, carry belonging, and experience place across movement and change."
+  ],
+  "questionsLead": "Some questions I keep coming back to:",
+  "questions": [
+   {
+    "label": "Exploration",
+    "text": "How much do you find vs create home?"
+   },
+   {
+    "label": "Evolution",
+    "text": "Has your idea of home changed over time?"
+   },
+   {
+    "label": "Perception",
+    "text": "Is \"home\" more of a feeling or a place to you?"
+   }
+  ],
+  "participation": [
+   "Participation was voluntary."
+  ],
+  "interviews": [
+   "It will use informal, conversational qualitative methods. Prospective participants will be invited to take part in relaxed conversations lasting approximately 30 minutes, which may take place over coffee, during walks, or in shared spaces around Wonderland.",
+   "Conversations will be immersive, and follow an autobiographical narrative structure that broadly encompasses the following concepts: personal definitions of home; experiences of belonging and displacement; how places begin to feel familiar or meaningful; how ideas of home change over time.",
+   "Conversation audio will be recorded with consent. Insights and reflections will be documented through notes to be analysed thematically."
+  ]
+ },
+ "process": {
+  "intro": [
+   "There is a method to storytelling magic! To find the deeper patterns in these travel and lifestyle experiences, conversation data goes through a rigorous (but highly visual) thematic analysis.",
+   "I record each conversation, listen back for patterns, group similar ideas together, and slowly build shared themes across everyone I've spoken to.",
+   "This doodle diagram illustrates my path from raw audio and rough notes to the final narratives and galleries emerging."
+  ],
+  "steps": [
+   {
+    "n": 1,
+    "title": "Step 1: Transcription",
+    "text": "Converting audio to text.",
+    "top": 8.0,
+    "left": 4.5
+   },
+   {
+    "n": 2,
+    "title": "Step 2: Data Familiarisation",
+    "text": "Getting close to the data by listening back to interview recordings together with the transcript.",
+    "top": 8.0,
+    "left": 26.5
+   },
+   {
+    "n": 3,
+    "title": "Step 3: Content Categorization",
+    "text": "Sorting topic of conversation based on the original project objectives.",
+    "top": 8.0,
+    "left": 52.0
+   },
+   {
+    "n": 4,
+    "title": "Step 4: Initial Coding & Refinement",
+    "text": "Grouping text descriptively.",
+    "top": 8.0,
+    "left": 74.0
+   },
+   {
+    "n": 5,
+    "title": "Step 5: Code Review & Refinement",
+    "text": "Cleaning up categories as more transcripts are analysed.",
+    "top": 48.0,
+    "left": 4.5
+   },
+   {
+    "n": 6,
+    "title": "Step 6: Drafting the Story",
+    "text": "Finding the \"headlines\" that weave the themes together.",
+    "top": 48.0,
+    "left": 30.5
+   },
+   {
+    "n": 7,
+    "title": "Step 7: Finalizing Themes & Narratives",
+    "text": "Organising participant cards by the emerging themes and categories.",
+    "top": 48.0,
+    "left": 56.5
+   }
+  ]
+ },
+ "analysis": {
+  "paragraphs": [
+   "Data analysis followed the principles of reflexive thematic analysis (Braun & Clarke, 2006, 2019), applied flexibly rather than as a fixed procedure. Familiarisation was achieved through repeated close reading of each transcript. Codes were generated inductively at the level of the individual conversation, then compared and clustered across participants into candidate themes, which were revised, merged, or dropped as later readings complicated them. This process is documented in full, with dates, in the project's own change log, kept specifically so the analysis could be audited rather than only trusted.",
+   "Two features of the analytic process depart from conventional practice and are stated plainly rather than smoothed over. First, an AI collaborator was used throughout coding and theme development in place of a second human coder. Every interpretative judgement was left visible and attributable: where a code reflects the researcher's holistic reading rather than a participant's direct statement, it is marked as such in the underlying data. Second, the researcher is an embedded member of the community from which participants were drawn, not an external observer. Every conversation concluded with a structured debrief in which the researcher shared emerging patterns from the project, offered as reciprocity for participants' openness. Section 4 discusses what both of these mean for how the findings should be read.",
+   "Table 1 sets out how the project's analytic decisions map onto Braun and Clarke's five core theoretical assumptions for thematic analysis.",
+   "Coding was tracked across several structured fields for every participant: a general narrative pattern, emotional tone, contradictions within the account, an interpretive reaction to the interview itself, notable quotes, and, once their value became clear across multiple participants, explicit codes for stated position on finding versus creating home, place versus feeling, the specific negative case that broke a sense of belonging, the concrete marker of settling in described, and childhood home structure."
+  ],
+  "table": {
+   "head": [
+    "Theoretical assumption",
+    "Braun & Clarke's guidance",
+    "Decision made in this project"
+   ],
+   "rows": [
+    [
+     "Defining a theme",
+     "Themes are defined by size, hierarchy, and description; the researcher decides.",
+     "A theme was treated as a pattern capturing something significant about how participants construct home, not merely a category for organising quotes."
+    ],
+    [
+     "Inductive or theoretical",
+     "Bottom-up (data-driven) versus top-down (theory-driven) coding.",
+     "Coding was inductive throughout. Theoretical literature was brought in only after coding, to interpret findings already grounded in the transcripts, not to shape them in advance."
+    ],
+    [
+     "Explicit or interpretative",
+     "Explicit codes describe what is said at face value; interpretative codes relate to underlying meaning.",
+     "A hybrid approach was used. Every interpretative code is visibly marked as such in the underlying data, rather than presented with the same evidentiary status as a direct quote."
+    ],
+    [
+     "Essentialist or constructionist",
+     "Whether language is treated as a direct window onto experience, or as shaped by social position and interaction.",
+     "A broadly essentialist stance was taken for coding purposes, while the researcher's own influence on the interaction is treated as a constructionist consideration throughout Section 5."
+    ]
+   ]
+  }
+ },
+ "position": [
+  "This project does not separate the person asking what home means from the person who has spent recent years dismantling her own fixed structures and building new ones, and that choice changes what kind of study this is. It is not a survey of attitudes toward home conducted by a detached observer. It is an inquiry into what becomes visible about home when the person doing the asking is herself experimenting with its dissolution and reconstruction. Taking that seriously requires more than disclosing it: what participants told an embedded, travelling interviewer that they might have withheld from an outside academic, which accounts ran against the researcher's own expectations, and whether any specific conversation revised her thinking in a way that could be shown rather than only claimed, are all questions a second, deliberate pass through the transcripts would need to answer. That pass has not yet been done.",
+  "The setting carries a parallel weight, and this is where the project's own interpretive stance from Section 4.1 has a direct, practical consequence rather than remaining an abstract caveat. Every finding above was produced inside one specific environment: a mobile, international, volunteer-run community on Siquijor. A geographically settled population might anchor home more heavily in genealogy, property, and continuous residence. This project cannot currently test that comparison, since every participant belongs to the same broad category: people who chose a mobile life.",
+  "The concrete response to this is a planned second cohort: interviews with local, non-transient residents of Siquijor, using the same conversational method and the same coding scheme, specifically to test whether the relational, portable account of home reported here is a property of home itself or an artifact of who was asked. If local residents describe home in similarly relational terms, the finding strengthens considerably, since it would no longer depend on the sample already having disrupted a conventional relationship with place. If they describe it in more fixed, geographically and genealogically anchored terms, that difference becomes a finding in its own right, and a direct empirical answer to the question this section opened with, rather than a limitation the project simply lives with. This comparison has not yet been carried out. It is stated here as the planned next expansion of the project, not a hypothetical one.",
+  "Cohen, Duncan and Thulemark's (2015) concept of lifestyle mobility, the intention to move on rather than move back, describes the current sample precisely, and distinguishes participants from tourists, who intend to return, and from migrants, who intend to resettle. A population defined partly by already having chosen not to be fixed to one place is, close to by definition, more likely to describe home in portable, relational terms than a general population would. Read through the stance in Section 4.1, this is not a flaw to apologise for. It is the specific thing the project is designed to make visible, and the planned local-resident comparison is how that specificity gets tested rather than only asserted."
+ ],
+ "limitations": {
+  "noteOnMe": [
+   "I'm not a neutral outsider asking these questions. I live in this community too. Every conversation ends with a debrief, where I share a little of what I'm noticing across the project so far. This is partly because people are genuinely curious what happens with what they've told me, and partly because it felt wrong to take without giving something back. That means the person I'm talking to isn't just a source of data. By the end of each conversation, they know a bit about the emerging picture too, and that is deliberate.",
+   "My own move from structured clinical research into this project is itself part of the story I'm telling. So read every \"pattern\" on this page as filtered through someone who's inside the thing she's describing, and who talks to her participants about it too. I'm not observing from a clean, silent distance."
+  ],
+  "report": {
+   "proximity": "This project's central strength is also its central limitation: proximity. The researcher's embeddedness within the community studied enabled a depth and openness of disclosure - evident throughout Section 3 - that would be difficult to achieve as an external interviewer, and sits within a legitimate methodological tradition of autoethnographic and insider research rather than being simply a deviation from a neutral standard. The same proximity means the researcher is not a neutral instrument: every conversation concludes with a structured debrief in which emerging patterns are shared with the participant, a deliberate and consistent practice rather than an occasional lapse, but one that nonetheless means participants' own reflections and any patterns circulating informally within the community cannot be treated as fully independent of the research process itself.",
+   "sample": "The sample is self-selected and drawn from a single, mobile volunteer community, which limits generalisability in a specific and structural way rather than only a general one: participants who have already chosen a mobile lifestyle are, plausibly, more likely to describe home in portable and relational terms than a general population would be, making the central finding partly a description of who was asked as well as what was found. The three groups the project set out to compare - travellers, locals, and people in between - are not yet evenly represented; all 26 participants coded to date are travellers, and the locals and people-in-between categories remain aspirational rather than populated.",
+   "coverage": "Coverage varies meaningfully across the coded dimensions reported in this document, from 25 of 26 (word category) down to 3 of 21 or single, well-corroborated cases for some of the more specific themes; each finding in Section 3 states its own coverage for this reason, and lower-coverage findings should be read as directional rather than established. The sample also skews young (44% aged 20-24) and skews female (roughly two in three participants), which should be considered when interpreting any finding, including the gendered-safety pattern in Section 3.2, which is itself drawn from a small number of cases (four) despite its internal consistency.",
+   "quotes": "Finally, quote selection throughout this project's outputs - including this report - has not been a neutral process. Quotes have been selected collaboratively with an eye toward clarity and resonance as well as representativeness, meaning vivid, well-phrased testimony is somewhat more likely to appear here than flatter or more typical testimony conveying the same underlying pattern. Readers should treat the quotes in Section 3 as illustrative of coded patterns established independently, not as the sole evidence for them.",
+   "gallery": "One further artifact deserves the same scrutiny. The word-colour-shape gallery accompanying this project's public output can look like a data display when it is actually a second-order interpretation: a participant's words, filtered through the researcher's visual and aesthetic judgement, rendered as an image. That is not a flaw to hide, and is arguably what makes the gallery worth encountering as a creative object in its own right, but it should not be mistaken for evidence in the way a coded transcript excerpt can be."
+  },
+  "organising": [
+   "The honest shape of what I'm finding isn't neat categories. It's closer to one dominant pattern with real texture underneath it. The overwhelming majority of people so far (more than 9 in 10) land somewhere in the relational and emotional register when you ask them what home really is.",
+   "Underneath that, there's genuine variety in how people carry or rebuild that feeling while they're on the move. It could be a particular tea, a comfort show, fairy lights strung up in a new room, or sometimes nothing physical at all, just the right people nearby. And then there's a small, powerful handful of stories where home isn't something to find or build anymore, because the place it would refer to doesn't exist to go back to.",
+   "So rather than sorting people into boxes, I'm holding onto one dominant pattern, the many different ways people enact it, and the exceptions that show what happens when it isn't available at all. That feels truer to what's actually in front of me than any tidy structure would."
+  ]
+ }
+}

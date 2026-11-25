@@ -1,21 +1,26 @@
 ---
-// Points readers from a story to how the research was done.
-// Until The Research page exists this renders a deliberate, visible
-// placeholder (design brief §12); once `research/` is ready in
-// src/data/navigation.ts it becomes a link automatically.
+// A pointer from elsewhere on the site to a part of The Research.
+// Until The Research page is ready (src/data/navigation.ts) it renders a
+// visible placeholder; then it becomes a link to `#anchor` on that page.
 import { href, isReady } from '../../data/navigation';
+interface Props { anchor?: string; title?: string; more?: string }
+const {
+  anchor = 'how-i-make-sense',
+  title = 'How I make sense of it all',
+  more = 'How the conversations were recorded and analysed',
+} = Astro.props;
 const ready = isReady('research/');
 ---
 {ready ? (
-  <a class="process" href={href('research/')}>
+  <a class="process" href={href(`research/#${anchor}`)}>
     <span class="eyebrow">The Research</span>
-    <span class="title">How I make sense of it all</span>
-    <span class="more">How the conversations were recorded and analysed <span aria-hidden="true">→</span></span>
+    <span class="title">{title}</span>
+    <span class="more">{more} <span aria-hidden="true">→</span></span>
   </a>
 ) : (
   <aside class="process placeholder" aria-label="Placeholder">
     <span class="eyebrow">The Research · page to come</span>
-    <span class="title">How I make sense of it all</span>
+    <span class="title">{title}</span>
     <span class="more">Placeholder: this will link to the research process, how the conversations were recorded and how the analysis was made.</span>
   </aside>
 )}
