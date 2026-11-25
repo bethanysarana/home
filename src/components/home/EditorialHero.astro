@@ -11,10 +11,6 @@ import { href } from '../../data/navigation';
     <p class="standfirst">How do we narrate our own lives?</p>
     <hr class="rule" />
     <p class="intro">Follow as I experiment with applying analytical rigor to the architecture of everyday life, exploring how we build identity and belonging when we leave traditional, fixed structures behind.</p>
-    <p class="actions">
-      <a class="button" href={href('stories/')}>The Stories</a>
-      <a class="button" href={href('project-gallery/')}>Project Gallery</a>
-    </p>
   </div>
   {SITE.heroImage && (
     <figure class="hero-image img-frame">
@@ -60,7 +56,6 @@ import { href } from '../../data/navigation';
   }
   .rule { width: 56px; border: 0; border-top: 2px solid var(--ink); margin: var(--space-6) 0; }
   .intro { font-size: var(--text-lead); line-height: 1.5; max-width: 30em; }
-  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5); margin: var(--space-6) 0 0; }
 
   @media (max-width: 1023px) {
     .hero-text { grid-column: 1 / span 6; }
