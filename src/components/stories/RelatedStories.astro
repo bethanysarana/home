@@ -1,0 +1,44 @@
+---
+// Related findings (from relationships.ts) and previous / next story.
+import { getCollection } from 'astro:content';
+import StoryCard from './StoryCard.astro';
+import { RELATED_STORIES } from '../../data/relationships';
+import { href } from '../../data/navigation';
+
+interface Props { slug: string }
+const { slug } = Astro.props;
+const all = (await getCollection('stories')).sort((a, b) => a.data.order - b.data.order);
+const related = (RELATED_STORIES[slug] ?? []).map((s) => all.find((x) => x.id === s)!).filter(Boolean);
+const i = all.findIndex((s) => s.id === slug);
+const prev = all[i - 1];
+const next = all[i + 1];
+---
+{related.length > 0 && (
+  <section class="related" aria-labelledby="related-heading">
+    <h2 id="related-heading" class="related-heading">Related stories</h2>
+    <ul class="related-list">{related.map((s) => <StoryCard story={s} />)}</ul>
+  </section>
+)}
+<nav class="pager" aria-label="Stories">
+  {prev ? <a class="pager-link prev" href={href(`stories/${prev.id}/`)}><span class="dir">← Previous</span><span>{prev.data.label}</span></a> : <span />}
+  {next ? <a class="pager-link next" href={href(`stories/${next.id}/`)}><span class="dir">Next →</span><span>{next.data.label}</span></a> : <span />}
+</nav>
+
+<style>
+  .related { margin-top: var(--space-50); }
+  .related-heading { font-size: var(--text-large); font-weight: 600; }
+  .related-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .pager {
+    margin-top: var(--space-50);
+    padding-top: var(--space-40);
+    border-top: 1px solid var(--colour-rule);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-30);
+    font-size: var(--text-medium);
+  }
+  .pager-link { display: flex; flex-direction: column; text-decoration: none; max-width: 48%; }
+  .pager-link:hover span:last-child { text-decoration: underline; }
+  .next { text-align: right; margin-left: auto; }
+  .dir { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; color: var(--colour-terracotta); }
+</style>

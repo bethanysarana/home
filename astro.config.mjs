@@ -5,13 +5,12 @@ import { defineConfig } from 'astro/config';
 const base = '/home';
 
 // The eight finding pages published on day 1 lived under /learning/.
-// They move to /stories/ in Phase 4; until then they point to the homepage.
-// In Phase 4 change the target to `${base}/stories/<slug>/`.
+// They now live under /stories/ with the same slugs.
 const day1 = ['home-isnt-a-place', 'its-never-the-room', 'no-single-answer', 'when-home-is-lost',
   'more-than-one-home', 'hard-talks-often', 'language-remembers', 'starting-over'];
 const redirects = Object.fromEntries([
-  ['/learning', `${base}/`],
-  ...day1.map((slug) => [`/learning/${slug}`, `${base}/`]),
+  ['/learning', `${base}/stories/`],
+  ...day1.map((slug) => [`/learning/${slug}`, `${base}/stories/${slug}/`]),
 ]);
 
 export default defineConfig({

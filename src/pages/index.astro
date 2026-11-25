@@ -1,10 +1,10 @@
 ---
-// Homepage (specification §4). Featured stories and the Fieldnotes
-// introduction are added when those sections are built (Phases 4 and 7).
+// Homepage (specification §4). The Fieldnotes introduction is added in Phase 7.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
 import ProjectIntroduction from '../components/home/ProjectIntroduction.astro';
 import ProjectSnapshot from '../components/home/ProjectSnapshot.astro';
+import FeaturedStories from '../components/home/FeaturedStories.astro';
 import FeaturedArchive from '../components/home/FeaturedArchive.astro';
 ---
 <BaseLayout>
@@ -14,6 +14,7 @@ import FeaturedArchive from '../components/home/FeaturedArchive.astro';
   </div>
   <ProjectIntroduction />
   <ProjectSnapshot />
+  <FeaturedStories />
   <FeaturedArchive />
 </BaseLayout>
 

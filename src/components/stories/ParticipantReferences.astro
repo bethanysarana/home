@@ -1,0 +1,36 @@
+---
+// Participant cards linked to a story through src/data/relationships.ts.
+import ParticipantCard from '../gallery/ParticipantCard.astro';
+import { publishedParticipants } from '../../data/participants';
+import { STORY_PARTICIPANTS } from '../../data/relationships';
+
+interface Props { slug: string }
+const { slug } = Astro.props;
+const TAGS = { supports: undefined, complicates: 'Complicates', extends: 'Extends' } as const;
+const published = publishedParticipants();
+const people = (STORY_PARTICIPANTS[slug] ?? [])
+  .map((l) => ({ ...l, p: published.find((p) => p.id === l.participant) }))
+  .filter((x) => x.p);
+---
+{people.length > 0 && (
+  <section class="people" aria-labelledby={`people-${slug}`}>
+    <h2 id={`people-${slug}`} class="people-heading">The people behind this story</h2>
+    <ul class="grid">
+      {people.map((x) => <ParticipantCard participant={x.p!} tag={TAGS[x.role]} />)}
+    </ul>
+  </section>
+)}
+
+<style>
+  .people { margin-top: var(--space-50); }
+  .people-heading { font-size: var(--text-large); font-weight: 600; }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 16px;
+  }
+  @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+</style>

@@ -1,16 +1,16 @@
 # Migration notes
 
 Record of how the WordPress page "Lets talk about 'Home'" (post 90) is being rebuilt to `docs/SPEC.md`.
-Last updated: 25 November 2026, after Phases 1–3.
+Last updated: 25 November 2026, after Phase 4.
 
 ## Progress
 
 | Phase | Status |
 |---|---|
 | 1 Foundation | Done |
-| 2 Homepage | Done, except featured stories (needs Phase 4) and Fieldnotes introduction (needs Phase 7) |
-| 3 Visual Archive | Done, except related-story links on cards (needs Phase 4) |
-| 4 Stories | Not started |
+| 2 Homepage | Done, except the Fieldnotes introduction (needs Phase 7) |
+| 3 Visual Archive | Done |
+| 4 Stories | Done, except links to What Emerges ideas (needs Phase 5) |
 | 5 What Emerges | Not started (source: Report 2's discussion section) |
 | 6 Research | Not started |
 | 7 Fieldnotes and About | Not started |
@@ -58,7 +58,7 @@ Last updated: 25 November 2026, after Phases 1–3.
 | Card-back biographies | Card backs show each person's codes until supplied |
 | Contact details | Footer has none |
 | Favicon | Browser default icon |
-| Participant-to-finding links | Phase 4, from Report 4's attributions |
+| Per-story limitations beyond the evidence line | Each story shows Report 4's coverage line; the fuller limitations go on The Research (Phase 6) and can be linked from each story then |
 
 ## Conflicts resolved
 
@@ -89,7 +89,7 @@ Last updated: 25 November 2026, after Phases 1–3.
 | How I make sense of it all (seven-step diagram) | The Research §9.4 | Phase 6 |
 | Travellers gallery, intro and tabs | Visual Archive | Done |
 | Gallery filters and cards | Visual Archive | Done (layers now combine, per spec) |
-| Headline findings (8) | The Stories | Phase 4 |
+| Headline findings (8) | The Stories: overview tabs + one page each (same addresses as day 1, /learning/ redirects) | Done |
 | "Live update: outdated (delete later)" | Archived in the export only; not migrated | — |
 | What this can (and can't) tell you | The Research §9.6 | Phase 6 |
 | Where will this go? | Fieldnotes or Research | Phase 6/7 |
@@ -115,8 +115,29 @@ Wording I added that isn't from WordPress, the spec or the reports:
 - Screen-reader text on each card: "show how this answer was coded"
 - Homepage link to the archive: "Visual Archive →" (navigation label)
 - Mobile menu button label: "Menu"; skip link: "Skip to content"; scroll button: "Back to top" (from WordPress)
+- Story pages: "The people behind this story", "Related stories", "← Previous" / "Next →", tags "Complicates" / "Extends"
+- Card back: "The Stories" (navigation label) above story links; round button label "Show artwork"
+- Overview panels: link text is each story's own tab label followed by →
 
 ## Text to review (kept verbatim, possibly outdated)
 
+- Story 1 (WordPress paragraph): "Only one person names an actual place" — Bethany has confirmed that Eduardo and Arturo both named a place.
+- Story 6 (Report 4 §3.6): "Section 4.6 situates this against the literature…" refers to the report, not the website. Could later point to What Emerges.
+
 - Method tab: "I'm interviewing people to explore…" — the traveller dataset is now complete.
 - Homepage selection shows the first six cards in WordPress order; change `FEATURED_IDS` in `src/components/home/FeaturedArchive.astro` to choose others.
+
+## Phase 4: The Stories
+
+**Content per story** (`src/content/stories/<slug>.md`):
+- Eyebrow, headline and opening paragraph: the WordPress "Headline findings" tab label, quote and paragraph, verbatim.
+- Research section: Report 4 §3.x heading and text, verbatim, with quotes.
+- Evidence: Report 4's coverage line. Language changed from "3 of 21" to "3 of 26" on Bethany's instruction.
+
+**Left out of the public pages:**
+- §3.6, second paragraph ("The range of severity is wide…"): it names participants alongside abuse, alcoholism and bereavement. The finding appears at pattern level and links to no one. Restore it by deleting its entry from `omit` in the generator, if Bethany decides to.
+- §3.8, the repeated "Sammy's account adds a sharper mechanism" paragraph (it repeats the paragraph before it).
+
+**Participant links** (`src/data/relationships.ts`): a person is linked to a story only where Report 4's section names them. "Complicates" marks Report 4's stated exceptions (Eduardo in 3.1, Theo in 3.3, Bella in 3.5); "Extends" marks Arturo in 3.5 ("a related but distinct pattern"). Bella and Michel are linked in the data but have no card until their artwork arrives. Story-to-story links only where Report 4 connects the sections (3.1↔3.4, 3.3↔3.4). The build fails if a link points at a missing person or story.
+
+**Homepage:** featured stories = the first three findings; change `FEATURED` in `src/components/home/FeaturedStories.astro`.

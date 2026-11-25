@@ -1,17 +1,22 @@
 ---
 // One canonical card per participant (specification §5.3).
-//   variant="flip" → Visual Archive: a button that flips between the artwork
-//                    (front) and the person's codes (back).
-//   variant="link" → homepage selection: front only, links to the archive.
+//   variant="flip" → front: artwork + final word (a button that flips the card);
+//                    back: the person's codes and links to their stories.
+//   variant="link" → front only, linking to the Visual Archive (homepage).
+// One flip state drives hover (mouse), tap and keyboard alike.
+import { getCollection } from 'astro:content';
 import type { Participant } from '../../data/participants';
 import { TIER1, TIER2, labelFor } from '../../data/gallery-filters';
-import { href } from '../../data/navigation';
+import { href, isReady } from '../../data/navigation';
+import { storiesFor } from '../../data/relationships';
 
 interface Props {
   participant: Participant;
   variant?: 'flip' | 'link';
+  /** Optional small tag under the card, e.g. on story pages. */
+  tag?: string;
 }
-const { participant: p, variant = 'flip' } = Astro.props;
+const { participant: p, variant = 'flip', tag } = Astro.props;
 const NOT_CODED = 'Not yet coded';
 const rows = [
   { term: TIER1.heading, value: labelFor(TIER1.options, p.finalWordCategory) },
@@ -23,6 +28,12 @@ const rows = [
   },
 ];
 const word = `“${p.finalWord}”`;
+const stories = isReady('stories/')
+  ? (await getCollection('stories'))
+      .filter((s) => storiesFor(p.id).includes(s.id))
+      .sort((a, b) => a.data.order - b.data.order)
+  : [];
+const backId = `card-back-${p.id}`;
 ---
 {variant === 'link' ? (
   <li class="card">
@@ -36,20 +47,26 @@ const word = `“${p.finalWord}”`;
 ) : (
   <li
     class="card"
+    data-card
     data-participant={p.id}
     data-finalwordcategory={p.finalWordCategory ?? ''}
     data-findcreate={p.findCreate ?? ''}
     data-placefeeling={p.placeFeeling ?? ''}
     data-placefeeling-source={p.placeFeelingIsInterpretation ? 'inferred' : undefined}
   >
-    <button class="card-inner" type="button" aria-pressed="false">
-      <span class="face front">
-        <img src={href(p.artwork!)} alt={p.finalWord!} width="900" height="900" loading="lazy" />
-        <span class="word serif-word">{word}</span>
-        <span class="visually-hidden"> – show how this answer was coded</span>
-      </span>
-      <span class="face back" aria-hidden="true">
-        <span class="back-word serif-word">{word}</span>
+    <div class="card-inner" data-flipped="false">
+      <div class="face front">
+        <button class="flip-btn" type="button" aria-expanded="false" aria-controls={backId}>
+          <img src={href(p.artwork!)} alt={p.finalWord!} width="900" height="900" loading="lazy" />
+          <span class="word serif-word">{word}</span>
+          <span class="visually-hidden"> – show how this answer was coded</span>
+        </button>
+      </div>
+      <div class="face back" id={backId} inert>
+        <button class="unflip-btn" type="button" aria-label="Show artwork">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        </button>
+        <p class="back-word serif-word">{word}</p>
         <dl class="codes">
           {rows.map((r) => (
             <div class="code-row">
@@ -61,9 +78,18 @@ const word = `“${p.finalWord}”`;
             </div>
           ))}
         </dl>
-        {p.biographyApproved && p.biography && <span class="bio">{p.biography}</span>}
-      </span>
-    </button>
+        {p.biographyApproved && p.biography && <p class="bio">{p.biography}</p>}
+        {stories.length > 0 && (
+          <div class="card-stories">
+            <p class="stories-term">The Stories</p>
+            <ul>
+              {stories.map((s) => <li><a href={href(`stories/${s.id}/`)}>{s.data.label}</a></li>)}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+    {tag && <span class="card-tag">{tag}</span>}
   </li>
 )}
 
@@ -79,15 +105,11 @@ const word = `“${p.finalWord}”`;
   .card-link, .card-inner {
     display: grid;
     width: 100%;
-    padding: 0;
-    border: 0;
-    background: none;
-    text-align: center;
     text-decoration: none;
     color: inherit;
-    cursor: pointer;
     border-radius: var(--radius-large);
     perspective: 1200px;
+    text-align: center;
   }
   .face {
     grid-area: 1 / 1;
@@ -98,13 +120,21 @@ const word = `“${p.finalWord}”`;
     overflow: hidden;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.2s ease;
   }
-  .front img {
+  .flip-btn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: var(--radius-large);
   }
+  .front img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
   .word {
     padding: 12px 14px;
     font-size: var(--text-large);
@@ -112,31 +142,53 @@ const word = `“${p.finalWord}”`;
     color: var(--colour-charcoal);
   }
 
-  /* Back of the card */
+  /* Back */
+  /* The back sits exactly over the front so it never changes the card's size */
+  .card-inner { position: relative; }
   .back {
+    position: absolute;
+    inset: 0;
     transform: rotateY(180deg);
-    justify-content: center;
-    gap: 14px;
-    padding: 20px 16px;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 16px 14px;
     text-align: left;
     border: 1px solid var(--colour-sand);
+    overflow-y: auto;
+  }
+  .unflip-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--colour-sand);
+    background: var(--colour-white);
+    color: var(--colour-terracotta);
+    cursor: pointer;
   }
   .back-word {
-    font-size: var(--text-large);
+    margin: 0;
+    padding-right: 32px;
+    font-size: var(--text-medium);
     line-height: 1.3;
     color: var(--colour-terracotta);
     border-left: 4px solid var(--colour-terracotta);
     padding-left: 12px;
   }
-  .codes { margin: 0; display: grid; gap: 10px; }
-  .code-row dt {
+  .codes { margin: 0; display: grid; gap: 8px; }
+  .code-row dt, .stories-term {
+    margin: 0;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.8px;
     color: var(--colour-terracotta);
     font-weight: 700;
   }
-  .code-row dd { margin: 2px 0 0; font-size: var(--text-medium); font-weight: 500; color: var(--colour-charcoal); }
+  .code-row dd { margin: 2px 0 0; font-size: 0.95rem; font-weight: 500; color: var(--colour-charcoal); }
   .code-row dd.uncoded { color: var(--colour-grey); font-style: italic; font-weight: 400; }
   .read-tag {
     display: inline-block;
@@ -149,26 +201,27 @@ const word = `“${p.finalWord}”`;
     color: var(--colour-terracotta);
     vertical-align: middle;
   }
-  .bio { font-size: var(--text-small); line-height: 1.5; }
-
-  /* Flip: tap/click/keyboard (aria-pressed), and hover on mouse devices */
-  .card-inner[aria-pressed='true'] .front { transform: rotateY(-180deg); }
-  .card-inner[aria-pressed='true'] .back { transform: rotateY(0deg); }
-  @media (hover: hover) and (pointer: fine) {
-    .card-inner:hover .front { transform: rotateY(-180deg); }
-    .card-inner:hover .back { transform: rotateY(0deg); }
+  @media (max-width: 480px) {
+    .back { padding: 12px 10px; gap: 8px; }
+    .code-row dt, .stories-term { font-size: 0.62rem; letter-spacing: 0.5px; }
+    .code-row dd { font-size: 0.85rem; }
+    .codes { gap: 6px; }
   }
+  .bio { margin: 0; font-size: var(--text-small); line-height: 1.5; }
+  .card-stories ul { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 2px 10px; }
+  .card-stories a { font-size: 0.8rem; font-weight: 500; line-height: 1.35; color: var(--colour-terracotta); }
+  /* Soft fade at the bottom edge when the back has more to scroll */
+  .back { scrollbar-width: thin; }
+  .back.has-more { -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent); mask-image: linear-gradient(to bottom, #000 82%, transparent); }
 
-  /* Reduced motion: cross-fade instead of rotating */
+  .card-inner[data-flipped='true'] .front { transform: rotateY(-180deg); }
+  .card-inner[data-flipped='true'] .back { transform: rotateY(0deg); }
+
   @media (prefers-reduced-motion: reduce) {
-    .face { transition: opacity 0.2s ease; transform: none !important; }
+    .face { transform: none !important; }
     .back { opacity: 0; }
-    .card-inner[aria-pressed='true'] .front { opacity: 0; }
-    .card-inner[aria-pressed='true'] .back { opacity: 1; }
-    @media (hover: hover) and (pointer: fine) {
-      .card-inner:hover .front { opacity: 0; }
-      .card-inner:hover .back { opacity: 1; }
-    }
+    .card-inner[data-flipped='true'] .front { opacity: 0; }
+    .card-inner[data-flipped='true'] .back { opacity: 1; }
   }
 
   /* Dashed border where a tag is the researcher's interpretive read */
@@ -177,7 +230,7 @@ const word = `“${p.finalWord}”`;
     content: "researcher's read";
     position: absolute;
     top: 6px;
-    right: 6px;
+    left: 6px;
     z-index: 3;
     background: var(--colour-terracotta);
     color: var(--colour-white);
@@ -187,5 +240,48 @@ const word = `“${p.finalWord}”`;
     pointer-events: none;
   }
 
+  .card-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    color: var(--colour-terracotta);
+  }
+
   .card-link:hover .word { text-decoration: underline; }
 </style>
+
+<script>
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  document.querySelectorAll<HTMLElement>('[data-card]').forEach((card) => {
+    const inner = card.querySelector<HTMLElement>('.card-inner')!;
+    const flipBtn = card.querySelector<HTMLButtonElement>('.flip-btn')!;
+    const unflipBtn = card.querySelector<HTMLButtonElement>('.unflip-btn')!;
+    const front = card.querySelector<HTMLElement>('.front')!;
+    const back = card.querySelector<HTMLElement>('.back')!;
+    let pinned = false; // flipped by tap/click/keyboard rather than hover
+
+    const updateFade = () => back.classList.toggle('has-more', back.scrollHeight - back.scrollTop - back.clientHeight > 4);
+    back.addEventListener('scroll', updateFade, { passive: true });
+
+    const set = (flipped: boolean, moveFocus = false) => {
+      inner.dataset.flipped = String(flipped);
+      flipBtn.setAttribute('aria-expanded', String(flipped));
+      back.inert = !flipped;
+      front.inert = flipped;
+      if (flipped) { back.scrollTop = 0; updateFade(); }
+      if (moveFocus) (flipped ? unflipBtn : flipBtn).focus({ preventScroll: true });
+    };
+
+    flipBtn.addEventListener('click', () => { pinned = true; set(true, true); });
+    unflipBtn.addEventListener('click', () => { pinned = false; set(false, true); });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && inner.dataset.flipped === 'true') { pinned = false; set(false, true); }
+    });
+    card.addEventListener('mouseenter', () => { if (finePointer.matches && !pinned) set(true); });
+    card.addEventListener('mouseleave', () => { if (finePointer.matches && !pinned) set(false); });
+  });
+</script>

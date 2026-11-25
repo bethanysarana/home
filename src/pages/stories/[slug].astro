@@ -1,0 +1,49 @@
+---
+// Individual story (specification §6): WordPress headline and paragraph,
+// then the full Report 4 section, evidence, the people behind it, related stories.
+import { getCollection, render } from 'astro:content';
+import ReadingLayout from '../../layouts/ReadingLayout.astro';
+import StoryHeader from '../../components/stories/StoryHeader.astro';
+import StoryEvidence from '../../components/stories/StoryEvidence.astro';
+import ParticipantReferences from '../../components/stories/ParticipantReferences.astro';
+import RelatedStories from '../../components/stories/RelatedStories.astro';
+import { validateRelationships } from '../../data/relationships';
+
+export async function getStaticPaths() {
+  const stories = await getCollection('stories');
+  validateRelationships(stories.map((s) => s.id));
+  return stories.map((story) => ({ params: { slug: story.id }, props: { story } }));
+}
+
+const { story } = Astro.props;
+const d = story.data;
+const { Content } = await render(story);
+---
+<ReadingLayout title={d.label} description={d.headline}>
+  <article>
+    <StoryHeader label={d.label} headline={d.headline} summary={d.summary} />
+    <section class="research" aria-labelledby="research-heading">
+      <h2 id="research-heading" class="research-heading">{d.researchHeading}</h2>
+      <div class="prose"><Content /></div>
+    </section>
+    <StoryEvidence evidence={d.evidence} qualification={d.qualification} />
+    <ParticipantReferences slug={story.id} />
+    <RelatedStories slug={story.id} />
+  </article>
+</ReadingLayout>
+
+<style>
+  .research { margin-top: var(--space-50); padding-top: var(--space-40); border-top: 1px solid var(--colour-rule); }
+  .research-heading { font-size: var(--text-x-large); }
+  .prose :global(p) { font-size: var(--text-large); line-height: 1.55; color: var(--colour-charcoal); }
+  .prose :global(blockquote) {
+    margin: var(--space-30) 0;
+    padding: 14px 18px;
+    background: var(--colour-cream);
+    border-left: 4px solid var(--colour-terracotta);
+    border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+  }
+  .prose :global(blockquote p) { margin: 0 0 0.6em; font-size: var(--text-medium); line-height: 1.5; }
+  .prose :global(blockquote p:last-child) { margin-bottom: 0; }
+  .prose :global(blockquote em) { font-family: var(--font-serif); }
+</style>
