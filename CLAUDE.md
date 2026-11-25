@@ -21,7 +21,7 @@ Keep the existing experience recognisable. Change its scale and structure, not i
 - Never invent participant information, biographies, quotes, codes, demographics or links between participants and findings.
 - One canonical record per participant in `src/data/participants.ts`. `null` means not yet coded or not supplied.
 - Keep researcher interpretation distinct from what participants said (`placeFeelingIsInterpretation`, dashed border).
-- Sensitive personal histories are reported at pattern level only, never attached to a named participant.
+- Report 4 is published in full, including named accounts of difficult histories (Bethany's decision, 26 Nov 2026).
 - Never commit recordings, transcripts or the research reports.
 
 ## How the site works
@@ -37,5 +37,5 @@ Published URLs are cited in essays. Never change one; add a redirect in `astro.c
 
 ## Working style
 - Bethany works mostly from an iPhone and is new to git. Explain any step she must do in plain language.
-- Work on a branch, run `npm run build`, test at phone and desktop width, then open a pull request.
+- Bethany does not want pull requests: run `npm run build` and `node scripts/check-links.mjs`, test at phone and desktop width, then push directly to `main`.
 - Follow the build order in `docs/SPEC.md` §14 and keep `MIGRATION_NOTES.md` up to date.

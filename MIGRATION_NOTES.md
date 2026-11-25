@@ -135,8 +135,7 @@ Wording I added that isn't from WordPress, the spec or the reports:
 - Evidence: Report 4's coverage line. Language changed from "3 of 21" to "3 of 26" on Bethany's instruction.
 
 **Left out of the public pages:**
-- §3.6, second paragraph ("The range of severity is wide…"): it names participants alongside abuse, alcoholism and bereavement. The finding appears at pattern level and links to no one. Restore it by deleting its entry from `omit` in the generator, if Bethany decides to.
-- §3.8, the repeated "Sammy's account adds a sharper mechanism" paragraph (it repeats the paragraph before it).
+- (Both omissions reversed on 26 Nov 2026: everything is published. Generator: `scripts/make_stories.py`.)
 
 **Participant links** (`src/data/relationships.ts`): a person is linked to a story only where Report 4's section names them. "Complicates" marks Report 4's stated exceptions (Eduardo in 3.1, Theo in 3.3, Bella in 3.5); "Extends" marks Arturo in 3.5 ("a related but distinct pattern"). Bella and Michel are linked in the data but have no card until their artwork arrives. Story-to-story links only where Report 4 connects the sections (3.1↔3.4, 3.3↔3.4). The build fails if a link points at a missing person or story.
 
@@ -162,7 +161,11 @@ Source: `docs/DESIGN_BRIEF.md` and `design/references/home-design-directions.png
 - Colour and shape are transcribed from the text printed on each fingerprint, spelling as printed (including "chimey" and "burgandy").
 - Michel and Bella now appear with an obvious "Artwork to come" placeholder (brief §12) instead of being hidden, so the archive shows all 26.
 
-**Story visuals (decided by Bethany, 26 Nov 2026):** each story's image will be a piece of data art Bethany is still making. Until it arrives, the homepage story cards use a linked participant's fingerprint as a stand-in. That is a known misrepresentation (a fingerprint is one person's answer, not a picture of the finding) and must be replaced. When the artwork arrives: add it under `public/images/stories/<slug>.webp`, add an image field to each story, and retire `STORY_IMAGE` in `src/data/relationships.ts`. "Hard talks, often" may also get a piece.
+**Story visuals (decided by Bethany, 26 Nov 2026):** each story's image will be a piece of data art Bethany is still making. TEMPORARY: until it arrives, the homepage story cards are typographic blocks in palette colours (deep purple, pink, yellow, off-white), with no images. Fingerprints are no longer used as story illustrations. When the artwork arrives, add it under `public/images/stories/<slug>.webp`, add an image field to each story, and update `src/components/home/StoriesGrid.astro`.
+
+**Published in full (Bethany, 26 Nov 2026):** the §3.6 paragraph naming Guilia, Michel, Ellie and Sammy is restored, and those four are now linked to "Hard talks, often". The repeated Sammy paragraph in §3.8 is also restored, as written in Report 4.
+
+**Story 1:** Arturo is linked to "Home isn't a place" alongside Eduardo (both named a place). The WordPress paragraph still says "Only one person names an actual place"; awaiting Bethany's replacement wording.
 
 **Still missing for the archive:** card-back introductions (50–90 words each), Michel's artwork, and Bella's artwork, final word and codes.
 

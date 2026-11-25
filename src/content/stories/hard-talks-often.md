@@ -9,3 +9,5 @@ evidence: "9 of 26 conversations read in depth carry a disclosed history of sign
 ---
 
 A project framed around travel and lifestyle has repeatedly opened onto material of real emotional weight: family estrangement, displacement and loss, childhood conflict, parentification, disordered eating, witnessed emotional abuse, and a disclosed abusive relationship. No standard question solicited this identically across participants; it surfaced opportunistically, and now touches close to one in three of everyone read in depth. Section 4.6 situates this against the literature on loss, home, and displacement.
+
+The range of severity is wide, from Guilia's account of an estranged family of origin, through Michel's disclosure of a parent's death, a witnessed violent incident, and prolonged bullying, to Ellie's account of a parent's alcoholism and emotional abuse and Sammy's disclosure of an abusive relationship roughly two years prior. In each case, the difficult material was volunteered rather than extracted, typically within an otherwise positive account of travel and self-discovery.

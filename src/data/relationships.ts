@@ -7,8 +7,8 @@
 //   complicates – Report 4 presents them as the exception or the other end
 //   extends     – Report 4 presents a related but distinct pattern
 //
-// Story 6 (difficult histories) deliberately links no one: the public site
-// reports that finding at pattern level only (see MIGRATION_NOTES.md).
+// Story 1 also links Arturo: Bethany confirmed that Eduardo and Arturo both
+// named a place (25 and 26 Nov 2026).
 
 import { PARTICIPANTS } from './participants';
 
@@ -23,6 +23,7 @@ export const STORY_PARTICIPANTS: Record<string, StoryLink[]> = {
     { participant: 'guilia', role: 'supports' },
     { participant: 'bella', role: 'supports' },
     { participant: 'eduardo', role: 'complicates' }, // "the clearest exception"
+    { participant: 'arturo', role: 'complicates' }, // named a place (Bethany, 25–26 Nov 2026)
   ],
   // §3.2
   'its-never-the-room': [
@@ -57,8 +58,13 @@ export const STORY_PARTICIPANTS: Record<string, StoryLink[]> = {
     { participant: 'bella', role: 'complicates' }, // "the other end of this spectrum"
     { participant: 'arturo', role: 'extends' }, // "a related but distinct pattern"
   ],
-  // §3.6 – pattern level only
-  'hard-talks-often': [],
+  // §3.6 – published in full on Bethany's instruction (26 Nov 2026)
+  'hard-talks-often': [
+    { participant: 'guilia', role: 'supports' },
+    { participant: 'michel', role: 'supports' },
+    { participant: 'ellie', role: 'supports' },
+    { participant: 'sammy', role: 'supports' },
+  ],
   // §3.7
   'language-remembers': [
     { participant: 'karolina', role: 'supports' },
@@ -78,20 +84,6 @@ export const RELATED_STORIES: Record<string, string[]> = {
   'home-isnt-a-place': ['when-home-is-lost'], // §3.1 names Eduardo's account as the exception developed in §3.4
   'when-home-is-lost': ['home-isnt-a-place', 'no-single-answer'], // §3.4 opens from §3.3's question
   'no-single-answer': ['when-home-is-lost'],
-};
-
-// The fingerprint used as each story's image on the homepage. It must belong
-// to someone linked to that story above (checked by validateRelationships).
-// Story 6 has no image: it is reported at pattern level only.
-export const STORY_IMAGE: Record<string, string | null> = {
-  'home-isnt-a-place': 'sammy',
-  'its-never-the-room': 'smila',
-  'no-single-answer': 'pau',
-  'when-home-is-lost': 'eduardo',
-  'more-than-one-home': 'cloe',
-  'hard-talks-often': null,
-  'language-remembers': 'karolina',
-  'starting-over': 'theo',
 };
 
 // Story ↔ idea (What Emerges) and fieldnote ↔ story are added in Phases 5 and 7.
@@ -115,7 +107,5 @@ export function validateRelationships(storySlugs: string[]) {
   for (const [slug, rel] of Object.entries(RELATED_STORIES))
     for (const r of [slug, ...rel]) if (!storySlugs.includes(r)) problems.push(`Unknown story "${r}" in RELATED_STORIES`);
   for (const slug of storySlugs) if (!(slug in STORY_PARTICIPANTS)) problems.push(`Story "${slug}" has no entry in STORY_PARTICIPANTS`);
-  for (const [slug, pid] of Object.entries(STORY_IMAGE))
-    if (pid && !STORY_PARTICIPANTS[slug]?.some((l) => l.participant === pid)) problems.push(`STORY_IMAGE for "${slug}" uses "${pid}", who is not linked to that story`);
   if (problems.length) throw new Error('Relationship errors:\n' + problems.join('\n'));
 }

@@ -1,20 +1,17 @@
 ---
-// "Explore the stories" (design brief §6): a curated grid of all eight
-// findings with varied proportions. Each image is the visual fingerprint of a
-// participant Report 4 names in that story (src/data/relationships.ts).
+// "Explore the stories" (design brief §6): all eight findings in a grid of
+// varied proportions.
+// TEMPORARY: each story is a typographic block until Bethany's data art for
+// the stories is ready (see MIGRATION_NOTES.md → Story visuals).
 import { getCollection } from 'astro:content';
-import { PARTICIPANTS } from '../../data/participants';
-import { STORY_IMAGE } from '../../data/relationships';
 import { href } from '../../data/navigation';
 
 const stories = (await getCollection('stories')).sort((a, b) => a.data.order - b.data.order);
-// Column spans on the 12-column grid, row by row: 7+5, 4+4+4, 5+7 … ending 12.
+// Column spans on the 12-column grid, row by row: 7+5, 4+4+4, 5+7, 12.
 const SPANS = [7, 5, 4, 4, 4, 5, 7, 12];
-const items = stories.map((s, i) => {
-  const pid = STORY_IMAGE[s.id];
-  const person = pid ? PARTICIPANTS.find((p) => p.id === pid) : undefined;
-  return { s, span: SPANS[i] ?? 4, person };
-});
+// Palette tones, arranged so neighbours never repeat.
+const TONES = ['purple', 'pink', 'yellow', 'paper', 'purple', 'paper', 'yellow', 'pink'];
+const items = stories.map((s, i) => ({ s, span: SPANS[i] ?? 4, tone: TONES[i] ?? 'paper' }));
 ---
 <section class="stories section surface-white" aria-labelledby="stories-heading">
   <div class="container container--wide">
@@ -27,21 +24,13 @@ const items = stories.map((s, i) => {
     </header>
 
     <ul class="grid">
-      {items.map(({ s, span, person }) => (
-        <li class={`story ${person?.artwork ? 'has-image' : 'no-image'} span-${span}`}>
+      {items.map(({ s, span, tone }) => (
+        <li class={`story span-${span} tone-${tone}`}>
           <a href={href(`stories/${s.id}/`)}>
-            {person?.artwork && (
-              <figure class="story-image">
-                <img src={href(person.artwork)} alt="" width="900" height="900" loading="lazy" />
-                <figcaption class="credit">{person.displayName}</figcaption>
-              </figure>
-            )}
-            <div class="story-text">
-              <p class="label">{s.data.label}</p>
-              <h3 class="title">{s.data.headline}</h3>
-              <p class="summary">{s.data.summary}</p>
-              <span class="more">Read the story <span aria-hidden="true">→</span></span>
-            </div>
+            <p class="label">{s.data.label}</p>
+            <h3 class="title">{s.data.headline}</h3>
+            <p class="summary">{s.data.summary}</p>
+            <span class="more">Read the story <span aria-hidden="true">→</span></span>
           </a>
         </li>
       ))}
@@ -71,73 +60,51 @@ const items = stories.map((s, i) => {
   .story a {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     height: 100%;
+    min-height: 300px;
+    padding: var(--space-6);
+    border-radius: var(--radius-medium);
     text-decoration: none;
     color: var(--ink);
+    transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
   }
-  .story-image { position: relative; margin: 0; overflow: hidden; border-radius: var(--radius-medium); aspect-ratio: 16 / 10; background: var(--paper); }
-  .span-7 .story-image, .span-12 .story-image { aspect-ratio: 16 / 9; }
-  .story-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Show the painted image rather than the printed caption */
-    object-position: 50% 8%;
-    transform: scale(1.04);
-    transition: transform 0.6s var(--ease);
-  }
-  .story a:hover .story-image img { transform: scale(1.08); }
-  .credit {
-    position: absolute;
-    left: 12px;
-    bottom: 10px;
-    font-family: var(--font-hand);
-    font-size: 1.35rem;
-    line-height: 1;
-    color: var(--ink);
-    background: rgba(251, 250, 243, 0.9);
-    padding: 3px 9px 5px;
-    border-radius: var(--radius-small);
-  }
-  .story-text { padding-top: var(--space-4); }
-  .label { font-size: var(--text-caption); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); margin: 0 0 var(--space-2); }
-  .title { font-size: var(--text-h3); margin: 0 0 var(--space-3); }
-  .span-7 .title, .span-12 .title { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.25rem); }
+  .story a:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); }
+  .span-7 a, .span-12 a { min-height: 360px; }
+
+  .label { font-size: var(--text-caption); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 var(--space-3); }
+  .title { font-size: var(--text-h3); margin: 0 0 var(--space-4); }
+  .span-7 .title, .span-12 .title { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); }
+  .span-12 .title, .span-12 .summary { max-width: 30em; }
   .summary {
-    margin: 0 0 var(--space-3);
-    color: var(--text-muted);
+    margin: 0 0 var(--space-4);
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
   .more { font-size: var(--text-small); font-weight: 600; text-decoration: underline; text-underline-offset: 0.3em; }
-  .story a:hover .title { color: var(--purple); }
 
-  /* The story with no image: a deep purple typographic panel */
-  .no-image a { background: var(--purple-deep); color: var(--white); padding: var(--space-6); border-radius: var(--radius-medium); justify-content: flex-end; min-height: 280px; }
-  .no-image .label { color: var(--yellow); }
-  .no-image .summary { color: rgba(255, 255, 255, 0.82); }
-  .no-image .title { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.25rem); }
-  .no-image a:hover .title { color: var(--yellow); }
-
-  /* The final full-width story: image and text side by side */
-  .span-12.has-image a { flex-direction: row; gap: var(--grid-gap); align-items: center; }
-  .span-12.has-image .story-image { flex: 0 0 58%; }
-  .span-12.has-image .story-text { padding-top: 0; }
+  /* Tones from the WordPress palette */
+  .tone-purple a { background: var(--purple-deep); color: var(--white); }
+  .tone-purple .label { color: var(--yellow); }
+  .tone-purple .summary { color: rgba(255, 255, 255, 0.82); }
+  .tone-pink a { background: var(--pink); }
+  .tone-pink .label { color: var(--purple); }
+  .tone-yellow a { background: var(--yellow); }
+  .tone-yellow .label { color: var(--purple); }
+  .tone-paper a { background: var(--paper); outline: 1px solid var(--rule-strong); outline-offset: -1px; }
+  .tone-paper .label { color: var(--purple); }
+  .tone-pink .summary, .tone-yellow .summary, .tone-paper .summary { color: #3B3B3B; }
 
   @media (max-width: 1023px) {
-    .span-4 { grid-column: span 6; }
-    .span-5, .span-7 { grid-column: span 6; }
+    .span-4, .span-5, .span-7 { grid-column: span 6; }
   }
   @media (max-width: 767px) {
     .intro-head, .intro-text { grid-column: 1 / -1; }
     .intro-text { margin-top: var(--space-4); }
-    .grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-7); }
+    .grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
     .grid > li { grid-column: 1 / -1; }
-    .story-image, .span-7 .story-image, .span-12 .story-image { aspect-ratio: 16 / 10; }
-    .span-12.has-image a { flex-direction: column; align-items: stretch; }
-    .span-12.has-image .story-image { flex: none; }
-    .span-12.has-image .story-text { padding-top: var(--space-4); }
+    .story a, .span-7 a, .span-12 a { min-height: 0; padding: var(--space-5); }
   }
 </style>

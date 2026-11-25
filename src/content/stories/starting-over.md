@@ -13,3 +13,5 @@ Several participants describe deliberately seeking out places or groups where no
 > *“I can rebirth myself... no one expects me to be anything because they don't know who I was in a different environment.” — Miri*
 
 Theo engineered this condition explicitly, choosing a university where he knew nobody after a difficult school experience he attributes, in retrospect, to other children's undisclosed domestic difficulties. Sammy's account adds a distinct, more active mechanism to this pattern: rather than anonymity being merely neutral space in which to reinvent oneself, he suggests that new, socially uncertain groups actively favour whoever presents as confident and distinctive - meaning a fresh start does not just permit difference, it can select for it.
+
+Sammy's account adds a sharper mechanism: new, socially uncertain groups can actively favour whoever presents as confident and distinctive, so a fresh start does not just permit difference, it can select for it.
