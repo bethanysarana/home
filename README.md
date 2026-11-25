@@ -1,18 +1,28 @@
 # Let's Talk About "Home"
 
-Source for the project website: https://bethanysarana.github.io/home/
+Website for the project, live at https://bethanysarana.github.io/home/
 
-## Adding something new (from a phone or browser)
+Built with Astro from the WordPress page "Lets talk about 'Home'". See `docs/SPEC.md` for the specification and `MIGRATION_NOTES.md` for progress, sources and anything awaiting input.
 
-1. Open the right folder in `src/content/`:
-   - `conversations/` – one file per conversation
-   - `learning/` – findings and insight pieces
-   - `art/` – visual fingerprints and paintings
-   - `other-side/` – personal essays
-   - `dispatches/` – dated project updates
-2. Open the `_example.md` file in that folder and copy its contents.
-3. Tap **Add file → Create new file**. Name it with lowercase words and hyphens, e.g. `language-and-belonging.md`. The name becomes the page address, so choose carefully: it never changes once published.
-4. Paste, replace the details and text, set `draft: false`, and **Commit changes**.
-5. The site republishes itself within a couple of minutes. Progress shows in the **Actions** tab.
+## Publishing
 
-`draft: true` keeps anything off the public site.
+Every merge to `main` rebuilds and publishes the site automatically (about two minutes). Progress shows in the **Actions** tab.
+
+## Editing common things
+
+| To change | Edit |
+|---|---|
+| A participant's word, codes or biography | `src/data/participants.ts` |
+| Gallery filter labels and captions | `src/data/gallery-filters.ts` |
+| Which pages appear in the menu | `src/data/navigation.ts` (`ready: true`) |
+| Colours, spacing, type sizes | `src/styles/tokens.css` |
+| Hero image | `src/data/site.ts` |
+| Participant artwork | add `public/participants/<id>.webp` and set `artwork` in `participants.ts` |
+
+## Running it on a computer
+
+```
+npm install
+npm run dev      # preview at http://localhost:4321/home/
+npm run build    # production build into dist/
+```

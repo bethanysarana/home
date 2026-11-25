@@ -1,0 +1,28 @@
+---
+// "Gallery purpose" / "Interpretation guide" tabs (WordPress .emerge-wrapper-2).
+import PillTabs from '../interactions/PillTabs.astro';
+---
+<div class="guide">
+  <PillTabs id="gallery-intro-tabs" labels={['Gallery purpose', 'Interpretation guide']} variant="block" panelClass="cream-box">
+    <div data-panel>
+      <p class="pane-text">The following gallery serves as a living record of every individual who took part in an interview with me. By turning each person’s story into a unique visual card, I can:</p>
+      <ol class="pane-list pane-text">
+        <li>Organise individual experiences into larger, shared themes.</li>
+        <li>Keep the project open and connected, allowing participants to see their own experiences reflected in the emerging collective story. As the project grows, those who shared their stories remain at the heart of the work.</li>
+      </ol>
+    </div>
+    <div data-panel>
+      <p class="pane-text">Person-cards are currently organised by two layers:</p>
+      <ol class="pane-list pane-text">
+        <li>The single word each person landed on at the end of our conversation (after being deliberately guided there)</li>
+        <li>How people talked about home earlier in the conversation, in their own unprompted words.</li>
+      </ol>
+      <p class="pane-text">These sometimes differ. This is what I like to think of as the gap between a considered final answer and in-the-moment thinking.</p>
+      <p class="pane-text">Note: A dashed border means a tag is my own interpretive read rather than something said outright.</p>
+    </div>
+  </PillTabs>
+</div>
+
+<style>
+  .guide { margin-top: var(--space-30); }
+</style>

@@ -1,25 +1,39 @@
 # House rules for Let's Talk About "Home"
 
-Read this before every change to this repository.
+Read this, then `docs/SPEC.md` (the implementation specification), before every change.
+
+## What this site is
+A build-up and reorganisation of Bethany's WordPress page "Lets talk about 'Home'", not a replacement for it.
+The WordPress site is both the content source and the first working version of the visual identity, layouts and interactions.
+Keep the existing experience recognisable. Change its scale and structure, not its identity.
+
+## Sources (in order of authority)
+1. Bethany's instructions in conversation, recorded in `MIGRATION_NOTES.md` → "Decisions".
+2. The latest research report (Report 4) for all figures, denominators and findings. It is not in this public repo; its published figures are recorded in `MIGRATION_NOTES.md`.
+3. `source/wordpress/wordpress-export-2026-11-25.xml`, post 90, for all page text, component structure, CSS and interactions. (The mermaid post is not part of this site.)
 
 ## Bethany's words
-- Never rewrite, paraphrase, shorten, tidy or "improve" Bethany's prose or participants' words. Insert text exactly as given, including spelling and punctuation.
-- Anything you add yourself (headings, captions, link text, labels) must be marked `[PLACEHOLDER: ...]` until Bethany approves it, unless she supplied the wording.
-- If text looks like it has an error, point it out in your reply. Do not fix it in the file.
+- Never rewrite, paraphrase, shorten, tidy or "improve" Bethany's prose or participants' words. Insert text exactly as given.
+- Do not publish placeholder text. Any wording you add yourself (labels, alt text, link text) goes in `MIGRATION_NOTES.md` → "Wording for approval".
+- If text looks wrong, say so in your reply. Do not fix it in the file.
+
+## Data rules
+- Never invent participant information, biographies, quotes, codes, demographics or links between participants and findings.
+- One canonical record per participant in `src/data/participants.ts`. `null` means not yet coded or not supplied.
+- Keep researcher interpretation distinct from what participants said (`placeFeelingIsInterpretation`, dashed border).
+- Sensitive personal histories are reported at pattern level only, never attached to a named participant.
+- Never commit recordings, transcripts or the research reports.
 
 ## How the site works
-- Astro site. Content lives in `src/content/<section>/` as Markdown files. Fields are defined in `src/content.config.ts`.
-- Sections: `conversations`, `learning`, `art`, `other-side`, `dispatches`.
-- `draft: true` keeps a file off the public site. Use it for anything unfinished.
-- A section only appears in the menu once it has at least one published (non-draft) item. Never add empty sections to the menu.
-- `themes:` tags link items across sections and generate `/themes/<tag>/` pages. Reuse existing tag spellings; list them before inventing new ones.
-- Hosting: GitHub Pages, published automatically by `.github/workflows/deploy.yml` on every merge to `main`.
-- Current address: https://bethanysarana.github.io/home/ . When a custom domain is added, change `site` and remove `base` in `astro.config.mjs`.
+- Astro + TypeScript. Pages in `src/pages/`, components in `src/components/<area>/`, data in `src/data/`, styles in `src/styles/` (tokens in `tokens.css`).
+- `src/data/navigation.ts`: a page appears in the menu only when `ready: true`. Never publish empty templates.
+- Hosting: GitHub Pages via `.github/workflows/deploy.yml` on every merge to `main`.
+- Address: https://bethanysarana.github.io/home/ . For a custom domain, change `site` and remove `base` in `astro.config.mjs`.
 
 ## Permanent links
-- Published URLs are permanent because they are cited in essays. Never rename a published file or change its URL. If a move is unavoidable, add a redirect in `astro.config.mjs` (`redirects`).
+Published URLs are cited in essays. Never change one; add a redirect in `astro.config.mjs` instead.
 
 ## Working style
-- Bethany works mostly from an iPhone and is new to git. Explain any step she must do herself in plain language, one screen at a time.
-- Work on a branch and open a pull request. Run `npm run build` before opening it and fix any errors.
-- The repository is public: never commit audio recordings or full transcripts.
+- Bethany works mostly from an iPhone and is new to git. Explain any step she must do in plain language.
+- Work on a branch, run `npm run build`, test at phone and desktop width, then open a pull request.
+- Follow the build order in `docs/SPEC.md` §14 and keep `MIGRATION_NOTES.md` up to date.

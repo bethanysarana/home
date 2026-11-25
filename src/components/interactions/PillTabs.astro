@@ -51,7 +51,7 @@ const { id, labels, variant = 'pill', panelClass = 'cream-panel' } = Astro.props
 
   .panels { min-height: 160px; }
   .panels :global([data-panel][hidden]) { display: none; }
-  .panels :global([data-panel]) { animation: fadeIn 0.3s ease-in-out; }
+  .panels :global([data-panel].is-entering) { animation: fadeIn 0.3s ease-in-out; }
 
   @media (max-width: 500px) {
     .tabs--block .tablist { flex-direction: column; }
@@ -74,7 +74,10 @@ const { id, labels, variant = 'pill', panelClass = 'cream-panel' } = Astro.props
         t.setAttribute('aria-selected', String(i === j));
         t.tabIndex = i === j ? 0 : -1;
       });
-      panels.forEach((p, j) => (p.hidden = i !== j));
+      panels.forEach((p, j) => {
+        p.hidden = i !== j;
+        p.classList.toggle('is-entering', i === j);
+      });
       if (focus) tabs[i].focus();
     };
     tabs.forEach((t, i) => {
