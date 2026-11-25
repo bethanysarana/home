@@ -1,0 +1,91 @@
+---
+// Accessible tabs rebuilding the WordPress radio-button tab components.
+//   variant="pill"  → .focus-pills (Belonging / The Shift / Method)
+//   variant="block" → .emerge-tabs-2 (Gallery purpose / Interpretation guide)
+// Put one element with a `data-panel` attribute in the slot per tab, in order.
+interface Props {
+  id: string;
+  labels: string[];
+  variant?: 'pill' | 'block';
+  panelClass?: string;
+}
+const { id, labels, variant = 'pill', panelClass = 'cream-panel' } = Astro.props;
+---
+<div class={`tabs tabs--${variant}`} data-tabs id={id}>
+  <div class="tablist" role="tablist">
+    {labels.map((label, i) => (
+      <button
+        type="button"
+        role="tab"
+        id={`${id}-tab-${i}`}
+        aria-controls={`${id}-panel-${i}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        tabindex={i === 0 ? 0 : -1}
+        class={variant === 'pill' ? 'pill' : 'block-tab'}
+      >{label}</button>
+    ))}
+  </div>
+  <div class={`panels ${panelClass}`}>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .tablist { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .tabs--pill .pill { padding: 6px 12px; font-size: 0.82rem; border-radius: 20px; }
+
+  .block-tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border-radius: var(--radius-small);
+    background: var(--colour-cream);
+    color: var(--colour-terracotta);
+    border: 1px solid var(--colour-terracotta);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .block-tab[aria-selected='true'] { background: var(--colour-terracotta); color: var(--colour-white); }
+
+  .panels { min-height: 160px; }
+  .panels :global([data-panel][hidden]) { display: none; }
+  .panels :global([data-panel]) { animation: fadeIn 0.3s ease-in-out; }
+
+  @media (max-width: 500px) {
+    .tabs--block .tablist { flex-direction: column; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('.panels > [data-panel]'));
+    panels.forEach((p, i) => {
+      p.id = `${root.id}-panel-${i}`;
+      p.setAttribute('role', 'tabpanel');
+      p.setAttribute('aria-labelledby', `${root.id}-tab-${i}`);
+      p.tabIndex = 0;
+      p.hidden = i !== 0;
+    });
+    const select = (i: number, focus = false) => {
+      tabs.forEach((t, j) => {
+        t.setAttribute('aria-selected', String(i === j));
+        t.tabIndex = i === j ? 0 : -1;
+      });
+      panels.forEach((p, j) => (p.hidden = i !== j));
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i));
+      t.addEventListener('keydown', (e) => {
+        const n = tabs.length;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); select((i + 1) % n, true); }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); select((i - 1 + n) % n, true); }
+        if (e.key === 'Home') { e.preventDefault(); select(0, true); }
+        if (e.key === 'End') { e.preventDefault(); select(n - 1, true); }
+      });
+    });
+  });
+</script>

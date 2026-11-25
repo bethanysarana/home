@@ -1,0 +1,35 @@
+---
+// A small selection of real participant cards, linking to the Visual Archive
+// (specification §4, component 5). Selection: the first six cards in the
+// WordPress gallery order. Change FEATURED_IDS to choose others.
+import ParticipantCard from '../gallery/ParticipantCard.astro';
+import { publishedParticipants } from '../../data/participants';
+import { href } from '../../data/navigation';
+
+const FEATURED_IDS = ['guilia', 'karolina', 'sian', 'erica', 'pau', 'shila'];
+const people = publishedParticipants().filter((p) => FEATURED_IDS.includes(p.id));
+---
+<section class="container container--wide section" aria-labelledby="gallery-preview">
+  <div class="intro container">
+    <h2 id="gallery-preview" class="section-heading">The <strong>Travellers</strong> gallery: everyone's word, colour, and shape</h2>
+    <p class="pane-text">At the end of each interview, once we were fully immersed in the conversation, I captured participants’ intuitive sense of home as a word, colour, and shape. To me, these are visual fingerprints of belonging.</p>
+  </div>
+  <ul class="grid">
+    {people.map((p) => <ParticipantCard participant={p} variant="link" />)}
+  </ul>
+  <p class="more container"><a class="arrow-link" href={href('visual-archive/')}>Visual Archive →</a></p>
+</section>
+
+<style>
+  .intro { padding-inline: 0; max-width: var(--content-width); }
+  .grid {
+    list-style: none;
+    margin: var(--space-30) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  @media (min-width: 900px) { .grid { grid-template-columns: repeat(6, 1fr); } }
+  .more { margin-top: var(--space-30); padding-inline: 0; max-width: var(--content-width); }
+</style>

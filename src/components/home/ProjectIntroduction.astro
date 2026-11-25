@@ -1,0 +1,44 @@
+---
+// "What this project is": image beside three pill tabs (WordPress .focus-container).
+import PillTabs from '../interactions/PillTabs.astro';
+import { href } from '../../data/navigation';
+---
+<section class="container section" aria-labelledby="what-this-project-is">
+  <h2 id="what-this-project-is" class="section-heading">What this project is</h2>
+  <div class="focus">
+    <div class="focus-img">
+      <img
+        src={href('images/project/wonderland-gateway.webp')}
+        alt="A woman walking along a garden path beneath a wooden archway decorated with red discs"
+        width="909" height="1400" loading="lazy"
+      />
+    </div>
+    <div class="focus-text">
+      <PillTabs id="focus-tabs" labels={['Belonging', 'The Shift', 'Method']}>
+        <p data-panel class="pane-text">Ideas of home and belonging shape how people understand themselves and the places they inhabit. For travellers, the meaning of home can shift depending on movement, community, culture, and lived experience.</p>
+        <p data-panel class="pane-text">Bringing together data science and lived experience, I have developed a strong interest in how people narrate and make sense of their lives. This project is an experiment in extending that curiosity into everyday life and travel.</p>
+        <p data-panel class="pane-text">I'm interviewing people to explore how they understand belonging, identity, and home, and how these ideas change over time. This is part of an ongoing journey into how we narrate our own lives.</p>
+      </PillTabs>
+    </div>
+  </div>
+</section>
+
+<style>
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .focus-img { flex: 1 1 220px; }
+  .focus-img img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-medium);
+    object-fit: cover;
+  }
+  @media (max-width: 600px) {
+    .focus-img img { aspect-ratio: 4 / 3; object-position: 50% 70%; }
+  }
+  .focus-text { flex: 1 1 300px; min-width: 0; }
+</style>

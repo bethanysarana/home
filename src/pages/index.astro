@@ -1,4 +1,22 @@
 ---
+// Homepage (specification §4). Featured stories and the Fieldnotes
+// introduction are added when those sections are built (Phases 4 and 7).
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import ProjectIntroduction from '../components/home/ProjectIntroduction.astro';
+import ProjectSnapshot from '../components/home/ProjectSnapshot.astro';
+import FeaturedArchive from '../components/home/FeaturedArchive.astro';
 ---
-<BaseLayout><div class="container section"><h1>Foundation check</h1></div></BaseLayout>
+<BaseLayout>
+  <Hero />
+  <div class="container">
+    <p class="lede text-large">Follow as I experiment with applying analytical rigor to the architecture of everyday life, exploring how we build identity and belonging when we leave traditional, fixed structures behind.</p>
+  </div>
+  <ProjectIntroduction />
+  <ProjectSnapshot />
+  <FeaturedArchive />
+</BaseLayout>
+
+<style>
+  .lede { padding-top: var(--space-50); margin: 0; }
+</style>
