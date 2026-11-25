@@ -1,9 +1,10 @@
 ---
-// Related findings (from relationships.ts) and previous / next story.
+// Related findings (from relationships.ts) and previous / next, as small
+// story blocks in each story's palette colour.
 import { getCollection } from 'astro:content';
-import StoryCard from './StoryCard.astro';
 import { RELATED_STORIES } from '../../data/relationships';
 import { href } from '../../data/navigation';
+import { toneFor } from '../../data/story-tones';
 
 interface Props { slug: string }
 const { slug } = Astro.props;
@@ -13,32 +14,44 @@ const i = all.findIndex((s) => s.id === slug);
 const prev = all[i - 1];
 const next = all[i + 1];
 ---
-{related.length > 0 && (
-  <section class="related" aria-labelledby="related-heading">
-    <h2 id="related-heading" class="related-heading">Related stories</h2>
-    <ul class="related-list">{related.map((s) => <StoryCard story={s} />)}</ul>
-  </section>
-)}
-<nav class="pager" aria-label="Stories">
-  {prev ? <a class="pager-link prev" href={href(`stories/${prev.id}/`)}><span class="dir">← Previous</span><span>{prev.data.label}</span></a> : <span />}
-  {next ? <a class="pager-link next" href={href(`stories/${next.id}/`)}><span class="dir">Next →</span><span>{next.data.label}</span></a> : <span />}
-</nav>
+<section class="related container container--wide" aria-label="More stories">
+  {related.length > 0 && (
+    <>
+      <h2 class="heading">Related stories</h2>
+      <ul class="blocks">
+        {related.map((s) => (
+          <li class={`block tone-${toneFor(s.data.order)}`}>
+            <a href={href(`stories/${s.id}/`)}><span class="label">{s.data.label}</span><span class="title">{s.data.headline}</span></a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+  <nav class="pager" aria-label="Stories">
+    {prev ? <a class="pager-link" href={href(`stories/${prev.id}/`)}><span class="dir">← Previous</span><span class="t">{prev.data.headline}</span></a> : <span />}
+    {next ? <a class="pager-link next" href={href(`stories/${next.id}/`)}><span class="dir">Next →</span><span class="t">{next.data.headline}</span></a> : <span />}
+  </nav>
+</section>
 
 <style>
-  .related { margin-top: var(--space-50); }
-  .related-heading { font-size: var(--text-large); font-weight: 600; }
-  .related-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-  .pager {
-    margin-top: var(--space-50);
-    padding-top: var(--space-40);
-    border-top: 1px solid var(--colour-rule);
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-30);
-    font-size: var(--text-medium);
-  }
-  .pager-link { display: flex; flex-direction: column; text-decoration: none; max-width: 48%; }
-  .pager-link:hover span:last-child { text-decoration: underline; }
-  .next { text-align: right; margin-left: auto; }
-  .dir { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; color: var(--colour-terracotta); }
+  .related { padding-block: var(--space-8) var(--space-9); }
+  .heading { font-size: var(--text-h3); }
+  .blocks { list-style: none; margin: 0 0 var(--space-7); padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--grid-gap); }
+  .block a { display: flex; flex-direction: column; gap: var(--space-3); height: 100%; padding: var(--space-5); border-radius: var(--radius-medium); text-decoration: none; color: var(--ink); transition: transform var(--duration) var(--ease); }
+  .block a:hover { transform: translateY(-3px); }
+  .label { font-size: var(--text-caption); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); }
+  .title { font-family: var(--font-display); font-size: var(--text-h3); line-height: 1.2; }
+  .tone-purple a { background: var(--purple-deep); color: var(--white); }
+  .tone-purple .label { color: var(--yellow); }
+  .tone-pink a { background: var(--pink); }
+  .tone-yellow a { background: var(--yellow); }
+  .tone-paper a { background: var(--paper); outline: 1px solid var(--rule-strong); outline-offset: -1px; }
+
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--grid-gap); padding-top: var(--space-6); border-top: 1px solid var(--rule-strong); }
+  .pager-link { display: flex; flex-direction: column; gap: var(--space-2); text-decoration: none; }
+  .pager-link:hover .t { text-decoration: underline; text-decoration-color: var(--purple); }
+  .next { text-align: right; }
+  .dir { font-size: var(--text-caption); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); }
+  .t { font-family: var(--font-display); font-size: var(--text-h3); line-height: 1.2; }
+  @media (max-width: 560px) { .pager { grid-template-columns: 1fr; } .next { text-align: left; } }
 </style>

@@ -1,13 +1,17 @@
 ---
-// Individual story (specification §6): WordPress headline and paragraph,
-// then the full Report 4 section, evidence, the people behind it, related stories.
+// Individual story (specification §6, design brief §8): editorial opening,
+// a participant's words, the Report 4 section in full, evidence with
+// expandable qualifications, the people behind it, related stories.
 import { getCollection, render } from 'astro:content';
-import ReadingLayout from '../../layouts/ReadingLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import StoryHeader from '../../components/stories/StoryHeader.astro';
+import OpeningQuote from '../../components/stories/OpeningQuote.astro';
 import StoryEvidence from '../../components/stories/StoryEvidence.astro';
 import ParticipantReferences from '../../components/stories/ParticipantReferences.astro';
 import RelatedStories from '../../components/stories/RelatedStories.astro';
 import { validateRelationships } from '../../data/relationships';
+import { extrasFor } from '../../data/stories';
+import { toneFor } from '../../data/story-tones';
 
 export async function getStaticPaths() {
   const stories = await getCollection('stories');
@@ -17,33 +21,40 @@ export async function getStaticPaths() {
 
 const { story } = Astro.props;
 const d = story.data;
+const extras = extrasFor(story.id);
+const tone = toneFor(d.order);
 const { Content } = await render(story);
 ---
-<ReadingLayout title={d.label} description={d.headline}>
+<BaseLayout title={d.label} description={d.headline}>
   <article>
     <StoryHeader label={d.label} headline={d.headline} summary={d.summary} />
-    <section class="research" aria-labelledby="research-heading">
+    {extras.openingQuote && <OpeningQuote text={extras.openingQuote.text} by={extras.openingQuote.by} tone={tone} />}
+    <section class="body container" aria-labelledby="research-heading">
+      <p class="eyebrow">From the research</p>
       <h2 id="research-heading" class="research-heading">{d.researchHeading}</h2>
       <div class="prose"><Content /></div>
+      <StoryEvidence evidence={d.evidence} qualifications={extras.qualifications} />
     </section>
-    <StoryEvidence evidence={d.evidence} qualification={d.qualification} />
     <ParticipantReferences slug={story.id} />
     <RelatedStories slug={story.id} />
   </article>
-</ReadingLayout>
+</BaseLayout>
 
 <style>
-  .research { margin-top: var(--space-50); padding-top: var(--space-40); border-top: 1px solid var(--colour-rule); }
-  .research-heading { font-size: var(--text-x-large); }
-  .prose :global(p) { font-size: var(--text-large); line-height: 1.55; color: var(--colour-charcoal); }
+  .body { padding-block: var(--space-9) var(--space-8); }
+  .eyebrow { color: var(--purple); }
+  .research-heading { font-size: var(--text-h2); margin-bottom: var(--space-6); }
+  .prose :global(p) { font-size: var(--text-body); line-height: 1.7; margin-bottom: 1.2em; }
   .prose :global(blockquote) {
-    margin: var(--space-30) 0;
-    padding: 14px 18px;
-    background: var(--colour-cream);
-    border-left: 4px solid var(--colour-terracotta);
-    border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+    margin: var(--space-7) 0;
+    padding: 0 0 0 var(--space-5);
+    border-left: 3px solid var(--purple);
   }
-  .prose :global(blockquote p) { margin: 0 0 0.6em; font-size: var(--text-medium); line-height: 1.5; }
+  .prose :global(blockquote p) { margin: 0 0 var(--space-4); font-size: var(--text-body); line-height: 1.5; }
   .prose :global(blockquote p:last-child) { margin-bottom: 0; }
-  .prose :global(blockquote em) { font-family: var(--font-serif); }
+  .prose :global(blockquote em) { font-family: var(--font-display); font-size: 1.3em; line-height: 1.35; color: var(--ink); }
+  @media (min-width: 1024px) {
+    /* Let pull quotes reach a little wider than the reading column */
+    .prose :global(blockquote) { margin-left: -2.5rem; margin-right: -2.5rem; }
+  }
 </style>

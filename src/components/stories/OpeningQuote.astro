@@ -1,0 +1,26 @@
+---
+// A participant's words opening the story, on the story's palette colour.
+import type { Tone } from '../../data/story-tones';
+interface Props { text: string; by: string; tone: Tone }
+const { text, by, tone } = Astro.props;
+---
+<section class={`opening tone-${tone}`} aria-label="Opening quotation">
+  <figure class="container container--wide inner">
+    <blockquote class="pull-quote"><p>{text}</p></blockquote>
+    <figcaption>{by}</figcaption>
+  </figure>
+</section>
+
+<style>
+  .opening { padding-block: var(--space-8); }
+  .inner { margin-block: 0; }
+  .inner blockquote { margin: 0; max-width: 22em; }
+  .inner blockquote p { margin: 0; }
+  figcaption { margin-top: var(--space-5); font-size: var(--text-small); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .tone-purple { background: var(--purple-deep); color: var(--white); }
+  .tone-purple figcaption { color: var(--yellow); }
+  .tone-pink { background: var(--pink); }
+  .tone-yellow { background: var(--yellow); }
+  .tone-paper { background: var(--white); border-block: 1px solid var(--rule); }
+  .tone-pink figcaption, .tone-yellow figcaption, .tone-paper figcaption { color: var(--purple); }
+</style>

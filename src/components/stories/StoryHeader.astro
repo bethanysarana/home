@@ -1,36 +1,27 @@
 ---
-// Story header: WordPress tab label (eyebrow), headline and paragraph.
+// Editorial story opening: label, headline and Bethany's WordPress paragraph.
 import { href } from '../../data/navigation';
 interface Props { label: string; headline: string; summary: string }
 const { label, headline, summary } = Astro.props;
 ---
-<header class="story-header">
-  <p class="eyebrow"><a href={href('stories/')}>The Stories</a> · {label}</p>
-  <h1 class="pane-quote headline">{headline}</h1>
-  <p class="pane-text intro">{summary}</p>
+<header class="story-header container container--wide grid-12">
+  <p class="eyebrow crumbs"><a href={href('stories/')}>The Stories</a> <span aria-hidden="true">/</span> {label}</p>
+  <h1 class="headline">{headline}</h1>
+  <div class="standfirst">
+    <p class="lead">{summary}</p>
+  </div>
 </header>
 
 <style>
-  .eyebrow {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-weight: 700;
-    color: var(--colour-terracotta);
-    margin-bottom: var(--space-30);
+  .story-header { padding-block: var(--space-9) var(--space-8); row-gap: 0; }
+  .crumbs { grid-column: 1 / -1; color: var(--purple); }
+  .crumbs a { text-decoration: none; color: var(--text-muted); }
+  .crumbs a:hover { color: var(--ink); text-decoration: underline; }
+  .headline { grid-column: 1 / span 10; font-size: clamp(2.5rem, 1.6rem + 3.8vw, 5.25rem); margin: 0 0 var(--space-7); }
+  .standfirst { grid-column: 5 / span 7; }
+  .lead { margin: 0; }
+  @media (max-width: 1023px) {
+    .headline { grid-column: 1 / -1; }
+    .standfirst { grid-column: 1 / span 10; }
   }
-  .eyebrow a { text-decoration: none; }
-  .eyebrow a:hover { text-decoration: underline; }
-  /* WordPress .pane-quote, scaled up for a page headline */
-  .headline {
-    font-size: var(--text-xx-large);
-    font-family: var(--font-display);
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.05;
-    border-left: 3px solid var(--purple);
-    padding-left: 18px;
-    margin-bottom: var(--space-40);
-  }
-  .intro { font-size: var(--text-large); }
 </style>

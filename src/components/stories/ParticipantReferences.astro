@@ -1,36 +1,44 @@
 ---
-// Participant cards linked to a story through src/data/relationships.ts.
+// The people Report 4 names in this story, as their archive cards.
 import ParticipantCard from '../gallery/ParticipantCard.astro';
-import { publishedParticipants } from '../../data/participants';
+import { archiveParticipants } from '../../data/participants';
 import { STORY_PARTICIPANTS } from '../../data/relationships';
+import { href } from '../../data/navigation';
 
 interface Props { slug: string }
 const { slug } = Astro.props;
 const TAGS = { supports: undefined, complicates: 'Complicates', extends: 'Extends' } as const;
-const published = publishedParticipants();
+const everyone = archiveParticipants();
 const people = (STORY_PARTICIPANTS[slug] ?? [])
-  .map((l) => ({ ...l, p: published.find((p) => p.id === l.participant) }))
+  .map((l) => ({ ...l, p: everyone.find((p) => p.id === l.participant) }))
   .filter((x) => x.p);
 ---
 {people.length > 0 && (
-  <section class="people" aria-labelledby={`people-${slug}`}>
-    <h2 id={`people-${slug}`} class="people-heading">The people behind this story</h2>
-    <ul class="grid">
-      {people.map((x) => <ParticipantCard participant={x.p!} tag={TAGS[x.role]} />)}
-    </ul>
+  <section class="people surface-paper" aria-labelledby={`people-${slug}`}>
+    <div class="container container--wide">
+      <header class="head">
+        <h2 id={`people-${slug}`}>The people behind this story</h2>
+        <a class="arrow-link" href={href('visual-archive/')}>Visual Archive <span aria-hidden="true">→</span></a>
+      </header>
+      <ul class="grid">
+        {people.map((x) => <ParticipantCard participant={x.p!} tag={TAGS[x.role]} />)}
+      </ul>
+    </div>
   </section>
 )}
 
 <style>
-  .people { margin-top: var(--space-50); }
-  .people-heading { font-size: var(--text-large); font-weight: 600; }
+  .people { padding-block: var(--space-8); border-top: 1px solid var(--rule); }
+  .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .head h2 { margin: 0; font-size: var(--text-h2); }
   .grid {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--grid-gap);
   }
-  @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+  @media (max-width: 1199px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 767px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); } }
 </style>

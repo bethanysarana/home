@@ -1,26 +1,48 @@
 ---
-// Evidence and denominator (WordPress .pane-evidence), plus an optional qualification.
-interface Props { evidence: string; qualification?: string }
-const { evidence, qualification } = Astro.props;
+// Evidence: the coverage line, then Report 4's qualifications in an
+// expandable section (design brief §8).
+interface Props { evidence: string; qualifications: string[] }
+const { evidence, qualifications } = Astro.props;
 ---
-<aside class="evidence-box" aria-label="Evidence">
-  <p class="pane-evidence">{evidence}</p>
-  {qualification && <p class="qualification">{qualification}</p>}
+<aside class="evidence-box" aria-labelledby="evidence-heading">
+  <p class="eyebrow" id="evidence-heading">Evidence</p>
+  <p class="coverage">{evidence}</p>
+  {qualifications.length > 0 && (
+    <details class="expand">
+      <summary>Evidence and qualifications</summary>
+      <div class="expand-body">
+        {qualifications.map((q) => <p>{q}</p>)}
+        <p class="source">From the research report, section 4.7: strengths and limitations.</p>
+      </div>
+    </details>
+  )}
 </aside>
 
 <style>
   .evidence-box {
-    margin-block: var(--space-40);
-    padding: 16px 20px;
-    background: var(--colour-cream);
-    border: 1px solid var(--colour-sand);
-    border-radius: 6px;
+    margin-block: var(--space-8) 0;
+    padding: var(--space-6);
+    background: var(--white);
+    border: 1px solid var(--rule-strong);
+    border-top: 3px solid var(--purple);
+    border-radius: var(--radius-medium);
   }
-  .pane-evidence {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--colour-terracotta);
-    font-style: italic;
+  .eyebrow { color: var(--purple); margin-bottom: var(--space-3); }
+  .coverage { font-family: var(--font-display); font-size: var(--text-h3); line-height: 1.3; margin: 0; }
+  .expand { margin-top: var(--space-5); border-top: 1px solid var(--rule); padding-top: var(--space-4); }
+  summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: var(--text-small);
   }
-  .qualification { margin: 8px 0 0; font-size: var(--text-small); color: var(--colour-charcoal); }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font-size: 1.4rem; font-weight: 300; line-height: 1; color: var(--purple); }
+  details[open] summary::after { content: '−'; }
+  .expand-body { margin-top: var(--space-4); }
+  .expand-body p { font-size: var(--text-small); line-height: 1.6; color: #3B3B3B; }
+  .source { color: var(--text-muted) !important; font-style: italic; margin-bottom: 0; }
 </style>

@@ -10,7 +10,7 @@ Last updated: 26 November 2026, after the visual redesign of the homepage and Vi
 | 1 Foundation | Done |
 | 2 Homepage | Done, except the Fieldnotes introduction (needs Phase 7) |
 | 3 Visual Archive | Done |
-| 4 Stories | Done, except links to What Emerges ideas (needs Phase 5) |
+| 4 Stories | Done and redesigned (editorial), except links to What Emerges ideas (needs Phase 5) |
 | 5 What Emerges | Not started (source: Report 2's discussion section) |
 | 6 Research | Not started |
 | 7 Fieldnotes and About | Not started |
@@ -174,3 +174,15 @@ Source: `docs/DESIGN_BRIEF.md` and `design/references/home-design-directions.png
 - "Explore the stories" (from the brief)
 - Hero photo alt text: "A thatched wooden shelter looking out over bamboo huts and A-frame cabins, with a pot of tea on the table"
 - Cards: "Artwork to come", "Final word to come", back button "Back to [name]'s fingerprint", screen-reader text "show more about [name]'s answer"
+
+## Stories redesign (26 November 2026)
+
+Editorial story pages (design brief §8) and an overview of story blocks matching the homepage.
+
+- **Each story keeps one palette colour** everywhere it appears (`src/data/story-tones.ts`).
+- **Opening quotes** (`src/data/stories.ts`) are quotes already in each story's Report 4 text, copied exactly. Chosen: Guilia (Home isn't a place), Michel on Stockholm (It's never the room), Pau (No single answer), Eduardo (When home is lost), Ellie (More than one home), Michel on language (Language remembers), Miri (Starting over). "Hard talks, often" has no quote in Report 4, so it opens without one. **For Bethany to check.**
+- **Evidence box:** Report 4's coverage line, plus an expandable "Evidence and qualifications" section of complete sentences from Report 4 §4.7. Every story gets the quote-selection sentence; "Home isn't a place" adds the self-selected-sample sentence; "It's never the room" adds the young/female skew sentence (which names the four-case safety pattern). Report 4's older figures in §4.7 (25 of 26, 3 of 21) are not used.
+- **The people behind this story:** full archive cards (Michel and Bella with their "to come" placeholders).
+- **The overview replaces the WordPress eight-tab component** with the same story blocks as the homepage, showing every story at once with its evidence line; WordPress intro and footer text kept.
+
+**Wording added (for approval):** "From the research", "Evidence", "Evidence and qualifications", "From the research report, section 4.7: strengths and limitations.", "The people behind this story", "Related stories", "← Previous" / "Next →", "Read the story →", overview eyebrow "The Stories · 26 conversations".
