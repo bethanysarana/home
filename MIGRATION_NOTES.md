@@ -225,3 +225,7 @@ Editorial story pages (design brief §8) and an overview of story blocks matchin
 - "Visual Archive" renamed "Project Gallery" everywhere on the site, in these notes and in CLAUDE.md (not in Bethany's SPEC.md or DESIGN_BRIEF.md). Address changed from `/visual-archive/` to `/project-gallery/`; the old address redirects (`astro.config.mjs`).
 - Homepage hero buttons ("The Stories", "Project Gallery") removed (Bethany, 26 Nov 2026).
 - **Carousel pending (Bethany, 26 Nov 2026):** four quotes removed (Eduardo "The home that I call home…", Michel "…Language, I would say, is home.", Miri "I can rebirth myself…", Bella "It's about acknowledging that your time is limited…"). Bethany will supply replacements; the carousel shows six until then.
+
+## Site icon (26 Nov 2026)
+- Purple quotation marks (“) on yellow, drawn by Claude, chosen from the favicon ideas because Bethany asked for an icon without picking one. Files in `public/favicon/`: `favicon.svg` (browser tab), `favicon-32.png` (older browsers), `apple-touch-icon.png` (iPhone home screen, 180×180), `icon-512.png` (spare large copy). Linked in `src/layouts/BaseLayout.astro`; paths follow the host automatically (GitHub `/home/`, Netlify root).
+- To use a different image: replace the three files with the same names and sizes.
