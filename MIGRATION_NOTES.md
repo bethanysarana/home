@@ -162,7 +162,7 @@ Source: `docs/DESIGN_BRIEF.md` and `design/references/home-design-directions.png
 - Colour and shape are transcribed from the text printed on each fingerprint, spelling as printed (including "chimey" and "burgandy").
 - Michel and Bella now appear with an obvious "Artwork to come" placeholder (brief §12) instead of being hidden, so the archive shows all 26.
 
-**Open issue (raised by Bethany, 26 Nov 2026), not yet changed:** the homepage story cards use individual participants' fingerprints as illustrations for findings they don't represent. A fingerprint is one person's answer, not a picture of a finding. Replace when Bethany supplies new images (see options discussed in chat: her own photography, her own watercolours per story, data-derived compositions from all fingerprints, typographic quote panels, or small groups of the linked participants' cards). Until then `STORY_IMAGE` in `src/data/relationships.ts` stays as it is.
+**Story visuals (decided by Bethany, 26 Nov 2026):** each story's image will be a piece of data art Bethany is still making. Until it arrives, the homepage story cards use a linked participant's fingerprint as a stand-in. That is a known misrepresentation (a fingerprint is one person's answer, not a picture of the finding) and must be replaced. When the artwork arrives: add it under `public/images/stories/<slug>.webp`, add an image field to each story, and retire `STORY_IMAGE` in `src/data/relationships.ts`. "Hard talks, often" may also get a piece.
 
 **Still missing for the archive:** card-back introductions (50–90 words each), Michel's artwork, and Bella's artwork, final word and codes.
 
