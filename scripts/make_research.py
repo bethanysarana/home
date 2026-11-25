@@ -83,6 +83,23 @@ data = {
     'organising': between("How I'm starting to organise what I'm hearing", 'Where will this go?'),
   },
 }
+# Past tense for the completed traveller conversations (Bethany, 26 Nov 2026).
+# Report 4's "Interviews" text was written as a plan; only the verbs change.
+TENSE = [
+ ('It will use informal', 'It used informal'),
+ ('Prospective participants will be invited', 'Prospective participants were invited'),
+ ('which may take place over coffee', 'which took place over coffee'),
+ ('Conversations will be immersive, and follow an', 'Conversations were immersive, and followed an'),
+ ('structure that broadly encompasses the', 'structure that broadly encompassed the'),
+ ('Conversation audio will be recorded with consent.', 'Conversation audio was recorded with consent.'),
+ ('Insights and reflections will be documented', 'Insights and reflections were documented'),
+]
+joined = '\n'.join(data['conversation']['interviews'])
+for old, new in TENSE:
+    assert old in joined, old
+    joined = joined.replace(old, new)
+data['conversation']['interviews'] = joined.split('\n')
+
 for check in ['travellers', 'locals', 'between']: assert data['groups'][check], check
 assert len(data['process']['intro']) == 3 and len(step_out) == 7 and all('top' in s for s in step_out)
 json.dump(data, open(out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
