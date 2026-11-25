@@ -193,4 +193,5 @@ Editorial story pages (design brief §8) and an overview of story blocks matchin
 - **Needs Bethany:** Report 2 §4 has no paragraph on finding and creating home, or on reinvention and identity. Both show a "Discussion to come" placeholder until she supplies text.
 - People per idea: those named in the discussion paragraphs, then the people behind the linked stories. Names link to their card in the Visual Archive (`#p-<id>`).
 - Related ideas pairings are Claude's choice; for approval.
-- Wording added (for approval): eyebrow "What Emerges · Report 2, section 4.1", captions "Report 2, section …", "Story"/"Stories", "People", "Related ideas", "Conclusion", placeholder "Discussion to come" / "Placeholder: Report 2's discussion (section 4) has no paragraph on this idea yet."
+- Section captions and in-report cross-references removed (Bethany, 26 Nov 2026). Deleted words only: "in Section 3.7" (Language), "(Section 3.6)" (Loss), "in Section 4.6" (Movement and continuity); listed in `CUTS` in scripts/make_ideas.py.
+- Wording added (for approval): "Story"/"Stories", "People", "Related ideas", "Conclusion", placeholder "Discussion to come" / "Placeholder: discussion text for this idea to come."

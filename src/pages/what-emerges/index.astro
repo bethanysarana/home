@@ -41,7 +41,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
 <BaseLayout title="What Emerges" description="The ideas connecting the stories from 26 conversations about home.">
   <header class="intro container container--wide grid-12">
     <div class="head">
-      <p class="eyebrow">What Emerges · Report 2, section 4.1</p>
       <h1>What Emerges</h1>
     </div>
     <div class="text">
@@ -65,17 +64,15 @@ const pad = (n: number) => String(n).padStart(2, '0');
           <h2 id={`h-${idea.id}`}>{idea.data.title}</h2>
         </div>
         <div class="main">
-          <p class="caption">Report 2, section {idea.data.introSection}</p>
           <p class="finding">{idea.data.intro}</p>
 
           {empty ? (
             <aside class="placeholder" aria-label="Placeholder">
               <span class="eyebrow">Discussion to come</span>
-              <p>Placeholder: Report 2's discussion (section 4) has no paragraph on this idea yet.</p>
+              <p>Placeholder: discussion text for this idea to come.</p>
             </aside>
           ) : (
             <div class="prose">
-              <p class="caption">Report 2, section {idea.data.discussionSections.join(' and ')}</p>
               <Content />
             </div>
           )}
@@ -112,7 +109,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
   <section class="closing surface-purple" aria-labelledby="conclusion">
     <div class="container container--wide grid-12">
       <div class="side">
-        <p class="eyebrow">Report 2, section 4.8</p>
         <h2 id="conclusion">Conclusion</h2>
       </div>
       <div class="main">

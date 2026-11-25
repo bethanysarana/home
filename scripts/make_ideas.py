@@ -40,11 +40,20 @@ IDEAS = [
  ('reinvention-and-identity', 'Reinvention and identity', '3.8',
   [], ['starting-over'], [], ['finding-and-creating-home', 'loss-and-the-possibility-of-home']),
 ]
+# Cross-references to report sections removed on Bethany's instruction (26 Nov 2026);
+# the page links to the stories instead. Only these words are deleted.
+CUTS = [
+ (' in Section 3.7 sit', ' sit'),
+ (' (Section 3.6) raises', ' raises'),
+ (' as a limitation in Section 4.6, but', ' as a limitation, but'),
+]
+
 for order, (slug, title, sec, refs, stories, people, related) in enumerate(IDEAS, 1):
     fm = {'order': order, 'title': title, 'intro': heading(sec), 'introSection': sec,
           'discussionSections': sorted({s for s, _ in refs}), 'stories': stories,
           'people': people, 'related': related}
     body = '\n\n'.join(paras(s)[i] for s, i in refs)
+    for old, new in CUTS: body = body.replace(old, new)
     with open(f'{outdir}/{slug}.md', 'w') as f:
         f.write('---\n' + '\n'.join(f'{k}: {json.dumps(v, ensure_ascii=False)}' for k, v in fm.items()) + '\n---\n\n' + body + '\n')
 
