@@ -1,0 +1,26 @@
+---
+// WordPress "Emerging feedback": the two participant quotations, unchanged.
+// The WordPress placeholder ("lalalalal") is excluded by scripts/make_fieldnotes.py.
+import W from '../../data/fieldnotes-wp.json';
+---
+<section class="feedback" aria-labelledby="feedback-h">
+  <h2 id="feedback-h" class="hand-heading">{W.feedbackHeading}</h2>
+  <ul>
+    {W.feedback.map((q) => (
+      <li><blockquote><p>{q}</p></blockquote><p class="who">Participant feedback</p></li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .hand-heading { font-family: var(--font-hand); font-weight: 500; font-size: clamp(2.2rem, 1.8rem + 2vw, 3.2rem); color: var(--purple); margin: 0 0 var(--space-5); transform: rotate(-1deg); }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  li { position: relative; padding: var(--space-6); background: var(--white); box-shadow: 0 2px 6px rgba(0,0,0,0.07); }
+  li:first-child { transform: rotate(-0.6deg); }
+  li:last-child { transform: rotate(0.7deg); }
+  li::before { content: ''; position: absolute; top: -8px; left: var(--space-6); width: 4rem; height: 1.3rem; background: rgba(246, 207, 244, 0.85); transform: rotate(-4deg); }
+  blockquote { margin: 0; }
+  blockquote p { margin: 0; font-family: var(--font-display); font-style: italic; font-size: var(--text-lead); line-height: 1.5; }
+  .who { margin: var(--space-4) 0 0; font-size: var(--text-caption); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  @media (max-width: 767px) { ul { grid-template-columns: 1fr; } }
+</style>

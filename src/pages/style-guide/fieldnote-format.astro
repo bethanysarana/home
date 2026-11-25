@@ -1,0 +1,11 @@
+---
+// Hidden preview of the fieldnote format (not linked, not indexed).
+// Renders src/content/fieldnotes/format-example.md, which stays a draft.
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FieldnoteArticle from '../../components/fieldnotes/FieldnoteArticle.astro';
+const entry = (await getEntry('fieldnotes', 'format-example'))!;
+---
+<BaseLayout title="Fieldnote format (preview)" noindex>
+  <FieldnoteArticle entry={entry} />
+</BaseLayout>

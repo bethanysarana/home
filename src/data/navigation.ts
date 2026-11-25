@@ -13,9 +13,9 @@ export const NAVIGATION: NavItem[] = [
   { label: 'The Stories', path: 'stories/', ready: true },
   { label: 'What Emerges', path: 'what-emerges/', ready: true },
   { label: 'Visual Archive', path: 'visual-archive/', ready: true },
-  { label: 'Fieldnotes', path: 'fieldnotes/', ready: false },
+  { label: 'Fieldnotes', path: 'fieldnotes/', ready: true },
   { label: 'The Research', path: 'research/', ready: true },
-  { label: 'About', path: 'about/', ready: false },
+  { label: 'About', path: 'about/', ready: true },
 ];
 
 export const liveNavigation = () => NAVIGATION.filter((item) => item.ready);

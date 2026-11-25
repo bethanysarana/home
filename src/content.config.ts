@@ -39,4 +39,24 @@ const ideas = defineCollection({
   }),
 });
 
-export const collections = { stories, ideas };
+// Fieldnotes (specification §8): one Markdown file per reflection.
+// The format is shown in src/content/fieldnotes/format-example.md.
+const fieldnotes = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/fieldnotes' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    summary: z.string().optional(),
+    /** Up to three images layered at the top. Paths start with /fieldnotes/<file name>/ (files in public/). */
+    layers: z.array(z.object({
+      src: z.string(),
+      alt: z.string(),
+      caption: z.string().optional(),
+      note: z.string().optional(),
+    })).max(3).default([]),
+    /** true keeps the fieldnote off the site. */
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { stories, ideas, fieldnotes };
