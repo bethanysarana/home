@@ -48,7 +48,7 @@ const rows: Row[] = [
   { id: 'guilia', displayName: 'Guilia', artwork: 'participants/guilia.webp', finalWord: 'The name of my sister', finalWordCategory: 'relational', findCreate: 'find', placeFeeling: 'other' },
   { id: 'karolina', displayName: 'Karolina', artwork: 'participants/karolina.webp', finalWord: 'Safe', finalWordCategory: 'feeling', findCreate: 'both', placeFeeling: 'feeling' },
   { id: 'sian', displayName: 'Sian', artwork: 'participants/sian.webp', finalWord: 'Loved', finalWordCategory: 'feeling', findCreate: 'both', placeFeeling: 'feeling' },
-  { id: 'erica', displayName: 'Erica', artwork: 'participants/erica.webp', finalWord: 'Dancing to any kind of music with souls', finalWordCategory: 'activity', findCreate: 'both', placeFeeling: 'feeling', pendingNote: 'Spelled "Erica" in WordPress and "Erika" in Report 4.' },
+  { id: 'erika', displayName: 'Erika', artwork: 'participants/erika.webp', finalWord: 'Dancing to any kind of music with souls', finalWordCategory: 'activity', findCreate: 'both', placeFeeling: 'feeling' },
   { id: 'pau', displayName: 'Pau', artwork: 'participants/pau.webp', finalWord: 'where love is free', finalWordCategory: 'feeling', findCreate: 'both', placeFeeling: null },
   { id: 'shila', displayName: 'Shila', artwork: 'participants/shila.webp', finalWord: 'A place to be chill but also make intense things', finalWordCategory: 'activity', findCreate: null, placeFeeling: null },
   { id: 'anna', displayName: 'Anna', artwork: 'participants/anna.webp', finalWord: 'Love', finalWordCategory: 'feeling', findCreate: null, placeFeeling: null },

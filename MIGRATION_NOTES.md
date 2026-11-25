@@ -11,7 +11,7 @@ Last updated: 25 November 2026, after Phases 1–3.
 | 2 Homepage | Done, except featured stories (needs Phase 4) and Fieldnotes introduction (needs Phase 7) |
 | 3 Visual Archive | Done, except related-story links on cards (needs Phase 4) |
 | 4 Stories | Not started |
-| 5 What Emerges | Not started (use Report 2's discussion section as well as Report 4's) |
+| 5 What Emerges | Not started (source: Report 2's discussion section) |
 | 6 Research | Not started |
 | 7 Fieldnotes and About | Not started |
 | 8 Validation | Not started |
@@ -21,7 +21,8 @@ Last updated: 25 November 2026, after Phases 1–3.
 - Report 4's figures are authoritative wherever they differ from WordPress.
 - "Read in depth" covers all 26 conversations. Use 26 as the denominator (language: 3 of 26).
 - Eduardo and Arturo both named a place: both stay coded Place.
-- Report 2 has a discussion section to draw on for What Emerges.
+- What Emerges draws on Report 2's discussion section.
+- Participant spelling: Erika (WordPress had Erica).
 - All publication approvals granted (participant feedback quotes included).
 - Hero image: the original WordPress cover photo, supplied separately.
 - Further missing information is to come from Bethany.
@@ -71,7 +72,7 @@ Last updated: 25 November 2026, after Phases 1–3.
 | Language | 3 of 21 | 3 of 26 |
 | Reinvention | 3 of 27 | 3 of 26 |
 | Project status | "Phase 1: In progress" | Traveller dataset complete (not shown on the homepage) |
-| Name spelling | Erica | Erica kept as the id; Report 4 spells it Erika. **Needs confirming** |
+| Name spelling | Erica | Erika |
 
 ## Section mapping (WordPress → new site)
 

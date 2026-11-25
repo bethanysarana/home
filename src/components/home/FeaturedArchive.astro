@@ -6,7 +6,7 @@ import ParticipantCard from '../gallery/ParticipantCard.astro';
 import { publishedParticipants } from '../../data/participants';
 import { href } from '../../data/navigation';
 
-const FEATURED_IDS = ['guilia', 'karolina', 'sian', 'erica', 'pau', 'shila'];
+const FEATURED_IDS = ['guilia', 'karolina', 'sian', 'erika', 'pau', 'shila'];
 const people = publishedParticipants().filter((p) => FEATURED_IDS.includes(p.id));
 ---
 <section class="container container--wide section" aria-labelledby="gallery-preview">
