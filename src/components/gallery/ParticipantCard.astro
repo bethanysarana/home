@@ -1,0 +1,191 @@
+---
+// One canonical card per participant (specification §5.3).
+//   variant="flip" → Visual Archive: a button that flips between the artwork
+//                    (front) and the person's codes (back).
+//   variant="link" → homepage selection: front only, links to the archive.
+import type { Participant } from '../../data/participants';
+import { TIER1, TIER2, labelFor } from '../../data/gallery-filters';
+import { href } from '../../data/navigation';
+
+interface Props {
+  participant: Participant;
+  variant?: 'flip' | 'link';
+}
+const { participant: p, variant = 'flip' } = Astro.props;
+const NOT_CODED = 'Not yet coded';
+const rows = [
+  { term: TIER1.heading, value: labelFor(TIER1.options, p.finalWordCategory) },
+  { term: TIER2.lenses.findcreate.label, value: labelFor(TIER2.lenses.findcreate.options, p.findCreate) },
+  {
+    term: TIER2.lenses.placefeeling.label,
+    value: labelFor(TIER2.lenses.placefeeling.options, p.placeFeeling),
+    interpretation: p.placeFeelingIsInterpretation,
+  },
+];
+const word = `“${p.finalWord}”`;
+---
+{variant === 'link' ? (
+  <li class="card">
+    <a class="card-link" href={href('visual-archive/')}>
+      <span class="face front">
+        <img src={href(p.artwork!)} alt={p.finalWord!} width="900" height="900" loading="lazy" />
+        <span class="word serif-word">{word}</span>
+      </span>
+    </a>
+  </li>
+) : (
+  <li
+    class="card"
+    data-participant={p.id}
+    data-finalwordcategory={p.finalWordCategory ?? ''}
+    data-findcreate={p.findCreate ?? ''}
+    data-placefeeling={p.placeFeeling ?? ''}
+    data-placefeeling-source={p.placeFeelingIsInterpretation ? 'inferred' : undefined}
+  >
+    <button class="card-inner" type="button" aria-pressed="false">
+      <span class="face front">
+        <img src={href(p.artwork!)} alt={p.finalWord!} width="900" height="900" loading="lazy" />
+        <span class="word serif-word">{word}</span>
+        <span class="visually-hidden"> – show how this answer was coded</span>
+      </span>
+      <span class="face back" aria-hidden="true">
+        <span class="back-word serif-word">{word}</span>
+        <dl class="codes">
+          {rows.map((r) => (
+            <div class="code-row">
+              <dt>{r.term}</dt>
+              <dd class={r.value ? '' : 'uncoded'}>
+                {r.value ?? NOT_CODED}
+                {r.interpretation && <span class="read-tag">researcher's read</span>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        {p.biographyApproved && p.biography && <span class="bio">{p.biography}</span>}
+      </span>
+    </button>
+  </li>
+)}
+
+<style>
+  .card {
+    position: relative;
+    list-style: none;
+    border-radius: var(--radius-large);
+    border: 2px solid transparent;
+    transition: opacity var(--duration-fast) var(--ease);
+  }
+  .card[hidden] { display: none; }
+  .card-link, .card-inner {
+    display: grid;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    border-radius: var(--radius-large);
+    perspective: 1200px;
+  }
+  .face {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--colour-cream);
+    border-radius: var(--radius-large);
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .front img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+  .word {
+    padding: 12px 14px;
+    font-size: var(--text-large);
+    line-height: 1.4;
+    color: var(--colour-charcoal);
+  }
+
+  /* Back of the card */
+  .back {
+    transform: rotateY(180deg);
+    justify-content: center;
+    gap: 14px;
+    padding: 20px 16px;
+    text-align: left;
+    border: 1px solid var(--colour-sand);
+  }
+  .back-word {
+    font-size: var(--text-large);
+    line-height: 1.3;
+    color: var(--colour-terracotta);
+    border-left: 4px solid var(--colour-terracotta);
+    padding-left: 12px;
+  }
+  .codes { margin: 0; display: grid; gap: 10px; }
+  .code-row dt {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--colour-terracotta);
+    font-weight: 700;
+  }
+  .code-row dd { margin: 2px 0 0; font-size: var(--text-medium); font-weight: 500; color: var(--colour-charcoal); }
+  .code-row dd.uncoded { color: var(--colour-grey); font-style: italic; font-weight: 400; }
+  .read-tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 8px;
+    font-size: 0.7rem;
+    font-style: normal;
+    border: 1px dashed var(--colour-terracotta);
+    border-radius: var(--radius-pill);
+    color: var(--colour-terracotta);
+    vertical-align: middle;
+  }
+  .bio { font-size: var(--text-small); line-height: 1.5; }
+
+  /* Flip: tap/click/keyboard (aria-pressed), and hover on mouse devices */
+  .card-inner[aria-pressed='true'] .front { transform: rotateY(-180deg); }
+  .card-inner[aria-pressed='true'] .back { transform: rotateY(0deg); }
+  @media (hover: hover) and (pointer: fine) {
+    .card-inner:hover .front { transform: rotateY(-180deg); }
+    .card-inner:hover .back { transform: rotateY(0deg); }
+  }
+
+  /* Reduced motion: cross-fade instead of rotating */
+  @media (prefers-reduced-motion: reduce) {
+    .face { transition: opacity 0.2s ease; transform: none !important; }
+    .back { opacity: 0; }
+    .card-inner[aria-pressed='true'] .front { opacity: 0; }
+    .card-inner[aria-pressed='true'] .back { opacity: 1; }
+    @media (hover: hover) and (pointer: fine) {
+      .card-inner:hover .front { opacity: 0; }
+      .card-inner:hover .back { opacity: 1; }
+    }
+  }
+
+  /* Dashed border where a tag is the researcher's interpretive read */
+  .card.provenance-inferred { border: 2px dashed var(--colour-terracotta); }
+  .card.provenance-inferred::after {
+    content: "researcher's read";
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 3;
+    background: var(--colour-terracotta);
+    color: var(--colour-white);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    pointer-events: none;
+  }
+
+  .card-link:hover .word { text-decoration: underline; }
+</style>

@@ -1,0 +1,47 @@
+/* Typography from the WordPress theme: Manrope, light body weight,
+   slight negative letter spacing, line height 1.4. */
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-large);
+  font-weight: 300;
+  letter-spacing: -0.1px;
+  line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: -0.1px;
+  line-height: 1.125;
+  margin: 0 0 var(--block-gap);
+}
+h1 { font-size: var(--text-xx-large); }
+h2 { font-size: var(--text-x-large); }
+h3 { font-size: var(--text-large); }
+h4 { font-size: var(--text-medium); }
+
+p { margin: 0 0 var(--block-gap); }
+
+blockquote, caption, figcaption, h1, h2, h3, h4, h5, h6, p { text-wrap: pretty; }
+
+a {
+  color: currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.1em;
+}
+a:hover { text-decoration: none; }
+
+strong { font-weight: 600; }
+
+.text-small { font-size: var(--text-small); }
+.text-medium { font-size: var(--text-medium); }
+.text-large { font-size: var(--text-large); }
+.text-subtitle { font-size: var(--text-subtitle); line-height: 1.2; }
+
+/* Serif is used only where the WordPress design used it:
+   participant words and quotations. */
+.serif-word {
+  font-family: var(--font-serif);
+  font-style: italic;
+}

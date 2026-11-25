@@ -1,0 +1,61 @@
+/* Design tokens. Values come from the WordPress site (Twenty Twenty-Five theme
+   settings plus the custom component CSS in the Home post). */
+
+:root {
+  /* Colours (specification §3) */
+  --colour-white: #FFFFFF;
+  --colour-charcoal: #2D2D2D;
+  --colour-dark: #1A120C;
+  --colour-ink: #111111; /* WordPress body text ("contrast") */
+
+  --colour-terracotta: #8B402B;
+  --colour-terracotta-dark: #733321;
+
+  --colour-cream: #FAF8F5;
+  --colour-sand: #E6D2B5;
+  --colour-warm-white: #FBFAF3;
+
+  --colour-yellow: #FFEE58;
+  --colour-pink: #F6CFF4;
+  --colour-purple: #503AA8;
+  --colour-grey: #686868;
+  --colour-muted: #8A8A8A;
+  --colour-rule: color-mix(in srgb, currentColor 20%, transparent);
+
+  /* Layout */
+  --content-width: 645px;
+  --wide-width: 1340px;
+  --page-padding: clamp(20px, 4vw, 50px);
+
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --radius-large: 12px;
+  --radius-pill: 999px;
+
+  /* Spacing (WordPress presets) */
+  --space-10: 10px;
+  --space-20: 10px;
+  --space-30: 20px;
+  --space-40: 30px;
+  --space-50: clamp(30px, 5vw, 50px);
+  --space-60: clamp(30px, 7vw, 70px);
+  --space-70: clamp(50px, 7vw, 90px);
+  --space-80: clamp(70px, 10vw, 140px);
+  --block-gap: 1.2rem;
+
+  /* Typography (WordPress presets) */
+  --font-sans: 'Manrope Variable', Manrope, system-ui, -apple-system, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+
+  --text-small: 0.875rem;
+  --text-medium: clamp(1rem, 1rem + ((1vw - 0.2rem) * 0.196), 1.125rem);
+  --text-large: clamp(1.125rem, 1.125rem + ((1vw - 0.2rem) * 0.392), 1.375rem);
+  --text-x-large: clamp(1.75rem, 1.75rem + ((1vw - 0.2rem) * 0.392), 2rem);
+  --text-xx-large: clamp(2.15rem, 2.15rem + ((1vw - 0.2rem) * 1.333), 3rem);
+  --text-subtitle: clamp(1.5rem, 1.5rem + ((1vw - 0.2rem) * 0.392), 1.75rem);
+
+  /* Motion */
+  --ease: ease;
+  --duration-fast: 0.2s;
+  --duration: 0.3s;
+}

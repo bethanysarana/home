@@ -1,33 +1,22 @@
 ---
-import Base from '../layouts/Base.astro';
-import { published, url } from '../site';
-
-// Day 1 homepage: Bethany's own words from the WordPress page, verbatim.
-// The full seven-section narrative homepage is built on day 2.
-const learning = await published('learning');
+// Homepage (specification §4). Featured stories and the Fieldnotes
+// introduction are added when those sections are built (Phases 4 and 7).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import ProjectIntroduction from '../components/home/ProjectIntroduction.astro';
+import ProjectSnapshot from '../components/home/ProjectSnapshot.astro';
+import FeaturedArchive from '../components/home/FeaturedArchive.astro';
 ---
-<Base>
-  <section class="wrap">
-    <p class="eyebrow">Understanding place, belonging, and identity</p>
-    <h1>Let’s Talk About “Home”</h1>
-    <p><em><strong>How do we narrate our own lives?</strong></em></p>
-    <p>Follow as I experiment with applying analytical rigor to the architecture of everyday life, exploring how we build identity and belonging when we leave traditional, fixed structures behind.</p>
-  </section>
+<BaseLayout>
+  <Hero />
+  <div class="container">
+    <p class="lede text-large">Follow as I experiment with applying analytical rigor to the architecture of everyday life, exploring how we build identity and belonging when we leave traditional, fixed structures behind.</p>
+  </div>
+  <ProjectIntroduction />
+  <ProjectSnapshot />
+  <FeaturedArchive />
+</BaseLayout>
 
-  {learning.length > 0 && (
-    <section class="wrap">
-      <h2>Headline findings: <strong>Travellers</strong></h2>
-      <ul class="item-list">
-        {learning.map((item) => (
-          <li>
-            <a href={url(`learning/${item.id}/`)}>
-              {item.data.shortTitle && <span class="eyebrow">{item.data.shortTitle}</span>}
-              <span class="item-title">{item.data.title}</span>
-            </a>
-            {item.data.evidence && <p class="meta">{item.data.evidence}</p>}
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
-</Base>
+<style>
+  .lede { padding-top: var(--space-50); margin: 0; }
+</style>

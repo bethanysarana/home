@@ -1,0 +1,102 @@
+/* Shared component styles. Individual components carry their own
+   scoped styles; this file holds patterns reused across many of them. */
+
+/* Containers: reading (645px) and exploration (1340px) widths */
+.container {
+  width: 100%;
+  max-width: calc(var(--content-width) + 2 * var(--page-padding));
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+.container--wide {
+  max-width: calc(var(--wide-width) + 2 * var(--page-padding));
+}
+
+.section { padding-block: var(--space-60); }
+.section--tight { padding-block: var(--space-40); }
+
+/* Section heading (WordPress h2 with padding-20 top and bottom) */
+.section-heading {
+  padding-block: var(--space-20);
+  margin-bottom: var(--block-gap);
+}
+
+/* Terracotta pill (WordPress .focus-pills label, .pill-btn, .lens-btn) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--colour-terracotta);
+  background: var(--colour-cream);
+  color: var(--colour-terracotta);
+  border-radius: var(--radius-pill);
+  padding: 6px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+.pill[aria-selected='true'],
+.pill[aria-pressed='true'] {
+  background: var(--colour-terracotta);
+  color: var(--colour-white);
+}
+.pill:hover { border-color: var(--colour-terracotta-dark); }
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* Cream text panel with terracotta left rule (WordPress .focus-card-display) */
+.cream-panel {
+  background: var(--colour-cream);
+  border-left: 4px solid var(--colour-terracotta);
+  padding: 20px;
+  border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+}
+
+/* Cream box with sand border (WordPress .emerge-content-box-2) */
+.cream-box {
+  background: var(--colour-cream);
+  border: 1px solid var(--colour-sand);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+/* Fluid large paragraph used inside custom WordPress components */
+.pane-text {
+  font-size: var(--text-large);
+  line-height: 1.55;
+  color: var(--colour-charcoal);
+  margin: 0 0 1em;
+}
+.pane-text:last-child { margin-bottom: 0; }
+
+.pane-list { margin: 0 0 1em; padding-left: 20px; }
+.pane-list li { margin-bottom: 0.5em; }
+
+/* Terracotta-bordered card (WordPress #traveller-demo, Phase 2 columns) */
+.outline-card {
+  position: relative;
+  border: 2px solid var(--colour-terracotta);
+  border-radius: 16px;
+  padding: 24px;
+  background: var(--colour-white);
+}
+
+/* Text link with arrow */
+.arrow-link {
+  display: inline-flex;
+  gap: 0.4em;
+  align-items: center;
+  font-weight: 500;
+  color: var(--colour-terracotta);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
