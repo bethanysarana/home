@@ -1,8 +1,12 @@
 import { defineConfig } from 'astro/config';
 
-// Free GitHub Pages address for the repo bethanysarana/home.
-// When the custom domain is ready: set `site` to the domain and remove `base`.
-const base = '/home';
+// Two hosts build this site:
+// - Netlify (public site): sets NETLIFY=true during its builds; the site sits at the root.
+// - GitHub Pages (working preview): bethanysarana.github.io/home/
+// When the custom domain is ready: change the Netlify `site` to the domain.
+const onNetlify = process.env.NETLIFY === 'true';
+const site = onNetlify ? 'https://letstalkabouthome.netlify.app' : 'https://bethanysarana.github.io';
+const base = onNetlify ? '' : '/home';
 
 // The eight finding pages published on day 1 lived under /learning/.
 // They now live under /stories/ with the same slugs.
@@ -14,8 +18,8 @@ const redirects = Object.fromEntries([
 ]);
 
 export default defineConfig({
-  site: 'https://bethanysarana.github.io',
-  base,
+  site,
+  base: base || '/',
   trailingSlash: 'always',
   redirects,
 });
