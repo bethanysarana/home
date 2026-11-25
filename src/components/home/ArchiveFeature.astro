@@ -1,5 +1,5 @@
 ---
-// Visual Archive feature (design brief §6): a dark purple field with a
+// Project Gallery feature (design brief §6): a dark purple field with a
 // scattered row of real fingerprints, leading into the archive.
 import { publishedParticipants, TOTAL_PARTICIPANTS } from '../../data/participants';
 import { href } from '../../data/navigation';
@@ -12,15 +12,15 @@ const tilt = ['-2deg', '1.5deg', '-1deg', '2deg', '-1.5deg', '1deg'];
 <section class="archive surface-purple" aria-labelledby="archive-heading">
   <div class="container container--wide grid-12">
     <div class="text">
-      <p class="eyebrow"><span class="num">04</span> Visual Archive · {TOTAL_PARTICIPANTS} conversations</p>
+      <p class="eyebrow"><span class="num">04</span> Project Gallery · {TOTAL_PARTICIPANTS} conversations</p>
       <h2 id="archive-heading">The <em>Travellers</em> gallery: everyone's word, colour, and shape</h2>
       <p class="lead">At the end of each interview, once we were fully immersed in the conversation, I captured participants’ intuitive sense of home as a word, colour, and shape. To me, these are visual fingerprints of belonging.</p>
-      <p><a class="button" href={href('visual-archive/')}>Visual Archive <span aria-hidden="true">→</span></a></p>
+      <p><a class="button" href={href('project-gallery/')}>Project Gallery <span aria-hidden="true">→</span></a></p>
     </div>
     <ul class="prints" aria-label="A selection of visual fingerprints">
       {people.map((p, i) => (
         <li style={`--tilt:${tilt[i]}`}>
-          <a href={href('visual-archive/')}>
+          <a href={href('project-gallery/')}>
             <img src={href(p!.artwork!)} alt={`${p!.displayName}: “${p!.finalWord}”`} width="900" height="900" loading="lazy" />
             <span class="name">{p!.displayName}</span>
           </a>

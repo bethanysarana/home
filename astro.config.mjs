@@ -15,6 +15,8 @@ const day1 = ['home-isnt-a-place', 'its-never-the-room', 'no-single-answer', 'wh
 const redirects = Object.fromEntries([
   ['/learning', `${base}/stories/`],
   ...day1.map((slug) => [`/learning/${slug}`, `${base}/stories/${slug}/`]),
+  // Renamed on Bethany's instruction (26 Nov 2026): Visual Archive → Project Gallery.
+  ['/visual-archive', `${base}/project-gallery/`],
 ]);
 
 export default defineConfig({

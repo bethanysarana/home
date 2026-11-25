@@ -27,7 +27,7 @@ Keep the existing experience recognisable. Change its scale and structure, not i
 ## How the site works
 - Astro + TypeScript. Pages in `src/pages/`, components in `src/components/<area>/`, data in `src/data/`, styles in `src/styles/` (tokens in `tokens.css`).
 - Design system: WordPress palette (ink, white, off-white, yellow, pale pink, purple, grey); Newsreader for display, Manrope for body, Caveat only for the logo and field-journal notes. Check `/style-guide/` after changing tokens.
-- Three directions: editorial (homepage, stories), archive (Visual Archive, research discovery), field journal (fieldnotes, reflections only).
+- Three directions: editorial (homepage, stories), archive (Project Gallery, research discovery), field journal (fieldnotes, reflections only).
 - `src/data/navigation.ts`: a page appears in the menu only when `ready: true`. Never publish empty templates.
 - Hosting: GitHub Pages via `.github/workflows/deploy.yml` on every merge to `main`.
 - Address: https://bethanysarana.github.io/home/ . For a custom domain, change `site` and remove `base` in `astro.config.mjs`.

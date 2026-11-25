@@ -95,7 +95,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
             <div>
               <h3 class="eyebrow">People</h3>
               <ul class="people">
-                {people.map((p) => <li><a class="hand" href={href(`visual-archive/#p-${p.id}`)}>{p.displayName}</a></li>)}
+                {people.map((p) => <li><a class="hand" href={href(`project-gallery/#p-${p.id}`)}>{p.displayName}</a></li>)}
               </ul>
             </div>
             <div>
@@ -119,7 +119,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
         {frame.conclusion.map((p) => <p>{p}</p>)}
         <p class="next">
           <a class="button" href={href('stories/')}>The Stories</a>
-          <a class="button button--outline" href={href('visual-archive/')}>Visual Archive</a>
+          <a class="button button--outline" href={href('project-gallery/')}>Project Gallery</a>
         </p>
       </div>
     </div>

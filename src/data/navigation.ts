@@ -12,7 +12,7 @@ export const NAVIGATION: NavItem[] = [
   { label: 'Home', path: '', ready: true },
   { label: 'The Stories', path: 'stories/', ready: true },
   { label: 'What Emerges', path: 'what-emerges/', ready: true },
-  { label: 'Visual Archive', path: 'visual-archive/', ready: true },
+  { label: 'Project Gallery', path: 'project-gallery/', ready: true },
   { label: 'Fieldnotes', path: 'fieldnotes/', ready: true },
   { label: 'The Research', path: 'research/', ready: true },
   { label: 'About', path: 'about/', ready: true },

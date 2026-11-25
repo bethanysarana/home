@@ -1,7 +1,7 @@
 # Migration notes
 
 Record of how the WordPress page "Lets talk about 'Home'" (post 90) is being rebuilt to `docs/SPEC.md`.
-Last updated: 26 November 2026, after the visual redesign of the homepage and Visual Archive.
+Last updated: 26 November 2026, after the visual redesign of the homepage and Project Gallery.
 
 ## Progress
 
@@ -9,7 +9,7 @@ Last updated: 26 November 2026, after the visual redesign of the homepage and Vi
 |---|---|
 | 1 Foundation | Done |
 | 2 Homepage | Done, except the Fieldnotes introduction (needs Phase 7) |
-| 3 Visual Archive | Done |
+| 3 Project Gallery | Done |
 | 4 Stories | Done and redesigned (editorial), except links to What Emerges ideas (needs Phase 5) |
 | 5 What Emerges | Not started (source: Report 2's discussion section) |
 | 6 Research | Built 26 Nov 2026; placeholders for ethics, full references, 26th person's demographics |
@@ -87,8 +87,8 @@ Last updated: 26 November 2026, after the visual redesign of the homepage and Vi
 | Phase 2: Locals / People in between | The Research §9.2 | Phase 6 |
 | How a conversation works + three questions | The Research §9.3 | Phase 6 |
 | How I make sense of it all (seven-step diagram) | The Research §9.4 | Phase 6 |
-| Travellers gallery, intro and tabs | Visual Archive | Done |
-| Gallery filters and cards | Visual Archive | Done (layers now combine, per spec) |
+| Travellers gallery, intro and tabs | Project Gallery | Done |
+| Gallery filters and cards | Project Gallery | Done (layers now combine, per spec) |
 | Headline findings (8) | The Stories: overview tabs + one page each (same addresses as day 1, /learning/ redirects) | Done |
 | "Live update: outdated (delete later)" | Archived in the export only; not migrated | — |
 | What this can (and can't) tell you | The Research §9.6 | Phase 6 |
@@ -113,7 +113,7 @@ Wording I added that isn't from WordPress, the spec or the reports:
 - Alt text for the Wonderland photo: "A woman walking along a garden path beneath a wooden archway decorated with red discs"
 - Card back, for uncoded values: "Not yet coded" (adapted from the WordPress count line "not yet coded on this theme")
 - Screen-reader text on each card: "show how this answer was coded"
-- Homepage link to the archive: "Visual Archive →" (navigation label)
+- Homepage link to the archive: "Project Gallery →" (navigation label)
 - Mobile menu button label: "Menu"; skip link: "Skip to content"; scroll button: "Back to top" (from WordPress)
 - Story pages: "The people behind this story", "Related stories", "← Previous" / "Next →", tags "Complicates" / "Extends"
 - Card back: "The Stories" (navigation label) above story links; round button label "Show artwork"
@@ -141,9 +141,9 @@ Wording I added that isn't from WordPress, the spec or the reports:
 
 **Homepage:** featured stories = the first three findings; change `FEATURED` in `src/components/home/FeaturedStories.astro`.
 
-## Visual redesign: homepage and Visual Archive (26 November 2026)
+## Visual redesign: homepage and Project Gallery (26 November 2026)
 
-Source: `docs/DESIGN_BRIEF.md` and `design/references/home-design-directions.png`. Editorial direction for the homepage, archive direction for the Visual Archive. Field-journal touches only in small details (handwritten names, the route motif, the tilted fingerprint prints).
+Source: `docs/DESIGN_BRIEF.md` and `design/references/home-design-directions.png`. Editorial direction for the homepage, archive direction for the Project Gallery. Field-journal touches only in small details (handwritten names, the route motif, the tilted fingerprint prints).
 
 **Design system:** `src/styles/tokens.css`, viewable at `/style-guide/` (not in the menu, not indexed).
 - Palette from the WordPress theme presets: ink #111111, white, off-white #FBFAF3, yellow #FFEE58, pale pink #F6CFF4, purple #503AA8, grey #686868. One derived shade, deep purple #2B1F63, for large dark fields.
@@ -151,12 +151,12 @@ Source: `docs/DESIGN_BRIEF.md` and `design/references/home-design-directions.png
 - Type: Newsreader (display serif) + Manrope (body). Caveat for the logo and handwritten names only.
 - Corners reduced to 2–4px; no gradient overlays on photographs.
 
-**Homepage:** editorial hero (title, "How do we narrate our own lives?", introduction, photo); Karolina's quote on pink; all eight stories in a varied grid; Belonging / The Shift / Method as a numbered sequence beside the Wonderland photo (all three visible, no tabs); Who I'm talking to with Travellers (26) and the two Phase 2 groups; a Visual Archive band; Where will this go?
+**Homepage:** editorial hero (title, "How do we narrate our own lives?", introduction, photo); Karolina's quote on pink; all eight stories in a varied grid; Belonging / The Shift / Method as a numbered sequence beside the Wonderland photo (all three visible, no tabs); Who I'm talking to with Travellers (26) and the two Phase 2 groups; a Project Gallery band; Where will this go?
 - The opening quote is verified: Report 4 §3.1, "Home is a feeling that you carry with you." — Karolina.
 - The background paragraph ("As a Doctor of Applied Health Research…") is no longer on the homepage; it belongs on About.
 - Story images are the fingerprints of people Report 4 names in each story (`STORY_IMAGE` in `src/data/relationships.ts`, checked at build). Story 6 has no image.
 
-**Visual Archive:** purple opening with the title and 26; Gallery purpose and Interpretation guide side by side (no longer tabs); the same filters and logic; cards show name, fingerprint, final word, colour, shape and word category; backs add the full colour/shape, any extra line printed on the artwork, the three codes and story links.
+**Project Gallery:** purple opening with the title and 26; Gallery purpose and Interpretation guide side by side (no longer tabs); the same filters and logic; cards show name, fingerprint, final word, colour, shape and word category; backs add the full colour/shape, any extra line printed on the artwork, the three codes and story links.
 - Names now appear on cards (brief §7).
 - Colour and shape are transcribed from the text printed on each fingerprint, spelling as printed (including "chimey" and "burgandy").
 - Michel and Bella now appear with an obvious "Artwork to come" placeholder (brief §12) instead of being hidden, so the archive shows all 26.
@@ -170,7 +170,7 @@ Source: `docs/DESIGN_BRIEF.md` and `design/references/home-design-directions.png
 **Still missing for the archive:** card-back introductions (50–90 words each), Michel's artwork, and Bella's artwork, final word and codes.
 
 **Wording added in the redesign (for approval):**
-- Header button "Explore the project" (from the brief); section eyebrows "01 The Stories", "02 The project", "03 The people", "04 Visual Archive"; "Read the story →"
+- Header button "Explore the project" (from the brief); section eyebrows "01 The Stories", "02 The project", "03 The people", "04 Project Gallery"; "Read the story →"
 - "Explore the stories" (from the brief)
 - Hero photo alt text: "A thatched wooden shelter looking out over bamboo huts and A-frame cabins, with a pot of tea on the table"
 - Cards: "Artwork to come", "Final word to come", back button "Back to [name]'s fingerprint", screen-reader text "show more about [name]'s answer"
@@ -191,7 +191,7 @@ Editorial story pages (design brief §8) and an overview of story blocks matchin
 - Page `/what-emerges/`, built from Report 2 by `scripts/make_ideas.py` (run: `python3 scripts/make_ideas.py <report2.md> src/content/ideas`). Text copied exactly: opening = §4.1 Summary; each idea = §3 heading + §4 Discussion paragraphs; closing = §4.8 Conclusion. §4.6 and §4.7 are left for The Research page.
 - Ideas and sources: 1 Feeling/relationship/activity = §3.1 + §4.2 ¶1, §4.4 ¶1 · 2 Belonging and safety = §3.2 + §4.3 ¶2 · 3 Finding and creating = §3.3, no discussion paragraph · 4 Movement and continuity = §3.5 + §4.2 ¶2, §4.3 ¶1 · 5 Loss = §3.4 + §4.5 · 6 Language = §3.7 + §4.4 ¶2 · 7 Reinvention and identity = §3.8, no discussion paragraph.
 - **Needs Bethany:** Report 2 §4 has no paragraph on finding and creating home, or on reinvention and identity. Both show a "Discussion to come" placeholder until she supplies text.
-- People per idea: those named in the discussion paragraphs, then the people behind the linked stories. Names link to their card in the Visual Archive (`#p-<id>`).
+- People per idea: those named in the discussion paragraphs, then the people behind the linked stories. Names link to their card in the Project Gallery (`#p-<id>`).
 - Related ideas pairings are Claude's choice; for approval.
 - Section captions and in-report cross-references removed (Bethany, 26 Nov 2026). Deleted words only: "in Section 3.7" (Language), "(Section 3.6)" (Loss), "in Section 4.6" (Movement and continuity); listed in `CUTS` in scripts/make_ideas.py.
 - Wording added (for approval): "Story"/"Stories", "People", "Related ideas", "Conclusion", placeholder "Discussion to come" / "Placeholder: discussion text for this idea to come."
@@ -210,7 +210,7 @@ Editorial story pages (design brief §8) and an overview of story blocks matchin
 - `scripts/make_fieldnotes.py` (run: `python3 -I scripts/make_fieldnotes.py source/wordpress/wordpress-export-2026-11-25.xml <report4.md> src/data`) writes `src/data/fieldnotes-wp.json` and `src/data/about.json`. Text copied exactly. The WordPress placeholder quote "lalalalal" is never published.
 - **Fieldnotes** `/fieldnotes/`: the four "What I'm loving so far!" cards (text revealed on hover, focus or tap; sideways scroll on phones; purple, pink, yellow and white instead of terracotta) and the two "Emerging feedback" quotes, labelled "Participant feedback". Published reflections appear above them once any exist.
 - **Fieldnote format:** one Markdown file per reflection in `src/content/fieldnotes/`, images in `public/fieldnotes/<file name>/`. Up to three layered images at the top (caption and handwritten note each), paragraphs, `✎` lines as handwritten notes, `![alt](/path "Caption")` as captioned photos. Instructions are at the top of `src/content/fieldnotes/format-example.md`, which stays a draft and is shown only on the hidden preview `/style-guide/fieldnote-format/`.
-- **About** `/about/`: WordPress intro paragraph and "How do we narrate our own lives?" (moved off the homepage); Report 4 introduction paragraph; the specification's facts as tags; Report 4 "Project background" (Wonderland) and "Envisaged impact" paragraphs; the two strands, titled with the specification's wording, linking to The Stories, What Emerges, The Research, Fieldnotes and the Visual Archive; WordPress "Follow as I experiment…" under strand 2; Report 4 §4.8 first paragraph (knowledge, literature, art). The homepage hero photo is reused.
+- **About** `/about/`: WordPress intro paragraph and "How do we narrate our own lives?" (moved off the homepage); Report 4 introduction paragraph; the specification's facts as tags; Report 4 "Project background" (Wonderland) and "Envisaged impact" paragraphs; the two strands, titled with the specification's wording, linking to The Stories, What Emerges, The Research, Fieldnotes and the Project Gallery; WordPress "Follow as I experiment…" under strand 2; Report 4 §4.8 first paragraph (knowledge, literature, art). The homepage hero photo is reused.
 - **About needs rewriting (Bethany, 26 Nov 2026).** The current page is a stand-in built from existing text; Bethany will supply new About text.
 - **Text to review (not changed):** the §4.8 paragraph on About says "the coded, transcript-grounded findings above", which referred to the report.
 - Wording added (for approval): "Participant feedback", "Background", "Where it began", "Two strands", card "+" control, preview page title "Fieldnote format (preview)", all placeholder text in format-example.md.
@@ -220,3 +220,7 @@ Editorial story pages (design brief §8) and an overview of story blocks matchin
 - Michel and Bella have no artwork yet, so their slides show "Artwork to come".
 - Swipe or scroll sideways on phones; ← / → buttons and arrow keys; no autoplay.
 - Wording added (for approval): "1 / 10" counter, button labels "Previous quote" / "Next quote" (screen readers only).
+
+## Project Gallery (26 Nov 2026)
+- "Visual Archive" renamed "Project Gallery" everywhere on the site, in these notes and in CLAUDE.md (not in Bethany's SPEC.md or DESIGN_BRIEF.md). Address changed from `/visual-archive/` to `/project-gallery/`; the old address redirects (`astro.config.mjs`).
+- Homepage hero: "The Stories" and "Project Gallery" are now both the same black button.

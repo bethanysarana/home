@@ -18,7 +18,7 @@ const people = (STORY_PARTICIPANTS[slug] ?? [])
     <div class="container container--wide">
       <header class="head">
         <h2 id={`people-${slug}`}>The people behind this story</h2>
-        <a class="arrow-link" href={href('visual-archive/')}>Visual Archive <span aria-hidden="true">→</span></a>
+        <a class="arrow-link" href={href('project-gallery/')}>Project Gallery <span aria-hidden="true">→</span></a>
       </header>
       <ul class="grid">
         {people.map((x) => <ParticipantCard participant={x.p!} tag={TAGS[x.role]} />)}

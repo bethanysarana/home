@@ -19,7 +19,7 @@ const isCurrent = (path: string) => (path === '' ? current === '' : current.star
         <li><a href={href(item.path)} aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a></li>
       ))}
     </ul>
-    <a class="button cta" href={href('visual-archive/')}>Explore the project</a>
+    <a class="button cta" href={href('project-gallery/')}>Explore the project</a>
   </div>
 </nav>
 

@@ -122,7 +122,7 @@ export const PARTICIPANTS: Participant[] = rows.map((r) => ({
 export const publishedParticipants = () =>
   PARTICIPANTS.filter((p) => p.publicationStatus === 'approved' && p.artwork && p.finalWord);
 
-/** Every participant shown in the Visual Archive. Records still awaiting
+/** Every participant shown in the Project Gallery. Records still awaiting
  *  artwork appear with a visible "to come" placeholder (design brief §12). */
 export const archiveParticipants = () => PARTICIPANTS.filter((p) => p.publicationStatus !== 'excluded');
 
