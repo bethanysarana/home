@@ -1,0 +1,7 @@
+/* Global responsive rules. Component-specific breakpoints live with
+   their components. */
+
+@media (max-width: 600px) {
+  .section { padding-block: var(--space-50); }
+  .cream-box { padding: 20px; }
+}

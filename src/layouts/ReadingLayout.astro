@@ -1,0 +1,15 @@
+---
+// Reading layout: ~645px column for long-form text, findings and reflections.
+import BaseLayout from './BaseLayout.astro';
+interface Props { title?: string; description?: string; }
+---
+<BaseLayout {...Astro.props}>
+  <div class="container reading">
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+  .reading { padding-block: var(--space-60); }
+  main:focus { outline: none; }
+</style>

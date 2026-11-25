@@ -1,0 +1,15 @@
+---
+// Exploration layout: up to 1340px for galleries, charts, diagrams and
+// visual interactions. Intro text inside it should still use .container.
+import BaseLayout from './BaseLayout.astro';
+interface Props { title?: string; description?: string; }
+---
+<BaseLayout {...Astro.props}>
+  <div class="exploration">
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+  .exploration { padding-block: var(--space-60); }
+</style>
