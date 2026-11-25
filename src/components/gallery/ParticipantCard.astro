@@ -37,6 +37,7 @@ const backId = `card-back-${p.id}`;
 const pending = !p.artwork;
 ---
 <li
+  id={`p-${p.id}`}
   class={`card ${pending ? 'is-pending' : ''}`}
   data-card
   data-participant={p.id}

@@ -11,7 +11,7 @@ export interface NavItem {
 export const NAVIGATION: NavItem[] = [
   { label: 'Home', path: '', ready: true },
   { label: 'The Stories', path: 'stories/', ready: true },
-  { label: 'What Emerges', path: 'what-emerges/', ready: false },
+  { label: 'What Emerges', path: 'what-emerges/', ready: true },
   { label: 'Visual Archive', path: 'visual-archive/', ready: true },
   { label: 'Fieldnotes', path: 'fieldnotes/', ready: false },
   { label: 'The Research', path: 'research/', ready: false },

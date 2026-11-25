@@ -186,3 +186,11 @@ Editorial story pages (design brief §8) and an overview of story blocks matchin
 - **The overview replaces the WordPress eight-tab component** with the same story blocks as the homepage, showing every story at once; WordPress intro and footer text kept.
 
 **Wording added (for approval):** "From the research", placeholder "The Research · page to come" / "Placeholder: this will link to the research process, how the conversations were recorded and how the analysis was made." / link text "How the conversations were recorded and analysed →", "The people behind this story", "Related stories", "← Previous" / "Next →", "Read the story →", overview eyebrow "The Stories · 26 conversations".
+
+## What Emerges (26 Nov 2026)
+- Page `/what-emerges/`, built from Report 2 by `scripts/make_ideas.py` (run: `python3 scripts/make_ideas.py <report2.md> src/content/ideas`). Text copied exactly: opening = §4.1 Summary; each idea = §3 heading + §4 Discussion paragraphs; closing = §4.8 Conclusion. §4.6 and §4.7 are left for The Research page.
+- Ideas and sources: 1 Feeling/relationship/activity = §3.1 + §4.2 ¶1, §4.4 ¶1 · 2 Belonging and safety = §3.2 + §4.3 ¶2 · 3 Finding and creating = §3.3, no discussion paragraph · 4 Movement and continuity = §3.5 + §4.2 ¶2, §4.3 ¶1 · 5 Loss = §3.4 + §4.5 · 6 Language = §3.7 + §4.4 ¶2 · 7 Reinvention and identity = §3.8, no discussion paragraph.
+- **Needs Bethany:** Report 2 §4 has no paragraph on finding and creating home, or on reinvention and identity. Both show a "Discussion to come" placeholder until she supplies text.
+- People per idea: those named in the discussion paragraphs, then the people behind the linked stories. Names link to their card in the Visual Archive (`#p-<id>`).
+- Related ideas pairings are Claude's choice; for approval.
+- Wording added (for approval): eyebrow "What Emerges · Report 2, section 4.1", captions "Report 2, section …", "Story"/"Stories", "People", "Related ideas", "Conclusion", placeholder "Discussion to come" / "Placeholder: Report 2's discussion (section 4) has no paragraph on this idea yet."
