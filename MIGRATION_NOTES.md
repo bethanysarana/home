@@ -224,3 +224,4 @@ Editorial story pages (design brief §8) and an overview of story blocks matchin
 ## Project Gallery (26 Nov 2026)
 - "Visual Archive" renamed "Project Gallery" everywhere on the site, in these notes and in CLAUDE.md (not in Bethany's SPEC.md or DESIGN_BRIEF.md). Address changed from `/visual-archive/` to `/project-gallery/`; the old address redirects (`astro.config.mjs`).
 - Homepage hero: "The Stories" and "Project Gallery" are now both the same black button.
+- **Carousel pending (Bethany, 26 Nov 2026):** four quotes removed (Eduardo "The home that I call home…", Michel "…Language, I would say, is home.", Miri "I can rebirth myself…", Bella "It's about acknowledging that your time is limited…"). Bethany will supply replacements; the carousel shows six until then.

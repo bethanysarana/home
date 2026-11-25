@@ -4,12 +4,10 @@
 import json, re, sys
 rep = open(sys.argv[1], encoding='utf-8').read().split('\n')
 # (start of quote, participant id, story it links to) in carousel order.
+# Four removed by Bethany (26 Nov 2026), replacements pending from her:
+# Eduardo 'The home that I call home', Michel 'Language… is home', Miri 'I can rebirth myself', Bella 'your time is limited'.
 PICKS = [
  ('“Home is a feeling that you carry with you.”', 'karolina', 'home-isnt-a-place'),
- ('“The home that I call home', 'eduardo', 'when-home-is-lost'),
- ('“I would say it\'s like the whole language thing', 'michel', 'language-remembers'),
- ('“I can rebirth myself', 'miri', 'starting-over'),
- ('“It\'s about acknowledging that your time is limited', 'bella', 'its-never-the-room'),
  ('“Home... is very much an emotion', 'sammy', 'home-isnt-a-place'),
  ('“Maybe that\'s the reason why I don\'t have a towel', 'eduardo', 'when-home-is-lost'),
  ('“I would never be like, oh, the mountain in Japan', 'ellie', 'more-than-one-home'),
