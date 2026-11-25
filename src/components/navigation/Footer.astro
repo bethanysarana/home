@@ -1,35 +1,26 @@
 ---
 import { liveNavigation, href } from '../../data/navigation';
-import { SITE } from '../../data/site';
 const items = liveNavigation();
 ---
-<footer class="site-footer">
+<footer class="site-footer surface-purple">
   <div class="container container--wide footer-row">
-    <p class="footer-title">{SITE.title}</p>
+    <div>
+      <p class="logo"><span>Let’s Talk About</span><span class="logo-home">“Home”</span></p>
+      <p class="tagline">Understanding place, belonging, and identity</p>
+    </div>
     <nav aria-label="Footer">
-      <ul>
-        {items.map((item) => <li><a href={href(item.path)}>{item.label}</a></li>)}
-      </ul>
+      <ul>{items.map((item) => <li><a href={href(item.path)}>{item.label}</a></li>)}</ul>
     </nav>
   </div>
 </footer>
 
 <style>
-  /* WordPress footer: site title left, vertical menu right */
-  .site-footer {
-    margin-top: var(--space-60);
-    padding-block: var(--space-60) var(--space-70);
-    border-top: 1px solid var(--colour-rule);
-  }
-  .footer-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--space-50);
-  }
-  .footer-title { font-weight: 700; letter-spacing: -0.5px; margin: 0; }
-  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-10); font-size: var(--text-medium); }
+  .site-footer { padding-block: var(--space-8) var(--space-9); }
+  .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: var(--space-7); }
+  .logo { display: flex; flex-direction: column; font-family: var(--font-hand); font-size: 2rem; line-height: 0.95; margin: 0 0 var(--space-4); }
+  .logo-home { padding-left: 0.55em; }
+  .tagline { font-family: var(--font-display); font-style: italic; font-size: var(--text-lead); margin: 0; opacity: 0.85; }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
   a { text-decoration: none; }
   a:hover { text-decoration: underline; }
 </style>

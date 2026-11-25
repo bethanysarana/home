@@ -1,0 +1,64 @@
+---
+// "Who I'm talking to" (design brief §6): the three groups, making clear
+// that only the traveller conversations (26) have been collected.
+// Group words verbatim from WordPress; the four facts from the specification.
+import { TOTAL_PARTICIPANTS } from '../../data/participants';
+const facts = ['Mobile volunteer community', 'Qualitative autobiographical narrative approach', 'Independent research project'];
+---
+<section class="who section surface-white" aria-labelledby="who-heading">
+  <div class="container container--wide">
+    <header class="section-intro">
+      <p class="eyebrow"><span class="num">03</span> The people</p>
+      <h2 id="who-heading">Who I'm talking to</h2>
+    </header>
+
+    <div class="groups">
+      <article class="group travellers surface-purple">
+        <p class="count"><span class="big">{TOTAL_PARTICIPANTS}</span> conversations</p>
+        <h3>Travellers</h3>
+        <p class="lines">Portable versions of home.<br />Temporary routines.<br />Familiarity built through movement.</p>
+        <ul class="facts">{facts.map((f) => <li>{f}</li>)}</ul>
+      </article>
+
+      <div class="future">
+        <p class="phase">Phase 2: Upcoming comparative enquiry</p>
+        <div class="future-groups">
+          <article class="group outline">
+            <h3>Locals</h3>
+            <ul class="words"><li>Rootedness</li><li>Continuity</li><li>Memory</li><li>Community</li></ul>
+          </article>
+          <article class="group outline">
+            <h3>People in between</h3>
+            <ul class="words"><li>Volunteers</li><li>Seasonal residents,</li><li>People negotiating multiple versions of belonging.</li></ul>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <p class="note">Every conversation so far has been with a <strong>traveller</strong> (not yet a local or someone in between).</p>
+  </div>
+</section>
+
+<style>
+  .eyebrow .num { color: var(--purple); margin-right: var(--space-3); }
+  .groups { display: grid; grid-template-columns: 5fr 7fr; gap: var(--grid-gap); align-items: stretch; }
+  .group { border-radius: var(--radius-medium); padding: var(--space-6); }
+  .travellers { display: flex; flex-direction: column; }
+  .count { margin: 0 0 var(--space-6); font-size: var(--text-small); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow); }
+  .big { display: block; font-family: var(--font-display); font-size: clamp(4rem, 3rem + 4vw, 7rem); line-height: 0.9; letter-spacing: -0.03em; font-weight: 400; text-transform: none; }
+  .travellers h3 { font-size: var(--text-h2); margin-bottom: var(--space-4); }
+  .lines { font-family: var(--font-display); font-style: italic; font-size: var(--text-lead); line-height: 1.4; margin: 0 0 var(--space-6); }
+  .facts { list-style: none; margin: auto 0 0; padding: var(--space-5) 0 0; border-top: 1px solid rgba(255, 255, 255, 0.25); display: grid; gap: var(--space-2); font-size: var(--text-small); }
+
+  .future { display: flex; flex-direction: column; }
+  .phase { margin: 0 0 var(--space-4); font-size: var(--text-caption); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  .future-groups { display: grid; grid-template-columns: 1fr 1fr; gap: var(--grid-gap); flex: 1; }
+  .outline { border: 1px dashed transparent; background: var(--paper); outline: 1px solid var(--rule-strong); outline-offset: -1px; }
+  .outline h3 { margin-bottom: var(--space-5); }
+  .words { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); color: var(--text-muted); font-size: var(--text-lead); line-height: 1.35; }
+
+  .note { margin: var(--space-6) 0 0; max-width: 40em; color: var(--text-muted); }
+
+  @media (max-width: 1023px) { .groups { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .future-groups { grid-template-columns: 1fr; } }
+</style>

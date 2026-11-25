@@ -30,6 +30,12 @@ export interface Participant {
   /** True where the place/feeling code is the researcher's interpretive read. */
   placeFeelingIsInterpretation?: boolean;
 
+  /** Colour and shape as printed on the person's visual fingerprint. */
+  colour?: string;
+  shape?: string;
+  /** Any further line printed on the fingerprint. */
+  artNote?: string;
+
   biography?: string;
   biographyApproved: boolean;
 
@@ -75,16 +81,50 @@ const rows: Row[] = [
   { id: 'bella', displayName: 'Bella', artwork: null, finalWord: null, finalWordCategory: null, findCreate: 'both', placeFeeling: null, publicationStatus: 'pending', pendingNote: 'Not in the WordPress gallery: artwork, final word and word category needed.' },
 ];
 
+// Colour and shape, transcribed from the text printed on each fingerprint
+// image (spelling as printed). Not available for Michel or Bella.
+const ART: Record<string, Pick<Participant, 'colour' | 'shape' | 'artNote'>> = {
+  guilia: { colour: 'Orange', shape: 'Paint splat', artNote: 'Volunteer, Portugal' },
+  karolina: { colour: 'Bamboo brown', shape: 'Bamboo hut' },
+  sian: { colour: 'Blue', shape: 'Tiny island', artNote: 'Everyone packed onto it with music playing' },
+  erika: { colour: 'Yellow', shape: 'Cat' },
+  pau: { colour: 'Blue', shape: 'Bubble' },
+  shila: { colour: 'Mustard yellow', shape: 'Hobbit house' },
+  anna: { colour: 'Green', shape: 'A matt pink S shaped path like a stretched out comma on its side' },
+  soph: { colour: 'Rainbow', shape: 'Bubble' },
+  lilia: { colour: 'Green', shape: 'Coloured water flowing because it’s not one thing' },
+  smila: { colour: 'Orange', shape: 'A big bright warm shiny heart that you want to hug' },
+  arturo: { colour: 'Blue', shape: 'A big place with a green garden close to the ocean' },
+  theo: { colour: 'Red and green', shape: 'A fancy modern green house made from cement with a balcony and nice windows' },
+  stuart: { colour: 'Blueish green', shape: 'A blooming hibiscus flower, a peachy colour' },
+  paulina: { colour: 'Warm orangey red', shape: 'A warm cosy 3D sphere with lots of pillows inside like the womb, dark orange red in colour. The sun could shine through the surface a bit like what I imagine babies see when they are inside the womb.' },
+  noa: { colour: 'Deep burgandy', shape: 'Something circular to symbolise a neverending cycle that is whole, together, no edges, a continuous space that you share.' },
+  emma: { colour: 'Yellow', shape: 'An ocean during the daytime' },
+  eduardo: { colour: 'Blue', shape: 'Tropical beach' },
+  miri: { colour: 'Yellow', shape: 'Glowing radiant bubble', artNote: 'A safe, warm place protecting you from the outside' },
+  ellie: { colour: 'Green', shape: 'A little house like one that a child draws. A little outline with a triangle roof, chimey, two window frames and a little door' },
+  cloe: { colour: 'Yellow', shape: 'A bubble', artNote: 'a loving warm bubble world inside the world' },
+  nora: { colour: 'Yellow/orange', shape: 'A line going in the shape of a circle touching itself. Inside is where the safe space and magic can happen and the line is the boundary.' },
+  laura: { colour: 'Purple', shape: 'A terrarium' },
+  keiron: { colour: 'Green', shape: 'A puzzle piece' },
+  sammy: { colour: 'Blue', shape: 'A rubber ring' },
+};
+
 export const PARTICIPANTS: Participant[] = rows.map((r) => ({
   biographyApproved: false,
   storySlugs: [],
   publicationStatus: 'approved',
+  ...ART[r.id],
   ...r,
 }));
 
-/** Participants shown in the Visual Archive: approved, with artwork and a final word. */
+/** Participants with artwork and a final word (used where only finished cards make sense). */
 export const publishedParticipants = () =>
   PARTICIPANTS.filter((p) => p.publicationStatus === 'approved' && p.artwork && p.finalWord);
+
+/** Every participant shown in the Visual Archive. Records still awaiting
+ *  artwork appear with a visible "to come" placeholder (design brief §12). */
+export const archiveParticipants = () => PARTICIPANTS.filter((p) => p.publicationStatus !== 'excluded');
 
 /** Total participants in the research (Report 4). */
 export const TOTAL_PARTICIPANTS = 26;

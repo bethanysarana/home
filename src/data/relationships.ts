@@ -80,6 +80,20 @@ export const RELATED_STORIES: Record<string, string[]> = {
   'no-single-answer': ['when-home-is-lost'],
 };
 
+// The fingerprint used as each story's image on the homepage. It must belong
+// to someone linked to that story above (checked by validateRelationships).
+// Story 6 has no image: it is reported at pattern level only.
+export const STORY_IMAGE: Record<string, string | null> = {
+  'home-isnt-a-place': 'sammy',
+  'its-never-the-room': 'smila',
+  'no-single-answer': 'pau',
+  'when-home-is-lost': 'eduardo',
+  'more-than-one-home': 'cloe',
+  'hard-talks-often': null,
+  'language-remembers': 'karolina',
+  'starting-over': 'theo',
+};
+
 // Story ↔ idea (What Emerges) and fieldnote ↔ story are added in Phases 5 and 7.
 export const STORY_IDEAS: Record<string, string[]> = {};
 export const FIELDNOTE_STORIES: Record<string, string[]> = {};
@@ -101,5 +115,7 @@ export function validateRelationships(storySlugs: string[]) {
   for (const [slug, rel] of Object.entries(RELATED_STORIES))
     for (const r of [slug, ...rel]) if (!storySlugs.includes(r)) problems.push(`Unknown story "${r}" in RELATED_STORIES`);
   for (const slug of storySlugs) if (!(slug in STORY_PARTICIPANTS)) problems.push(`Story "${slug}" has no entry in STORY_PARTICIPANTS`);
+  for (const [slug, pid] of Object.entries(STORY_IMAGE))
+    if (pid && !STORY_PARTICIPANTS[slug]?.some((l) => l.participant === pid)) problems.push(`STORY_IMAGE for "${slug}" uses "${pid}", who is not linked to that story`);
   if (problems.length) throw new Error('Relationship errors:\n' + problems.join('\n'));
 }

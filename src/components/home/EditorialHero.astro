@@ -1,0 +1,74 @@
+---
+// Editorial hero (design brief §6): an asymmetric text/image composition.
+// Text is Bethany's, from the WordPress cover and introduction.
+import { SITE } from '../../data/site';
+import { href } from '../../data/navigation';
+---
+<section class="hero container container--wide" aria-labelledby="hero-title">
+  <div class="hero-text">
+    <p class="eyebrow">Understanding place, belonging, and identity</p>
+    <h1 id="hero-title">Let’s Talk About <span class="nowrap">“Home”</span></h1>
+    <p class="standfirst">How do we narrate our own lives?</p>
+    <hr class="rule" />
+    <p class="intro">Follow as I experiment with applying analytical rigor to the architecture of everyday life, exploring how we build identity and belonging when we leave traditional, fixed structures behind.</p>
+    <p class="actions">
+      <a class="button" href={href('stories/')}>The Stories</a>
+      <a class="arrow-link" href={href('visual-archive/')}>Visual Archive <span aria-hidden="true">→</span></a>
+    </p>
+  </div>
+  {SITE.heroImage && (
+    <figure class="hero-image img-frame">
+      <img src={href(SITE.heroImage)} alt="A thatched wooden shelter looking out over bamboo huts and A-frame cabins, with a pot of tea on the table" width="1600" height="900" fetchpriority="high" />
+    </figure>
+  )}
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--grid-gap);
+    align-items: end;
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+  .hero-text {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+    position: relative;
+    z-index: 2;
+    padding-bottom: var(--space-5);
+  }
+  .hero-image {
+    grid-column: 7 / -1;
+    grid-row: 1;
+    align-self: stretch;
+    min-height: clamp(420px, 62vh, 680px);
+  }
+  .hero-image img { border-radius: var(--radius-medium); object-position: 50% 45%; }
+  .nowrap { white-space: nowrap; }
+  h1 { margin-bottom: var(--space-5); }
+  @media (min-width: 1024px) {
+    h1 { font-size: clamp(4rem, 2rem + 4.2vw, 6.25rem); }
+  }
+  .standfirst {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    margin: 0;
+  }
+  .rule { width: 56px; border: 0; border-top: 2px solid var(--ink); margin: var(--space-6) 0; }
+  .intro { font-size: var(--text-lead); line-height: 1.5; max-width: 30em; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5); margin: var(--space-6) 0 0; }
+
+  @media (max-width: 1023px) {
+    .hero-text { grid-column: 1 / span 6; }
+    .hero-image { grid-column: 7 / -1; }
+  }
+  @media (max-width: 767px) {
+    .hero { display: flex; flex-direction: column-reverse; gap: var(--space-6); padding-top: var(--space-5); }
+    .hero-image { min-height: 0; aspect-ratio: 4 / 3; }
+    .hero-text { padding-bottom: 0; }
+  }
+</style>

@@ -1,9 +1,63 @@
 ---
-// Gallery introduction and its two tabs, verbatim from WordPress.
-import GalleryInterpretationGuide from './GalleryInterpretationGuide.astro';
+// Archive opening (design brief §7): a deep purple field with the title,
+// Bethany's introduction and the number of conversations, followed by the
+// WordPress "Gallery purpose" and "Interpretation guide" text, now side by side.
+import { TOTAL_PARTICIPANTS } from '../../data/participants';
 ---
-<section class="container" aria-labelledby="gallery-title">
-  <h1 id="gallery-title" class="section-heading">The <strong>Travellers</strong> gallery: everyone's word, colour, and shape</h1>
-  <p class="pane-text">At the end of each interview, once we were fully immersed in the conversation, I captured participants’ intuitive sense of home as a word, colour, and shape. To me, these are visual fingerprints of belonging.</p>
-  <GalleryInterpretationGuide />
+<section class="archive-hero surface-purple" aria-labelledby="gallery-title">
+  <div class="container container--wide grid-12">
+    <div class="title">
+      <p class="eyebrow">Visual Archive</p>
+      <h1 id="gallery-title">The <em>Travellers</em> gallery: everyone's word, colour, and shape</h1>
+    </div>
+    <div class="side">
+      <p class="stat"><span class="big">{TOTAL_PARTICIPANTS}</span> conversations</p>
+      <p class="lead">At the end of each interview, once we were fully immersed in the conversation, I captured participants’ intuitive sense of home as a word, colour, and shape. To me, these are visual fingerprints of belonging.</p>
+    </div>
+  </div>
 </section>
+
+<section class="guide container container--wide grid-12" aria-label="About this archive">
+  <div class="col purpose">
+    <h2 class="col-heading">Gallery purpose</h2>
+    <p>The following gallery serves as a living record of every individual who took part in an interview with me. By turning each person’s story into a unique visual card, I can:</p>
+    <ol>
+      <li>Organise individual experiences into larger, shared themes.</li>
+      <li>Keep the project open and connected, allowing participants to see their own experiences reflected in the emerging collective story. As the project grows, those who shared their stories remain at the heart of the work.</li>
+    </ol>
+  </div>
+  <div class="col interpretation">
+    <h2 class="col-heading">Interpretation guide</h2>
+    <p>Person-cards are currently organised by two layers:</p>
+    <ol>
+      <li>The single word each person landed on at the end of our conversation (after being deliberately guided there)</li>
+      <li>How people talked about home earlier in the conversation, in their own unprompted words.</li>
+    </ol>
+    <p>These sometimes differ. This is what I like to think of as the gap between a considered final answer and in-the-moment thinking.</p>
+    <p class="dashed-note">Note: A dashed border means a tag is my own interpretive read rather than something said outright.</p>
+  </div>
+</section>
+
+<style>
+  .archive-hero { padding-block: var(--space-9) var(--space-8); }
+  .title { grid-column: 1 / span 7; }
+  .title h1 { color: var(--white); margin: 0; font-size: clamp(2.5rem, 1.6rem + 3.6vw, 5rem); }
+  .title h1 em { color: var(--yellow); }
+  .side { grid-column: 9 / -1; align-self: end; }
+  .stat { margin: 0 0 var(--space-5); font-size: var(--text-small); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); }
+  .big { display: block; font-family: var(--font-display); font-size: clamp(4rem, 3rem + 3vw, 6rem); line-height: 0.9; letter-spacing: -0.03em; font-weight: 400; text-transform: none; color: var(--white); }
+  .side .lead { color: rgba(255, 255, 255, 0.85); margin: 0; font-size: var(--text-body); }
+
+  .guide { padding-block: var(--space-8); row-gap: var(--space-7); }
+  .purpose { grid-column: 1 / span 5; }
+  .interpretation { grid-column: 7 / -1; }
+  .col-heading { font-size: var(--text-h3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--rule-strong); margin-bottom: var(--space-4); }
+  .col p, .col li { color: var(--text-muted); }
+  .col ol { padding-left: 1.2em; margin: 0 0 var(--block-gap); display: grid; gap: var(--space-2); }
+  .dashed-note { border: 1.5px dashed var(--purple); border-radius: var(--radius-medium); padding: var(--space-3) var(--space-4); color: var(--ink) !important; }
+
+  @media (max-width: 1023px) {
+    .title { grid-column: 1 / -1; }
+    .side { grid-column: 1 / -1; margin-top: var(--space-6); max-width: 36em; }
+  }
+</style>

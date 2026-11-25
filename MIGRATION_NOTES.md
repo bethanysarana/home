@@ -1,7 +1,7 @@
 # Migration notes
 
 Record of how the WordPress page "Lets talk about 'Home'" (post 90) is being rebuilt to `docs/SPEC.md`.
-Last updated: 25 November 2026, after Phase 4.
+Last updated: 26 November 2026, after the visual redesign of the homepage and Visual Archive.
 
 ## Progress
 
@@ -141,3 +141,31 @@ Wording I added that isn't from WordPress, the spec or the reports:
 **Participant links** (`src/data/relationships.ts`): a person is linked to a story only where Report 4's section names them. "Complicates" marks Report 4's stated exceptions (Eduardo in 3.1, Theo in 3.3, Bella in 3.5); "Extends" marks Arturo in 3.5 ("a related but distinct pattern"). Bella and Michel are linked in the data but have no card until their artwork arrives. Story-to-story links only where Report 4 connects the sections (3.1↔3.4, 3.3↔3.4). The build fails if a link points at a missing person or story.
 
 **Homepage:** featured stories = the first three findings; change `FEATURED` in `src/components/home/FeaturedStories.astro`.
+
+## Visual redesign: homepage and Visual Archive (26 November 2026)
+
+Source: `docs/DESIGN_BRIEF.md` and `design/references/home-design-directions.png`. Editorial direction for the homepage, archive direction for the Visual Archive. Field-journal touches only in small details (handwritten names, the route motif, the tilted fingerprint prints).
+
+**Design system:** `src/styles/tokens.css`, viewable at `/style-guide/` (not in the menu, not indexed).
+- Palette from the WordPress theme presets: ink #111111, white, off-white #FBFAF3, yellow #FFEE58, pale pink #F6CFF4, purple #503AA8, grey #686868. One derived shade, deep purple #2B1F63, for large dark fields.
+- Terracotta and cream (from the earlier custom components) are retired, as the brief lists the theme palette only. Their old variable names now point at purple and off-white so the remaining pages still work.
+- Type: Newsreader (display serif) + Manrope (body). Caveat for the logo and handwritten names only.
+- Corners reduced to 2–4px; no gradient overlays on photographs.
+
+**Homepage:** editorial hero (title, "How do we narrate our own lives?", introduction, photo); Karolina's quote on pink; all eight stories in a varied grid; Belonging / The Shift / Method as a numbered sequence beside the Wonderland photo (all three visible, no tabs); Who I'm talking to with Travellers (26) and the two Phase 2 groups; a Visual Archive band; Where will this go?
+- The opening quote is verified: Report 4 §3.1, "Home is a feeling that you carry with you." — Karolina.
+- The background paragraph ("As a Doctor of Applied Health Research…") is no longer on the homepage; it belongs on About.
+- Story images are the fingerprints of people Report 4 names in each story (`STORY_IMAGE` in `src/data/relationships.ts`, checked at build). Story 6 has no image.
+
+**Visual Archive:** purple opening with the title and 26; Gallery purpose and Interpretation guide side by side (no longer tabs); the same filters and logic; cards show name, fingerprint, final word, colour, shape and word category; backs add the full colour/shape, any extra line printed on the artwork, the three codes and story links.
+- Names now appear on cards (brief §7).
+- Colour and shape are transcribed from the text printed on each fingerprint, spelling as printed (including "chimey" and "burgandy").
+- Michel and Bella now appear with an obvious "Artwork to come" placeholder (brief §12) instead of being hidden, so the archive shows all 26.
+
+**Still missing for the archive:** card-back introductions (50–90 words each), Michel's artwork, and Bella's artwork, final word and codes.
+
+**Wording added in the redesign (for approval):**
+- Header button "Explore the project" (from the brief); section eyebrows "01 The Stories", "02 The project", "03 The people", "04 Visual Archive"; "Read the story →"
+- "Explore the stories" (from the brief)
+- Hero photo alt text: "A thatched wooden shelter looking out over bamboo huts and A-frame cabins, with a pot of tea on the table"
+- Cards: "Artwork to come", "Final word to come", back button "Back to [name]'s fingerprint", screen-reader text "show more about [name]'s answer"

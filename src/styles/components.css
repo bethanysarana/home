@@ -1,100 +1,154 @@
-/* Shared component styles. Individual components carry their own
-   scoped styles; this file holds patterns reused across many of them. */
+/* Shared component patterns for the editorial redesign. */
 
-/* Containers: reading (645px) and exploration (1340px) widths */
+/* ---------- Containers and grid ---------- */
 .container {
   width: 100%;
   max-width: calc(var(--content-width) + 2 * var(--page-padding));
   margin-inline: auto;
   padding-inline: var(--page-padding);
 }
-.container--wide {
-  max-width: calc(var(--wide-width) + 2 * var(--page-padding));
+.container--wide { max-width: calc(var(--wide-width) + 2 * var(--page-padding)); }
+
+/* 12-column editorial grid used for asymmetric compositions */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+}
+@media (max-width: 767px) {
+  .grid-12 { grid-template-columns: minmax(0, 1fr); }
+  .grid-12 > * { grid-column: 1 / -1 !important; }
 }
 
-.section { padding-block: var(--space-60); }
-.section--tight { padding-block: var(--space-40); }
+.section { padding-block: var(--space-9); }
+.section--tight { padding-block: var(--space-8); }
+.section-heading { margin-bottom: var(--space-5); }
 
-/* Section heading (WordPress h2 with padding-20 top and bottom) */
-.section-heading {
-  padding-block: var(--space-20);
-  margin-bottom: var(--block-gap);
+/* Section introduction: number, eyebrow, heading */
+.section-intro { margin-bottom: var(--space-7); }
+.section-intro .eyebrow { display: flex; gap: var(--space-3); align-items: baseline; }
+.section-intro .eyebrow .num { color: var(--accent); font-variant-numeric: tabular-nums; }
+
+/* ---------- Surfaces ---------- */
+.surface-white { background: var(--white); }
+.surface-paper { background: var(--paper); }
+.surface-pink { background: var(--pink); }
+.surface-yellow { background: var(--yellow); }
+.surface-purple { background: var(--purple-deep); color: var(--white); }
+.surface-purple .eyebrow, .surface-purple .caption { color: rgba(255, 255, 255, 0.72); }
+.surface-purple a { color: var(--white); }
+.surface-purple a:hover { color: var(--yellow); text-decoration-color: var(--yellow); }
+
+/* ---------- Images ---------- */
+.img-frame { margin: 0; }
+.img-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-medium); }
+.img-frame figcaption { margin-top: var(--space-2); }
+
+/* ---------- Buttons and links ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.7em 1.3em;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.2;
+  transition: background-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
 }
+.button:hover { background: var(--purple); border-color: var(--purple); color: var(--white); }
+.button--outline { background: transparent; color: var(--ink); }
+.button--outline:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.surface-purple .button { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+.surface-purple .button:hover { background: var(--white); border-color: var(--white); color: var(--ink); }
 
-/* Terracotta pill (WordPress .focus-pills label, .pill-btn, .lens-btn) */
+.arrow-link {
+  display: inline-flex;
+  gap: 0.45em;
+  align-items: center;
+  font-weight: 600;
+  font-size: var(--text-small);
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+.arrow-link:hover { color: var(--accent); }
+
+/* ---------- Pills (filters and tabs) ---------- */
 .pill {
   display: inline-flex;
   align-items: center;
-  border: 1px solid var(--colour-terracotta);
-  background: var(--colour-cream);
-  color: var(--colour-terracotta);
+  border: 1px solid var(--rule-strong);
+  background: var(--white);
+  color: var(--ink);
   border-radius: var(--radius-pill);
-  padding: 6px 16px;
-  font-size: 0.88rem;
-  font-weight: 600;
+  padding: 0.45em 1.05em;
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: 500;
   line-height: 1.3;
   cursor: pointer;
-  transition: background-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+  transition: background-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
 }
+.pill:hover { border-color: var(--ink); }
 .pill[aria-selected='true'],
-.pill[aria-pressed='true'] {
-  background: var(--colour-terracotta);
-  color: var(--colour-white);
-}
-.pill:hover { border-color: var(--colour-terracotta-dark); }
+.pill[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: var(--white); }
 
-.pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 8px;
+.pill-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+/* Category chip (non-interactive label) */
+.chip {
+  display: inline-block;
+  padding: 0.2em 0.7em;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: var(--purple-tint);
+  color: var(--purple);
 }
 
-/* Cream text panel with terracotta left rule (WordPress .focus-card-display) */
+/* ---------- Pull quote ---------- */
+.pull-quote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-quote);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.pull-quote cite {
+  display: block;
+  margin-top: var(--space-5);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-small);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Legacy patterns (pre-redesign pages) ---------- */
 .cream-panel {
-  background: var(--colour-cream);
-  border-left: 4px solid var(--colour-terracotta);
+  background: var(--white);
+  border-left: 3px solid var(--accent);
   padding: 20px;
-  border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
 }
-
-/* Cream box with sand border (WordPress .emerge-content-box-2) */
 .cream-box {
-  background: var(--colour-cream);
-  border: 1px solid var(--colour-sand);
-  border-radius: 6px;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-medium);
   padding: 24px;
 }
-
-/* Fluid large paragraph used inside custom WordPress components */
-.pane-text {
-  font-size: var(--text-large);
-  line-height: 1.55;
-  color: var(--colour-charcoal);
-  margin: 0 0 1em;
-}
+.pane-text { font-size: var(--text-body); line-height: 1.6; margin: 0 0 1em; }
 .pane-text:last-child { margin-bottom: 0; }
-
 .pane-list { margin: 0 0 1em; padding-left: 20px; }
 .pane-list li { margin-bottom: 0.5em; }
-
-/* Terracotta-bordered card (WordPress #traveller-demo, Phase 2 columns) */
-.outline-card {
-  position: relative;
-  border: 2px solid var(--colour-terracotta);
-  border-radius: 16px;
-  padding: 24px;
-  background: var(--colour-white);
-}
-
-/* Text link with arrow */
-.arrow-link {
-  display: inline-flex;
-  gap: 0.4em;
-  align-items: center;
-  font-weight: 500;
-  color: var(--colour-terracotta);
-}
+.outline-card { position: relative; border: 1px solid var(--rule-strong); border-radius: var(--radius-medium); padding: 24px; background: var(--white); }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(3px); }

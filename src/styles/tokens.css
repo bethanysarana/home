@@ -1,61 +1,114 @@
-/* Design tokens. Values come from the WordPress site (Twenty Twenty-Five theme
-   settings plus the custom component CSS in the Home post). */
+/* Design tokens — editorial redesign (design brief, Nov 2026).
+   Palette: the WordPress theme presets (Twenty Twenty-Five, as customised).
+   Terracotta and cream from the earlier custom components are retired as
+   brand colours; legacy variable names below alias the new accent so older
+   components keep working until they are redesigned. */
 
 :root {
-  /* Colours (specification §3) */
-  --colour-white: #FFFFFF;
+  /* Palette (WordPress presets) */
+  --ink: #111111;            /* WordPress "contrast" */
+  --white: #FFFFFF;          /* WordPress "base" */
+  --paper: #FBFAF3;          /* WordPress accent-5, off-white */
+  --yellow: #FFEE58;         /* accent-1 */
+  --pink: #F6CFF4;           /* accent-2 */
+  --purple: #503AA8;         /* accent-3 */
+  --grey: #686868;           /* accent-4 */
+
+  /* Shades derived from the palette (not new hues) */
+  --purple-deep: #2B1F63;    /* purple, darkened, for large dark fields */
+  --purple-tint: #ECE8F8;    /* purple at ~12% on white */
+  --pink-tint: #FCEEFB;
+  --yellow-tint: #FFF9C9;
+  --rule: rgba(17, 17, 17, 0.14);
+  --rule-strong: rgba(17, 17, 17, 0.32);
+
+  /* Semantic roles */
+  --text: var(--ink);
+  --text-muted: var(--grey);
+  --surface: var(--paper);
+  --surface-raised: var(--white);
+  --accent: var(--purple);
+  --accent-contrast: var(--white);
+  --focus: var(--purple);
+
+  /* Legacy names → new palette (pre-redesign components) */
+  --colour-white: var(--white);
   --colour-charcoal: #2D2D2D;
-  --colour-dark: #1A120C;
-  --colour-ink: #111111; /* WordPress body text ("contrast") */
+  --colour-dark: var(--ink);
+  --colour-ink: var(--ink);
+  --colour-terracotta: var(--purple);
+  --colour-terracotta-dark: var(--purple-deep);
+  --colour-cream: var(--paper);
+  --colour-sand: var(--rule-strong);
+  --colour-warm-white: var(--paper);
+  --colour-yellow: var(--yellow);
+  --colour-pink: var(--pink);
+  --colour-purple: var(--purple);
+  --colour-grey: var(--grey);
+  --colour-muted: var(--grey);
+  --colour-rule: var(--rule);
 
-  --colour-terracotta: #8B402B;
-  --colour-terracotta-dark: #733321;
+  /* Type families */
+  --font-sans: 'Manrope Variable', Manrope, system-ui, -apple-system, sans-serif;
+  --font-display: 'Newsreader Variable', Newsreader, Georgia, 'Times New Roman', serif;
+  --font-serif: var(--font-display);
+  --font-hand: 'Caveat', 'Bradley Hand', cursive; /* logo and field-journal notes only */
 
-  --colour-cream: #FAF8F5;
-  --colour-sand: #E6D2B5;
-  --colour-warm-white: #FBFAF3;
+  /* Type scale */
+  --text-caption: 0.8125rem;                          /* 13px */
+  --text-small: 0.875rem;                             /* 14px */
+  --text-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem); /* 17–19px */
+  --text-lead: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+  --text-h3: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --text-h2: clamp(1.875rem, 1.5rem + 1.6vw, 3rem);
+  --text-h1: clamp(2.75rem, 1.9rem + 4vw, 5.75rem);
+  --text-quote: clamp(1.75rem, 1.3rem + 2.4vw, 3.5rem);
 
-  --colour-yellow: #FFEE58;
-  --colour-pink: #F6CFF4;
-  --colour-purple: #503AA8;
-  --colour-grey: #686868;
-  --colour-muted: #8A8A8A;
-  --colour-rule: color-mix(in srgb, currentColor 20%, transparent);
+  /* Legacy type names */
+  --text-medium: var(--text-body);
+  --text-large: var(--text-lead);
+  --text-x-large: var(--text-h2);
+  --text-xx-large: var(--text-h1);
+  --text-subtitle: var(--text-h3);
 
   /* Layout */
-  --content-width: 645px;
-  --wide-width: 1340px;
-  --page-padding: clamp(20px, 4vw, 50px);
+  --content-width: 640px;     /* reading column */
+  --wide-width: 1320px;
+  --page-padding: clamp(20px, 5vw, 64px);
+  --grid-gap: clamp(16px, 2.2vw, 32px);
 
-  --radius-small: 4px;
-  --radius-medium: 8px;
-  --radius-large: 12px;
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: clamp(48px, 7vw, 80px);
+  --space-9: clamp(64px, 10vw, 128px);
+  --space-10: clamp(80px, 13vw, 176px);
+
+  /* Legacy spacing names */
+  --space-20: var(--space-2);
+  --space-30: var(--space-4);
+  --space-40: var(--space-6);
+  --space-50: var(--space-7);
+  --space-60: var(--space-8);
+  --space-70: var(--space-9);
+  --space-80: var(--space-10);
+  --block-gap: 1.1em;
+
+  /* Shape: restrained corners */
+  --radius-small: 2px;
+  --radius-medium: 3px;
+  --radius-large: 4px;
   --radius-pill: 999px;
 
-  /* Spacing (WordPress presets) */
-  --space-10: 10px;
-  --space-20: 10px;
-  --space-30: 20px;
-  --space-40: 30px;
-  --space-50: clamp(30px, 5vw, 50px);
-  --space-60: clamp(30px, 7vw, 70px);
-  --space-70: clamp(50px, 7vw, 90px);
-  --space-80: clamp(70px, 10vw, 140px);
-  --block-gap: 1.2rem;
-
-  /* Typography (WordPress presets) */
-  --font-sans: 'Manrope Variable', Manrope, system-ui, -apple-system, sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
-
-  --text-small: 0.875rem;
-  --text-medium: clamp(1rem, 1rem + ((1vw - 0.2rem) * 0.196), 1.125rem);
-  --text-large: clamp(1.125rem, 1.125rem + ((1vw - 0.2rem) * 0.392), 1.375rem);
-  --text-x-large: clamp(1.75rem, 1.75rem + ((1vw - 0.2rem) * 0.392), 2rem);
-  --text-xx-large: clamp(2.15rem, 2.15rem + ((1vw - 0.2rem) * 1.333), 3rem);
-  --text-subtitle: clamp(1.5rem, 1.5rem + ((1vw - 0.2rem) * 0.392), 1.75rem);
+  --shadow-card: 0 1px 2px rgba(17, 17, 17, 0.06), 0 8px 24px -12px rgba(17, 17, 17, 0.18);
 
   /* Motion */
-  --ease: ease;
-  --duration-fast: 0.2s;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-fast: 0.18s;
   --duration: 0.3s;
 }

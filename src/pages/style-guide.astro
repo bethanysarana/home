@@ -1,0 +1,61 @@
+---
+// Development route (design brief §16, phase 2): the visual system on one page.
+// Not linked from the navigation and excluded from search engines.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ParticipantCard from '../components/gallery/ParticipantCard.astro';
+import { PARTICIPANTS } from '../data/participants';
+const swatches = [
+  ['Ink', '--ink', '#111111'], ['White', '--white', '#FFFFFF'], ['Off-white', '--paper', '#FBFAF3'],
+  ['Yellow', '--yellow', '#FFEE58'], ['Pale pink', '--pink', '#F6CFF4'], ['Purple', '--purple', '#503AA8'],
+  ['Grey', '--grey', '#686868'], ['Purple, deep (shade)', '--purple-deep', '#2B1F63'],
+];
+const cards = ['karolina', 'eduardo', 'michel'].map((id) => PARTICIPANTS.find((p) => p.id === id)!);
+---
+<BaseLayout title="Style guide" noindex>
+  <div class="container container--wide sg">
+    <p class="eyebrow">Development</p>
+    <h1>Style guide</h1>
+
+    <h2>Palette</h2>
+    <ul class="swatches">
+      {swatches.map(([name, v, hex]) => (
+        <li><span class="sw" style={`background: var(${v})`}></span><strong>{name}</strong><span class="caption">{v} · {hex}</span></li>
+      ))}
+    </ul>
+
+    <h2>Type</h2>
+    <p class="eyebrow">Eyebrow · Manrope 600, tracked capitals</p>
+    <h1>Display · Newsreader</h1>
+    <h2>Section heading · Newsreader</h2>
+    <h3>Sub-heading · Newsreader</h3>
+    <p class="lead">Lead · Manrope, for introductions and standfirsts.</p>
+    <p>Body · Manrope 17–19px with generous line height, set in a narrow reading column so long passages stay comfortable.</p>
+    <p class="caption">Caption · Manrope 13px, grey</p>
+    <p class="hand" style="font-size:1.8rem">Handwritten · Caveat, for the logo and field-journal notes only</p>
+    <blockquote class="pull-quote"><p>“Home is a feeling that you carry with you.”</p><cite>Karolina</cite></blockquote>
+
+    <h2>Controls</h2>
+    <p class="row"><a class="button" href="#">Button</a> <a class="button button--outline" href="#">Outline button</a> <a class="arrow-link" href="#">Arrow link <span aria-hidden="true">→</span></a></p>
+    <div class="pill-row"><button class="pill" aria-pressed="true">Selected</button><button class="pill" aria-pressed="false">Pill</button><span class="chip">Chip</span></div>
+
+    <h2>Surfaces</h2>
+    <div class="surfaces">
+      <div class="surface-paper">Off-white</div><div class="surface-white">White</div><div class="surface-pink">Pink</div><div class="surface-yellow">Yellow</div><div class="surface-purple">Deep purple</div>
+    </div>
+
+    <h2>Participant cards</h2>
+    <ul class="cards">{cards.map((p) => <ParticipantCard participant={p} />)}</ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .sg { padding-block: var(--space-8); }
+  .sg > h2 { margin-top: var(--space-8); padding-top: var(--space-5); border-top: 1px solid var(--rule-strong); }
+  .swatches { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-5); }
+  .swatches li { display: grid; gap: 4px; }
+  .sw { height: 80px; border-radius: var(--radius-medium); border: 1px solid var(--rule); }
+  .row { display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: center; }
+  .surfaces { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-4); }
+  .surfaces > div { padding: var(--space-6) var(--space-4); border-radius: var(--radius-medium); border: 1px solid var(--rule); }
+  .cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--grid-gap); }
+</style>

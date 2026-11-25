@@ -1,0 +1,30 @@
+---
+// Closing section: "Where will this go?", verbatim from WordPress, with a
+// small hand-drawn route motif (field-journal accent, used sparingly).
+import { liveNavigation, href } from '../../data/navigation';
+const links = liveNavigation().filter((i) => i.path !== '');
+---
+<section class="closing section" aria-labelledby="where-heading">
+  <div class="container container--wide grid-12">
+    <div class="text">
+      <h2 id="where-heading">Where will this go?</h2>
+      <p class="lead">Envisaged outputs include: data driven art and creative storytelling</p>
+      <ul class="links">
+        {links.map((l) => <li><a class="arrow-link" href={href(l.path)}>{l.label} <span aria-hidden="true">→</span></a></li>)}
+      </ul>
+    </div>
+    <svg class="route" viewBox="0 0 420 220" aria-hidden="true">
+      <path d="M10 190 C 80 180, 90 110, 160 120 S 250 190, 300 120 S 360 30, 405 40" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round" />
+      <circle cx="10" cy="190" r="5" fill="currentColor" />
+      <path d="M396 22 l9 18 l9 -18 a10 10 0 1 0 -18 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" transform="translate(-9 -6)" />
+    </svg>
+  </div>
+</section>
+
+<style>
+  .text { grid-column: 1 / span 6; }
+  .text .lead { font-family: var(--font-display); font-style: italic; font-size: var(--text-h3); line-height: 1.3; }
+  .links { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-5); }
+  .route { grid-column: 8 / -1; align-self: center; width: 100%; color: var(--purple); opacity: 0.8; }
+  @media (max-width: 767px) { .route { max-width: 280px; margin-top: var(--space-7); } }
+</style>

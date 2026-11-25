@@ -1,23 +1,21 @@
 ---
-// Homepage (specification §4). The Fieldnotes introduction is added in Phase 7.
+// Editorial homepage (design brief §6). The Fieldnotes introduction is added
+// when Fieldnotes is built.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/home/Hero.astro';
+import EditorialHero from '../components/home/EditorialHero.astro';
+import QuoteFeature from '../components/home/QuoteFeature.astro';
+import StoriesGrid from '../components/home/StoriesGrid.astro';
 import ProjectIntroduction from '../components/home/ProjectIntroduction.astro';
-import ProjectSnapshot from '../components/home/ProjectSnapshot.astro';
-import FeaturedStories from '../components/home/FeaturedStories.astro';
-import FeaturedArchive from '../components/home/FeaturedArchive.astro';
+import WhoImTalkingTo from '../components/home/WhoImTalkingTo.astro';
+import ArchiveFeature from '../components/home/ArchiveFeature.astro';
+import ClosingSection from '../components/home/ClosingSection.astro';
 ---
 <BaseLayout>
-  <Hero />
-  <div class="container">
-    <p class="lede text-large">Follow as I experiment with applying analytical rigor to the architecture of everyday life, exploring how we build identity and belonging when we leave traditional, fixed structures behind.</p>
-  </div>
+  <EditorialHero />
+  <QuoteFeature />
+  <StoriesGrid />
   <ProjectIntroduction />
-  <ProjectSnapshot />
-  <FeaturedStories />
-  <FeaturedArchive />
+  <WhoImTalkingTo />
+  <ArchiveFeature />
+  <ClosingSection />
 </BaseLayout>
-
-<style>
-  .lede { padding-top: var(--space-50); margin: 0; }
-</style>

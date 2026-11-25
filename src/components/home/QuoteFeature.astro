@@ -1,0 +1,49 @@
+---
+// Opening quotation (design brief §6). Verified: Report 4 §3.1,
+// "Home is a feeling that you carry with you." — Karolina.
+import { PARTICIPANTS } from '../../data/participants';
+import { href, isReady } from '../../data/navigation';
+const karolina = PARTICIPANTS.find((p) => p.id === 'karolina')!;
+---
+<section class="quote-band surface-pink" aria-label="A participant's words">
+  <div class="container container--wide inner">
+    <figure class="quote">
+      <blockquote class="pull-quote"><p>“Home is a feeling that you carry with you.”</p></blockquote>
+      <figcaption>
+        <span class="who">Karolina</span>
+        {isReady('stories/') && <a class="arrow-link" href={href('stories/home-isnt-a-place/')}>Home isn't a place <span aria-hidden="true">→</span></a>}
+      </figcaption>
+    </figure>
+    {karolina.artwork && (
+      <figure class="fingerprint img-frame">
+        <img src={href(karolina.artwork)} alt={`Karolina's visual fingerprint: “${karolina.finalWord}”`} width="900" height="900" loading="lazy" />
+      </figure>
+    )}
+  </div>
+</section>
+
+<style>
+  .quote-band { padding-block: var(--space-9); }
+  .inner {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--grid-gap);
+    align-items: center;
+  }
+  .quote { grid-column: 2 / span 7; margin: 0; }
+  .quote p { margin: 0; }
+  .quote blockquote { margin: 0; }
+  figcaption { display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: baseline; margin-top: var(--space-6); }
+  .who { font-weight: 600; font-size: var(--text-small); letter-spacing: 0.06em; text-transform: uppercase; }
+  .fingerprint {
+    grid-column: 10 / span 3;
+    transform: rotate(2deg);
+    box-shadow: var(--shadow-card);
+    background: var(--white);
+    padding: 10px 10px 28px;
+  }
+  @media (max-width: 767px) {
+    .inner { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-7); }
+    .fingerprint { width: 55%; align-self: flex-end; }
+  }
+</style>

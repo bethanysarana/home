@@ -1,44 +1,48 @@
 ---
-// "What this project is": image beside three pill tabs (WordPress .focus-container).
-import PillTabs from '../interactions/PillTabs.astro';
+// "What this project is" (design brief §6): Belonging, The Shift and Method,
+// set as an editorial sequence beside the Wonderland photograph. Text verbatim
+// from the WordPress tabs; all three are now visible at once.
 import { href } from '../../data/navigation';
+const parts = [
+  { n: '01', title: 'Belonging', text: 'Ideas of home and belonging shape how people understand themselves and the places they inhabit. For travellers, the meaning of home can shift depending on movement, community, culture, and lived experience.' },
+  { n: '02', title: 'The Shift', text: 'Bringing together data science and lived experience, I have developed a strong interest in how people narrate and make sense of their lives. This project is an experiment in extending that curiosity into everyday life and travel.' },
+  { n: '03', title: 'Method', text: "I'm interviewing people to explore how they understand belonging, identity, and home, and how these ideas change over time. This is part of an ongoing journey into how we narrate our own lives." },
+];
 ---
-<section class="container section" aria-labelledby="what-this-project-is">
-  <h2 id="what-this-project-is" class="section-heading">What this project is</h2>
-  <div class="focus">
-    <div class="focus-img">
-      <img
-        src={href('images/project/wonderland-gateway.webp')}
-        alt="A woman walking along a garden path beneath a wooden archway decorated with red discs"
-        width="909" height="1400" loading="lazy"
-      />
-    </div>
-    <div class="focus-text">
-      <PillTabs id="focus-tabs" labels={['Belonging', 'The Shift', 'Method']}>
-        <p data-panel class="pane-text">Ideas of home and belonging shape how people understand themselves and the places they inhabit. For travellers, the meaning of home can shift depending on movement, community, culture, and lived experience.</p>
-        <p data-panel class="pane-text">Bringing together data science and lived experience, I have developed a strong interest in how people narrate and make sense of their lives. This project is an experiment in extending that curiosity into everyday life and travel.</p>
-        <p data-panel class="pane-text">I'm interviewing people to explore how they understand belonging, identity, and home, and how these ideas change over time. This is part of an ongoing journey into how we narrate our own lives.</p>
-      </PillTabs>
+<section class="project section" aria-labelledby="what-this-project-is">
+  <div class="container container--wide grid-12">
+    <figure class="photo img-frame">
+      <img src={href('images/project/wonderland-gateway.webp')} alt="A woman walking along a garden path beneath a wooden archway decorated with red discs" width="909" height="1400" loading="lazy" />
+    </figure>
+    <div class="text">
+      <p class="eyebrow"><span class="num">02</span> The project</p>
+      <h2 id="what-this-project-is">What this project is</h2>
+      <ol class="parts">
+        {parts.map((p) => (
+          <li>
+            <span class="n" aria-hidden="true">{p.n}</span>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </div>
 </section>
 
 <style>
-  .focus {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    align-items: flex-start;
+  .photo { grid-column: 1 / span 5; align-self: start; position: sticky; top: 96px; }
+  .photo img { aspect-ratio: 3 / 4; }
+  .text { grid-column: 7 / -1; }
+  .eyebrow .num { color: var(--purple); margin-right: var(--space-3); }
+  .parts { list-style: none; margin: var(--space-7) 0 0; padding: 0; display: grid; gap: var(--space-7); }
+  .parts li { display: grid; grid-template-columns: 3.2rem 1fr; column-gap: var(--space-4); border-top: 1px solid var(--rule-strong); padding-top: var(--space-5); }
+  .n { grid-row: span 2; font-family: var(--font-display); font-style: italic; font-size: var(--text-h3); color: var(--purple); line-height: 1.2; }
+  .parts h3 { margin: 0 0 var(--space-3); }
+  .parts p { margin: 0; font-size: var(--text-lead); line-height: 1.5; }
+  @media (max-width: 767px) {
+    .photo { position: static; margin-bottom: var(--space-7); }
+    .photo img { aspect-ratio: 4 / 3; object-position: 50% 70%; }
+    .parts li { grid-template-columns: 2.4rem 1fr; }
   }
-  .focus-img { flex: 1 1 220px; }
-  .focus-img img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-medium);
-    object-fit: cover;
-  }
-  @media (max-width: 600px) {
-    .focus-img img { aspect-ratio: 4 / 3; object-position: 50% 70%; }
-  }
-  .focus-text { flex: 1 1 300px; min-width: 0; }
 </style>

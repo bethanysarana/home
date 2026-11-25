@@ -1,81 +1,91 @@
 ---
-// The two-layer gallery (WordPress #theme-gallery), with both layers combined.
+// The two-layer gallery (WordPress #theme-gallery), both layers combined.
+// Filter labels, captions and explainers are unchanged from WordPress.
 import ParticipantCard from './ParticipantCard.astro';
-import { publishedParticipants } from '../../data/participants';
+import { archiveParticipants } from '../../data/participants';
 import { TIER1, TIER2 } from '../../data/gallery-filters';
 
-const people = publishedParticipants();
+const people = archiveParticipants();
 const lenses = Object.entries(TIER2.lenses) as [keyof typeof TIER2.lenses, (typeof TIER2.lenses)[keyof typeof TIER2.lenses]][];
 ---
-<section class="gallery container container--wide" aria-labelledby="sort-heading" data-gallery>
-  <div class="controls">
-    <h2 id="sort-heading" class="sort-heading">Try sorting the gallery by how each person described home</h2>
-
-    <div class="tier">
-      <h3 class="tier-heading" id="tier1-heading">{TIER1.heading}</h3>
-      <p class="tier-caption">{TIER1.caption}</p>
-      <div class="pill-row" role="group" aria-labelledby="tier1-heading">
-        {TIER1.options.map(([value, label], i) => (
-          <button type="button" class="pill" data-tier1={value} aria-pressed={i === 0 ? 'true' : 'false'}>{label}</button>
-        ))}
-      </div>
-    </div>
-
-    <div class="tier">
-      <h3 class="tier-heading" id="tier2-heading">{TIER2.heading}</h3>
-      <p class="tier-caption">{TIER2.caption}</p>
-      <div class="pill-row lens-row" role="group" aria-label="Lens">
-        {lenses.map(([key, lens], i) => (
-          <button type="button" class="pill" data-lens={key} aria-pressed={i === 0 ? 'true' : 'false'}>{lens.label}</button>
-        ))}
-      </div>
-      {lenses.map(([key, lens], i) => (
-        <div class="lens-panel" data-lens-panel={key} hidden={i !== 0}>
-          <p class="lens-explainer">{lens.explainer}</p>
-          <div class="pill-row" role="group" aria-label={lens.label}>
-            {lens.options.map(([value, label], j) => (
-              <button type="button" class="pill" data-tier2={value} aria-pressed={j === 0 ? 'true' : 'false'}>{label}</button>
+<section class="gallery" aria-labelledby="sort-heading" data-gallery>
+  <div class="controls-wrap surface-white">
+    <div class="container container--wide">
+      <h2 id="sort-heading" class="sort-heading">Try sorting the gallery by how each person described home</h2>
+      <div class="controls">
+        <div class="tier">
+          <h3 class="tier-heading" id="tier1-heading"><span class="step">1</span>{TIER1.heading}</h3>
+          <p class="tier-caption">{TIER1.caption}</p>
+          <div class="pill-row" role="group" aria-labelledby="tier1-heading">
+            {TIER1.options.map(([value, label], i) => (
+              <button type="button" class="pill" data-tier1={value} aria-pressed={i === 0 ? 'true' : 'false'}>{label}</button>
             ))}
           </div>
         </div>
-      ))}
-    </div>
 
-    <p class="filter-count" aria-live="polite" data-count>{people.length} of {people.length} shown</p>
+        <div class="tier">
+          <h3 class="tier-heading" id="tier2-heading"><span class="step">2</span>{TIER2.heading}</h3>
+          <p class="tier-caption">{TIER2.caption}</p>
+          <div class="lens-switch" role="group" aria-label="Lens">
+            {lenses.map(([key, lens], i) => (
+              <button type="button" class="lens" data-lens={key} aria-pressed={i === 0 ? 'true' : 'false'}>{lens.label}</button>
+            ))}
+          </div>
+          {lenses.map(([key, lens], i) => (
+            <div class="lens-panel" data-lens-panel={key} hidden={i !== 0}>
+              <p class="lens-explainer">{lens.explainer}</p>
+              <div class="pill-row" role="group" aria-label={lens.label}>
+                {lens.options.map(([value, label], j) => (
+                  <button type="button" class="pill" data-tier2={value} aria-pressed={j === 0 ? 'true' : 'false'}>{label}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p class="filter-count" aria-live="polite" data-count>{people.length} of {people.length} shown</p>
+    </div>
   </div>
 
-  <ul class="grid" data-grid>
-    {people.map((p) => <ParticipantCard participant={p} />)}
-  </ul>
+  <div class="container container--wide">
+    <ul class="grid" data-grid>
+      {people.map((p) => <ParticipantCard participant={p} />)}
+    </ul>
 
-  <div class="container after">
-    <p class="text-small">*images co-created with a $2 watercolour set and AI</p>
-    <p>Stay tuned to see how I continue to curate and group these into the evolving themes of the project!</p>
+    <div class="after">
+      <p class="caption">*images co-created with a $2 watercolour set and AI</p>
+      <p class="closing">Stay tuned to see how I continue to curate and group these into the evolving themes of the project!</p>
+    </div>
   </div>
 </section>
 
 <style>
-  .controls { max-width: var(--content-width); margin: 0 auto; }
-  .sort-heading { font-size: var(--text-large); padding-block: var(--space-20); margin-top: var(--space-40); }
-  .tier { margin-bottom: 18px; }
-  .tier-heading { margin: 0 0 2px; font-size: 1rem; font-weight: 600; color: var(--colour-charcoal); }
-  .tier-caption { margin: 0 0 10px; font-size: 0.8rem; color: var(--colour-muted); font-style: italic; }
-  .lens-row { margin-bottom: 10px; }
-  .lens-explainer { font-size: 0.8rem; color: #666; margin: 0 0 10px; font-style: italic; }
-  .filter-count { font-size: 0.85rem; color: var(--colour-muted); margin: 4px 0 20px; }
+  .controls-wrap { border-block: 1px solid var(--rule); padding-block: var(--space-7) var(--space-5); }
+  .sort-heading { font-size: var(--text-h3); margin-bottom: var(--space-6); }
+  .controls { display: grid; grid-template-columns: 5fr 7fr; gap: var(--space-7); }
+  .tier-heading { display: flex; align-items: center; gap: var(--space-3); margin: 0 0 var(--space-1); font-family: var(--font-sans); font-size: var(--text-body); font-weight: 600; }
+  .step { display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--purple); color: var(--white); font-size: 0.78rem; }
+  .tier-caption { margin: 0 0 var(--space-4); font-size: var(--text-small); color: var(--text-muted); font-family: var(--font-display); font-style: italic; }
+  .lens-switch { display: inline-flex; padding: 3px; border-radius: var(--radius-pill); background: var(--purple-tint); margin-bottom: var(--space-3); }
+  .lens { border: 0; background: transparent; padding: 0.45em 1em; border-radius: var(--radius-pill); font-size: var(--text-small); font-weight: 600; color: var(--purple); cursor: pointer; }
+  .lens[aria-pressed='true'] { background: var(--purple); color: var(--white); }
+  .lens-explainer { font-size: var(--text-caption); color: var(--text-muted); margin: 0 0 var(--space-3); }
+  .filter-count { margin: var(--space-6) 0 0; font-size: var(--text-small); font-weight: 600; }
 
   .grid {
     list-style: none;
-    margin: 0;
+    margin: var(--space-7) 0 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--grid-gap);
   }
-  @media (max-width: 480px) {
-    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  }
-  .after { margin-top: var(--space-40); padding-inline: 0; max-width: var(--content-width); }
+  @media (max-width: 1199px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 1023px) { .controls { grid-template-columns: 1fr; gap: var(--space-6); } }
+  @media (max-width: 767px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); } }
+
+  .after { margin: var(--space-8) 0 var(--space-9); max-width: var(--content-width); }
+  .closing { font-family: var(--font-display); font-style: italic; font-size: var(--text-lead); }
 </style>
 
 <script>

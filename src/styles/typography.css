@@ -1,47 +1,62 @@
-/* Typography from the WordPress theme: Manrope, light body weight,
-   slight negative letter spacing, line height 1.4. */
+/* Editorial typography: Newsreader (display serif) for headlines, section
+   headings and quotations; Manrope for body and interface. */
 
 body {
   font-family: var(--font-sans);
-  font-size: var(--text-large);
-  font-weight: 300;
-  letter-spacing: -0.1px;
-  line-height: 1.4;
+  font-size: var(--text-body);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.6;
+  color: var(--text);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
+  font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: -0.1px;
-  line-height: 1.125;
-  margin: 0 0 var(--block-gap);
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+  margin: 0 0 0.5em;
+  font-optical-sizing: auto;
 }
-h1 { font-size: var(--text-xx-large); }
-h2 { font-size: var(--text-x-large); }
-h3 { font-size: var(--text-large); }
-h4 { font-size: var(--text-medium); }
+h1 { font-size: var(--text-h1); line-height: 1.02; letter-spacing: -0.025em; }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); line-height: 1.2; }
+h4 { font-family: var(--font-sans); font-size: var(--text-body); font-weight: 600; margin: 0 0 0.5em; }
+
+h1 em, h2 em, h3 em { font-style: italic; }
 
 p { margin: 0 0 var(--block-gap); }
 
-blockquote, caption, figcaption, h1, h2, h3, h4, h5, h6, p { text-wrap: pretty; }
+blockquote, caption, figcaption, h1, h2, h3, h4, p { text-wrap: pretty; }
 
 a {
-  color: currentColor;
+  color: inherit;
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.1em;
+  text-underline-offset: 0.18em;
 }
-a:hover { text-decoration: none; }
+a:hover { text-decoration-color: var(--accent); color: var(--accent); }
 
 strong { font-weight: 600; }
 
-.text-small { font-size: var(--text-small); }
-.text-medium { font-size: var(--text-medium); }
-.text-large { font-size: var(--text-large); }
-.text-subtitle { font-size: var(--text-subtitle); line-height: 1.2; }
-
-/* Serif is used only where the WordPress design used it:
-   participant words and quotations. */
-.serif-word {
-  font-family: var(--font-serif);
-  font-style: italic;
+/* Text roles */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-4);
 }
+.lead { font-size: var(--text-lead); line-height: 1.5; }
+.caption { font-size: var(--text-caption); line-height: 1.45; color: var(--text-muted); }
+.display-italic { font-family: var(--font-display); font-style: italic; }
+.serif-word { font-family: var(--font-display); font-style: italic; }
+.hand { font-family: var(--font-hand); font-weight: 500; }
+
+/* Legacy */
+.text-small { font-size: var(--text-small); }
+.text-medium { font-size: var(--text-body); }
+.text-large { font-size: var(--text-lead); }
+.text-subtitle { font-size: var(--text-h3); line-height: 1.2; }

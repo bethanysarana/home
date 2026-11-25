@@ -1,6 +1,6 @@
 # House rules for Let's Talk About "Home"
 
-Read this, then `docs/SPEC.md` (the implementation specification), before every change.
+Read this, then `docs/SPEC.md` (the implementation specification) and `docs/DESIGN_BRIEF.md` (the visual redesign brief, with its reference image in `design/references/`), before every change.
 
 ## What this site is
 A build-up and reorganisation of Bethany's WordPress page "Lets talk about 'Home'", not a replacement for it.
@@ -14,7 +14,7 @@ Keep the existing experience recognisable. Change its scale and structure, not i
 
 ## Bethany's words
 - Never rewrite, paraphrase, shorten, tidy or "improve" Bethany's prose or participants' words. Insert text exactly as given.
-- Do not publish placeholder text. Any wording you add yourself (labels, alt text, link text) goes in `MIGRATION_NOTES.md` → "Wording for approval".
+- Do not publish placeholder prose. Missing participant assets show a deliberate, obvious "to come" placeholder (design brief §12). Any wording you add yourself (labels, alt text, link text) goes in `MIGRATION_NOTES.md` → "Wording for approval".
 - If text looks wrong, say so in your reply. Do not fix it in the file.
 
 ## Data rules
@@ -26,6 +26,8 @@ Keep the existing experience recognisable. Change its scale and structure, not i
 
 ## How the site works
 - Astro + TypeScript. Pages in `src/pages/`, components in `src/components/<area>/`, data in `src/data/`, styles in `src/styles/` (tokens in `tokens.css`).
+- Design system: WordPress palette (ink, white, off-white, yellow, pale pink, purple, grey); Newsreader for display, Manrope for body, Caveat only for the logo and field-journal notes. Check `/style-guide/` after changing tokens.
+- Three directions: editorial (homepage, stories), archive (Visual Archive, research discovery), field journal (fieldnotes, reflections only).
 - `src/data/navigation.ts`: a page appears in the menu only when `ready: true`. Never publish empty templates.
 - Hosting: GitHub Pages via `.github/workflows/deploy.yml` on every merge to `main`.
 - Address: https://bethanysarana.github.io/home/ . For a custom domain, change `site` and remove `base` in `astro.config.mjs`.

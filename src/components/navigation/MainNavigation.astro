@@ -2,6 +2,7 @@
 import { liveNavigation, href } from '../../data/navigation';
 
 const items = liveNavigation();
+const sections = items.filter((i) => i.path !== '');
 const current = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '').replace(/^\//, '');
 const isCurrent = (path: string) => (path === '' ? current === '' : current.startsWith(path));
 ---
@@ -11,26 +12,33 @@ const isCurrent = (path: string) => (path === '' ? current === '' : current.star
     <svg class="icon-open" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h16v1.5H4zM4 15h16v1.5H4z" fill="currentColor" /></svg>
     <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m13.06 12 6.47-6.47-1.06-1.06L12 10.94 5.53 4.47 4.47 5.53 10.94 12l-6.47 6.47 1.06 1.06L12 13.06l6.47 6.47 1.06-1.06L13.06 12Z" fill="currentColor" /></svg>
   </button>
-  <ul id="main-menu" class="menu">
-    {items.map((item) => (
-      <li><a href={href(item.path)} aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a></li>
-    ))}
-  </ul>
+  <div id="main-menu" class="menu">
+    <ul class="menu-list">
+      <li class="mobile-only"><a href={href('')} aria-current={isCurrent('') ? 'page' : undefined}>Home</a></li>
+      {sections.map((item) => (
+        <li><a href={href(item.path)} aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a></li>
+      ))}
+    </ul>
+    <a class="button cta" href={href('visual-archive/')}>Explore the project</a>
+  </div>
 </nav>
 
 <style>
-  .main-nav { font-size: var(--text-medium); }
-  .menu {
+  .menu { display: flex; align-items: center; gap: var(--space-6); }
+  .menu-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: var(--space-10) var(--space-30);
+    gap: var(--space-5);
+    font-size: var(--text-small);
+    font-weight: 500;
   }
-  .menu a { text-decoration: none; }
-  .menu a:hover, .menu a[aria-current='page'] { text-decoration: underline; }
+  .menu-list a { text-decoration: none; padding-block: 4px; border-bottom: 1px solid transparent; }
+  .menu-list a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .menu-list a[aria-current='page'] { border-bottom-color: var(--purple); color: var(--purple); }
+  .mobile-only { display: none; }
+
   .menu-toggle {
     display: none;
     background: none;
@@ -38,11 +46,11 @@ const isCurrent = (path: string) => (path === '' ? current === '' : current.star
     padding: 8px;
     margin: -8px;
     cursor: pointer;
+    color: var(--ink);
   }
   .icon-close { display: none; }
 
-  /* Collapsible menu on small screens (WordPress used an overlay at <600px) */
-  @media (max-width: 781px) {
+  @media (max-width: 767px) {
     .menu-toggle { display: inline-flex; position: relative; z-index: 101; }
     .menu {
       display: none;
@@ -50,13 +58,15 @@ const isCurrent = (path: string) => (path === '' ? current === '' : current.star
       inset: 0;
       z-index: 100;
       flex-direction: column;
+      align-items: flex-start;
       justify-content: flex-start;
-      gap: var(--space-30);
-      padding: calc(2rem + 64px) var(--page-padding) var(--page-padding);
-      background: var(--colour-white);
-      font-size: var(--text-x-large);
+      gap: var(--space-7);
+      padding: 96px var(--page-padding) var(--page-padding);
+      background: var(--paper);
       animation: fadeIn var(--duration-fast) ease-out;
     }
+    .menu-list { flex-direction: column; gap: var(--space-5); font-family: var(--font-display); font-size: var(--text-h2); font-weight: 400; }
+    .mobile-only { display: list-item; }
     .main-nav.is-open .menu { display: flex; }
     .main-nav.is-open .icon-open { display: none; }
     .main-nav.is-open .icon-close { display: block; }

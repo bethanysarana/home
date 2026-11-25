@@ -1,0 +1,59 @@
+---
+// Visual Archive feature (design brief §6): a dark purple field with a
+// scattered row of real fingerprints, leading into the archive.
+import { publishedParticipants, TOTAL_PARTICIPANTS } from '../../data/participants';
+import { href } from '../../data/navigation';
+
+// Change FEATURED_IDS to choose which fingerprints appear here.
+const FEATURED_IDS = ['karolina', 'sammy', 'guilia', 'eduardo', 'miri', 'theo'];
+const people = FEATURED_IDS.map((id) => publishedParticipants().find((p) => p.id === id)).filter(Boolean);
+const tilt = ['-2deg', '1.5deg', '-1deg', '2deg', '-1.5deg', '1deg'];
+---
+<section class="archive surface-purple" aria-labelledby="archive-heading">
+  <div class="container container--wide grid-12">
+    <div class="text">
+      <p class="eyebrow"><span class="num">04</span> Visual Archive · {TOTAL_PARTICIPANTS} conversations</p>
+      <h2 id="archive-heading">The <em>Travellers</em> gallery: everyone's word, colour, and shape</h2>
+      <p class="lead">At the end of each interview, once we were fully immersed in the conversation, I captured participants’ intuitive sense of home as a word, colour, and shape. To me, these are visual fingerprints of belonging.</p>
+      <p><a class="button" href={href('visual-archive/')}>Visual Archive <span aria-hidden="true">→</span></a></p>
+    </div>
+    <ul class="prints" aria-label="A selection of visual fingerprints">
+      {people.map((p, i) => (
+        <li style={`--tilt:${tilt[i]}`}>
+          <a href={href('visual-archive/')}>
+            <img src={href(p!.artwork!)} alt={`${p!.displayName}: “${p!.finalWord}”`} width="900" height="900" loading="lazy" />
+            <span class="name">{p!.displayName}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .archive { padding-block: var(--space-9); overflow: hidden; }
+  .eyebrow .num { color: var(--yellow); margin-right: var(--space-3); }
+  .text { grid-column: 1 / span 5; align-self: center; }
+  .text h2 { color: var(--white); }
+  .text .lead { color: rgba(255, 255, 255, 0.85); margin-bottom: var(--space-6); }
+  .prints {
+    grid-column: 7 / -1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+  .prints li { transform: rotate(var(--tilt)); transition: transform var(--duration) var(--ease); }
+  .prints li:hover { transform: rotate(0deg) translateY(-4px); }
+  .prints a { display: block; background: var(--white); padding: 8px 8px 0; text-decoration: none; box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.6); }
+  .prints img { aspect-ratio: 1 / 1; object-fit: cover; }
+  .name { display: block; font-family: var(--font-hand); font-size: 1.3rem; color: var(--ink); padding: 4px 4px 6px; }
+  .prints a:hover .name { color: var(--purple); }
+  @media (max-width: 767px) {
+    .text { margin-bottom: var(--space-7); }
+    .prints { grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+    .name { font-size: 1.05rem; }
+  }
+</style>
