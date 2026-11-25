@@ -20,10 +20,7 @@ const items = stories.map((s, i) => ({ s, span: SPANS[i] ?? 4, tone: toneFor(s.d
         <p class="label">{s.data.label}</p>
         <h3 class="title">{s.data.headline}</h3>
         <p class="summary">{s.data.summary}</p>
-        <span class="foot">
-          <span class="evidence">{s.data.evidence}</span>
-          <span class="more">Read the story <span aria-hidden="true">→</span></span>
-        </span>
+        <span class="more">Read the story <span aria-hidden="true">→</span></span>
       </a>
     </li>
   ))}
@@ -69,8 +66,6 @@ const items = stories.map((s, i) => ({ s, span: SPANS[i] ?? 4, tone: toneFor(s.d
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-2) var(--space-5); }
-  .evidence { font-family: var(--font-display); font-style: italic; font-size: var(--text-small); opacity: 0.85; }
   .more { font-size: var(--text-small); font-weight: 600; text-decoration: underline; text-underline-offset: 0.3em; white-space: nowrap; }
 
   .tone-purple a { background: var(--purple-deep); color: var(--white); }

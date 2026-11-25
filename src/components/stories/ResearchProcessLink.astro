@@ -1,0 +1,40 @@
+---
+// Points readers from a story to how the research was done.
+// Until The Research page exists this renders a deliberate, visible
+// placeholder (design brief §12); once `research/` is ready in
+// src/data/navigation.ts it becomes a link automatically.
+import { href, isReady } from '../../data/navigation';
+const ready = isReady('research/');
+---
+{ready ? (
+  <a class="process" href={href('research/')}>
+    <span class="eyebrow">The Research</span>
+    <span class="title">How I make sense of it all</span>
+    <span class="more">How the conversations were recorded and analysed <span aria-hidden="true">→</span></span>
+  </a>
+) : (
+  <aside class="process placeholder" aria-label="Placeholder">
+    <span class="eyebrow">The Research · page to come</span>
+    <span class="title">How I make sense of it all</span>
+    <span class="more">Placeholder: this will link to the research process, how the conversations were recorded and how the analysis was made.</span>
+  </aside>
+)}
+
+<style>
+  .process {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    border-radius: var(--radius-medium);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  a.process { background: var(--purple-tint); }
+  a.process:hover .title { text-decoration: underline; }
+  .placeholder { border: 1.5px dashed var(--rule-strong); background: transparent; color: var(--text-muted); }
+  .eyebrow { margin: 0; }
+  .title { font-family: var(--font-display); font-size: var(--text-h3); line-height: 1.2; color: var(--ink); }
+  .more { font-size: var(--text-small); }
+</style>

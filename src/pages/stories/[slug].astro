@@ -1,12 +1,12 @@
 ---
 // Individual story (specification §6, design brief §8): editorial opening,
-// a participant's words, the Report 4 section in full, evidence with
-// expandable qualifications, the people behind it, related stories.
+// a participant's words, the Report 4 section in full, a pointer to the
+// research process, the people behind it, related stories.
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StoryHeader from '../../components/stories/StoryHeader.astro';
 import OpeningQuote from '../../components/stories/OpeningQuote.astro';
-import StoryEvidence from '../../components/stories/StoryEvidence.astro';
+import ResearchProcessLink from '../../components/stories/ResearchProcessLink.astro';
 import ParticipantReferences from '../../components/stories/ParticipantReferences.astro';
 import RelatedStories from '../../components/stories/RelatedStories.astro';
 import { validateRelationships } from '../../data/relationships';
@@ -33,7 +33,7 @@ const { Content } = await render(story);
       <p class="eyebrow">From the research</p>
       <h2 id="research-heading" class="research-heading">{d.researchHeading}</h2>
       <div class="prose"><Content /></div>
-      <StoryEvidence evidence={d.evidence} qualifications={extras.qualifications} />
+      <ResearchProcessLink />
     </section>
     <ParticipantReferences slug={story.id} />
     <RelatedStories slug={story.id} />
