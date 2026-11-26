@@ -230,3 +230,7 @@ Editorial story pages (design brief §8) and an overview of story blocks matchin
 - Purple quotation marks (“) on yellow, drawn by Claude, chosen from the favicon ideas because Bethany asked for an icon without picking one. Files in `public/favicon/`: `favicon.svg` (browser tab), `favicon-32.png` (older browsers), `apple-touch-icon.png` (iPhone home screen, 180×180), `icon-512.png` (spare large copy). Linked in `src/layouts/BaseLayout.astro`; paths follow the host automatically (GitHub `/home/`, Netlify root).
 - To use a different image: replace the three files with the same names and sizes.
 - **Link-preview thumbnail** (what shows when the link is shared): `public/images/share/share.jpg`, the homepage hero photo cropped to 1200×630, used on every page (`og:image` in `src/layouts/BaseLayout.astro`). Its full address follows the host. To change it, replace that file with another 1200×630 JPG of the same name. Netlify's copy is private until Bethany makes it public, so apps can't fetch the Netlify thumbnail until then.
+
+## Ethics text (26 Nov 2026)
+- The Research → Ethics and references now has three parts (Consent and recording; Anonymity and publication decisions; Handling sensitive disclosures), text in `src/data/ethics.ts`, approved by Bethany. "Methodological notes" removed on her instruction. Full references still to come.
+- **Open question:** Bethany said names "will be fake"; confirm whether the names now on the site are already pseudonyms before the Netlify site is made public.

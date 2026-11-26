@@ -8,6 +8,7 @@ import R from '../../data/research.json';
 import { DEMOGRAPHICS } from '../../data/demographics';
 import { TOTAL_PARTICIPANTS } from '../../data/participants';
 import { href } from '../../data/navigation';
+import { ETHICS } from '../../data/ethics';
 
 const SECTIONS = [
   { id: 'origins', title: 'Project origins' },
@@ -209,10 +210,10 @@ const L = R.limitations;
       <section id="ethics" aria-labelledby="h-ethics">
         <h2 id="h-ethics"><span class="n">{num('ethics')}</span>{title('ethics')}</h2>
         <div class="ethics">
-          {['Consent and recording', 'Anonymity and publication decisions', 'Handling sensitive disclosures', 'Methodological notes'].map((t) => (
+          {ETHICS.map((e) => (
             <div>
-              <h3 class="sub">{t}</h3>
-              <aside class="placeholder" aria-label="Placeholder"><p>Placeholder: text to come.</p></aside>
+              <h3 class="sub">{e.title}</h3>
+              <div class="prose">{e.paragraphs.map((p) => <p>{p}</p>)}</div>
             </div>
           ))}
         </div>
@@ -341,8 +342,7 @@ const L = R.limitations;
   details[open] summary::after { content: '−'; }
   details .prose { padding-bottom: var(--space-5); }
 
-  .ethics { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--space-6); }
-  .ethics .placeholder { margin-top: 0; }
+  .ethics { display: grid; gap: 0; }
   .refs { margin: 0; padding-left: 1.2em; display: grid; gap: var(--space-1); }
 
   @media (max-width: 1023px) {
